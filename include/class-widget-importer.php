@@ -23,8 +23,8 @@ class WidgetImporter {
 	 */
 	public static function import( $widget_import_file_path ) {
 		$results       = array();
-		$kadence_starter_templates = Importer_Templates::get_instance();
-		$log_file_path = $kadence_starter_templates->get_log_file_path();
+		$templify_import_templates = Importer_Templates::get_instance();
+		$log_file_path = $templify_import_templates->get_log_file_path();
 
 		// Import widgets and return result.
 		if ( ! empty( $widget_import_file_path ) ) {
@@ -36,8 +36,8 @@ class WidgetImporter {
 			$error_message = $results->get_error_message();
 
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
-			$kadence_starter_templates->append_to_frontend_error_messages( $error_message );
-			if ( apply_filters( 'kadence_starter_templates_save_log_files', false ) ) {
+			$templify_import_templates->append_to_frontend_error_messages( $error_message );
+			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
 				// Write error to log file.
 				Helpers::append_to_file(
 					$error_message,
@@ -49,7 +49,7 @@ class WidgetImporter {
 			ob_start();
 				self::format_results_for_log( $results );
 			$message = ob_get_clean();
-			if ( apply_filters( 'kadence_starter_templates_save_log_files', false ) ) {
+			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
 				// Add this message to log file.
 				$log_added = Helpers::append_to_file(
 					$message,

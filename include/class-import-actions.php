@@ -10,7 +10,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 class ImportActions {
 	/**
 	 * Register all action hooks for this class.
@@ -51,7 +50,7 @@ class ImportActions {
 	 * Execute the widgets import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `kadence-starter-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function widgets_import( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
@@ -64,7 +63,7 @@ class ImportActions {
 	 * Execute the customizer import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `kadence-starter-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function customizer_import_color_only( $selected_import_files ) {
@@ -77,7 +76,7 @@ class ImportActions {
 	 * Execute the customizer import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `kadence-starter-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function customizer_import_font_only( $selected_import_files ) {
@@ -89,7 +88,7 @@ class ImportActions {
 	 * Execute the customizer import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `kadence-starter-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function customizer_import( $selected_import_files ) {

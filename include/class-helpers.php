@@ -1,13 +1,13 @@
 <?php
 /**
- * Static functions used in the Kadence Starter Templates plugin.
+ * Static functions used in the Templify Import Templates plugin.
  *
  * @package Templify Import Templates
  */
 
 
 
-use function request_filesystem_credentials;
+//use function request_filesystem_credentials;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -48,7 +48,7 @@ class Helpers {
 			return new \WP_Error(
 				'failed_writing_file_to_server',
 				sprintf(
-					__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'kadence-starter-templates' ),
+					__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'templify-import-templates' ),
 					'<br>',
 					$file_path
 				)
@@ -81,7 +81,7 @@ class Helpers {
 			return new \WP_Error(
 				'failed_reading_file_from_server',
 				sprintf(
-					__( 'An error occurred while reading a file from your server! Tried reading file from path: %s%s.', 'kadence-starter-templates' ),
+					__( 'An error occurred while reading a file from your server! Tried reading file from path: %s%s.', 'templify-import-templates' ),
 					'<br>',
 					$file_path
 				)
@@ -105,7 +105,7 @@ class Helpers {
 			return new \WP_Error(
 				'no_direct_file_access',
 				sprintf(
-					__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'kadence-starter-templates' ),
+					__( 'This WordPress page does not have %sdirect%s write file access. This plugin needs it in order to save the demo import xml file to the upload directory of your site. You can change this setting with these instructions: %s.', 'templify-import-templates' ),
 					'<strong>',
 					'</strong>',
 					'<a href="http://gregorcapuder.com/wordpress-how-to-set-direct-filesystem-method/" target="_blank">How to set <strong>direct</strong> filesystem method</a>'
@@ -116,8 +116,8 @@ class Helpers {
 		// Get plugin page settings.
 		$plugin_page_setup = apply_filters( 'templify-import-templates/plugin_page_setup', array(
 				'parent_slug' => 'themes.php',
-				'page_title'  => esc_html__( 'One Click Demo Import' , 'kadence-starter-templates' ),
-				'menu_title'  => esc_html__( 'Import Demo Data' , 'kadence-starter-templates' ),
+				'page_title'  => esc_html__( 'One Click Demo Import' , 'templify-import-templates' ),
+				'menu_title'  => esc_html__( 'Import Demo Data' , 'templify-import-templates' ),
 				'capability'  => 'import',
 				'menu_slug'   => 'pt-one-click-demo-import',
 			)
@@ -129,7 +129,7 @@ class Helpers {
 		if ( false === ( $creds = request_filesystem_credentials( $demo_import_page_url, '', false, false, null ) ) ) {
 			return new \WP_error(
 				'filesystem_credentials_could_not_be_retrieved',
-				__( 'An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!', 'kadence-starter-templates' )
+				__( 'An error occurred while retrieving reading/writing permissions to your server (could not retrieve WP filesystem credentials)!', 'templify-import-templates' )
 			);
 		}
 
@@ -137,7 +137,7 @@ class Helpers {
 		if ( ! WP_Filesystem( $creds ) ) {
 			return new \WP_Error(
 				'wrong_login_credentials',
-				__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'kadence-starter-templates' )
+				__( 'Your WordPress login credentials don\'t allow to use WP_Filesystem!', 'templify-import-templates' )
 			);
 		}
 

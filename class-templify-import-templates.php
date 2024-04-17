@@ -174,7 +174,8 @@ class Importer_Templates {
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-customizer-importer.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-helpers.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-export-option.php';
-		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'inc/class-plugin-check.php';
+		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-plugin-check.php';
+		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-fluent.php';
 	}
 
     /**
@@ -269,6 +270,18 @@ class Importer_Templates {
     public function templify_import_settings_page(){
         
     }
+
+
+	
+	/**
+	 * Getter function to retrieve the private log_file_path value.
+	 *
+	 * @return string The log_file_path value.
+	 */
+	public function get_log_file_path() {
+		return $this->log_file_path;
+	}
+
 
 }
 

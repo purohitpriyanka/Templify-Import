@@ -43,7 +43,7 @@
 			reset: function() {
 				var data = {
 					wp_customize: 'on',
-					action: 'kadence_starter_reset',
+					action: 'templify_import_reset',
 					nonce: kadenceStarterImport.nonce.reset
 				};
 		
