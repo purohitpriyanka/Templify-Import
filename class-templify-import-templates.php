@@ -176,6 +176,8 @@ class Importer_Templates {
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-export-option.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-plugin-check.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-fluent.php';
+		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-give.php';
+		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-elementor.php';
 	}
 
     /**
