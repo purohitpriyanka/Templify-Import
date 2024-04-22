@@ -302,7 +302,7 @@ class CustomizerImporter {
 			return new \WP_Error(
 				'missing_cutomizer_import_file',
 				sprintf(
-					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'kadence-starter-templates' ),
+					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'templify-import-templates' ),
 					$import_file_path
 				)
 			);
@@ -321,13 +321,13 @@ class CustomizerImporter {
 		if ( 'array' != gettype( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
 			return new \WP_Error(
 				'customizer_import_data_error',
-				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'kadence-starter-templates' )
+				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'templify-import-templates' )
 			);
 		}
 		if ( $data['template'] !== $template ) {
 			return new \WP_Error(
 				'customizer_import_wrong_theme',
-				esc_html__( 'Error: The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme.', 'kadence-starter-templates' )
+				esc_html__( 'Error: The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme.', 'templify-import-templates' )
 			);
 		}
 
@@ -361,7 +361,7 @@ class CustomizerImporter {
 			return new \WP_Error(
 				'missing_cutomizer_import_file',
 				sprintf(
-					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'kadence-starter-templates' ),
+					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'templify-import-templates' ),
 					$import_file_path
 				)
 			);
@@ -380,7 +380,7 @@ class CustomizerImporter {
 		if ( 'array' != gettype( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
 			return new \WP_Error(
 				'customizer_import_data_error',
-				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'kadence-starter-templates' )
+				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'templify-import-templates' )
 			);
 		}
 		// Import custom options.

@@ -209,7 +209,7 @@ class Helpers {
 			'message' => __( 'Give data has been successfully imported.', 'templify-import-templates' ),
 		);
 		// Return results.
-		return apply_filters( 'kadence-starter-templates/give_import_results', $results );
+		return apply_filters( 'templify-import-templates/give_import_results', $results );
 	}
 
 

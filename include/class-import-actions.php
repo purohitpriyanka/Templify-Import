@@ -102,24 +102,24 @@ class ImportActions {
 	 * Execute the Give donations import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `kadence-starter-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function donations_import( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
-		if ( ! empty( $selected_import_files['give-donations'] ) && class_exists( 'KadenceWP\KadenceStarterTemplates\Kadence_Starter_Templates_Give_Import' ) ) {
-			Kadence_Starter_Templates_Give_Import::import( $selected_import_files['give-donations'] );
+		if ( ! empty( $selected_import_files['give-donations'] ) && class_exists( 'KadenceWP\KadenceStarterTemplates\Templify_Import_Templates_Give_Import' ) ) {
+			Templify_Import_Templates_Give_Import::import( $selected_import_files['give-donations'] );
 		}
 	}
 	/**
 	 * Execute the Give forms import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `kadence-starter-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function give_forms_import( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
-		if ( ! empty( $selected_import_files['give-forms'] ) && class_exists( 'KadenceWP\KadenceStarterTemplates\Kadence_Starter_Templates_Give_Import' ) ) {
-			Kadence_Starter_Templates_Give_Import::import_forms( $selected_import_files['give-forms'] );
+		if ( ! empty( $selected_import_files['give-forms'] ) && class_exists( 'KadenceWP\KadenceStarterTemplates\Templify_Import_Templates_Give_Import' ) ) {
+			Templify_Import_Templates_Give_Import::import_forms( $selected_import_files['give-forms'] );
 		}
 	}
 

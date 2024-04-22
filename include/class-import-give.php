@@ -19,7 +19,7 @@ if ( ! defined( 'GIVE_VERSION' ) ) {
 /**
  * Class for importing fluent forms.
  */
-class Kadence_Starter_Templates_Give_Import {
+class Templify_Import_Templates_Give_Import {
 
     /**
 	 * Import forms from JSON file.
