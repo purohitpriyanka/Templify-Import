@@ -226,8 +226,8 @@ class Importer {
 	public function process_elementor( $post_id, $data, $meta, $comments, $terms ) {
 		$meta_data = wp_list_pluck( $meta, 'key' );
 		if ( in_array( '_elementor_data', $meta_data, true ) ) {
-			if ( class_exists( '\Elementor\TemplateLibrary\Kadence_Starter_Templates_Elementor_Import' ) ) {
-				$el_import = new \Elementor\TemplateLibrary\Kadence_Starter_Templates_Elementor_Import();
+			if ( class_exists( '\Elementor\TemplateLibrary\Templify_Import_Templates_Elementor_Import' ) ) {
+				$el_import = new \Elementor\TemplateLibrary\Templify_Import_Templates_Elementor_Import();
 				foreach ( $meta as $key => $value ) {
 					if ( '_elementor_data' === $value['key'] ) {
 						$import_data = $el_import->import( $post_id, $value['value'] );
@@ -261,7 +261,7 @@ class Importer {
 						$page_links[] = $link;
 					}
 				}
-				$demo_data = get_option( '_kadence_starter_templates_last_import_data', array() );
+				$demo_data = get_option( '_templify_import_templates_last_import_data', array() );
 				if ( ! empty( $demo_data['url'] ) ) {
 					$site_url = get_site_url();
 					$demo_url = rtrim( sanitize_text_field( $demo_data['url'] ), '/' );
@@ -313,6 +313,8 @@ class Importer {
 		}
 		return $content;
 	}
+
+	
 	/**
 	 * Process Kadence Block CSS
 	 *
@@ -580,13 +582,13 @@ class Importer {
 
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
 			if ( ! empty( $message ) ) {
-				$this->kadence_starter_templates->append_to_frontend_error_messages( $message );
+				$this->templify_import_templates->append_to_frontend_error_messages( $message );
 			}
-			if ( apply_filters( 'kadence_starter_templates_save_log_files', false ) ) {
+			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
 				// Add message to log file.
 				$log_added = Helpers::append_to_file(
 					__( 'New AJAX call!' , 'templify-import-templates' ) . PHP_EOL . $message,
-					$this->kadence_starter_templates->get_log_file_path(),
+					$this->templify_import_templates->get_log_file_path(),
 					''
 				);
 			}
@@ -804,13 +806,13 @@ class Importer {
 
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
 			if ( ! empty( $message ) ) {
-				$this->kadence_starter_templates->append_to_frontend_error_messages( $message );
+				$this->templify_import_templates->append_to_frontend_error_messages( $message );
 			}
-			if ( apply_filters( 'kadence_starter_templates_save_log_files', false ) ) {
+			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
 				// Add message to log file.
 				$log_added = Helpers::append_to_file(
 					__( 'New AJAX call!' , 'templify-import-templates' ) . PHP_EOL . $message,
-					$this->kadence_starter_templates->get_log_file_path(),
+					$this->templify_import_templates->get_log_file_path(),
 					''
 				);
 			}
@@ -838,7 +840,7 @@ class Importer {
 	 * @param array $data Raw data imported for the term.
 	 */
 	public function add_term_tracking( $term_id, $data ) {
-		update_term_meta( $term_id, '_kadence_starter_templates_imported_term', true );
+		update_term_meta( $term_id, '_templify_import_templates_imported_term', true );
 	}
 	/**
 	 * Run elementor Import.
@@ -850,14 +852,14 @@ class Importer {
 	 * @param array $terms Raw term data, already processed.
 	 */
 	public function add_post_tracking( $post_id, $data, $meta, $comments, $terms ) {
-		update_post_meta( $post_id, '_kadence_starter_templates_imported_post', true );
+		update_post_meta( $post_id, '_templify_import_templates_imported_post', true );
 	}
 
 	/**
 	 * Set current state of the content importer, so we can continue the import with new AJAX request.
 	 */
 	private function set_current_importer_data() {
-		$data = array_merge( $this->kadence_starter_templates->get_current_importer_data(), $this->get_importer_data() );
+		$data = array_merge( $this->templify_import_templates->get_current_importer_data(), $this->get_importer_data() );
 
 		Helpers::set_import_data_transient( $data );
 	}

@@ -16,7 +16,7 @@ use Elementor\Plugin;
 /**
  * Class for importing elementor data.
  */
-class Kadence_Starter_Templates_Elementor_Import extends Source_Local {
+class Templify_Import_Templates_Elementor_Import extends Source_Local {
 
     /**
 	 * Update the elementor meta data.

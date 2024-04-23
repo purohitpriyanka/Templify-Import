@@ -598,9 +598,9 @@ class Importer_Templates {
 		$show_builder_choice = ( 'active' === $plugins['elementor']['state'] ? true : false );
 		$subscribed       = ( class_exists( 'Kadence_Theme_Pro' ) || ! empty( apply_filters( 'kadence_starter_templates_custom_array', array() ) ) ? true : get_option( 'kadence_starter_templates_subscribe' ) );
 		wp_enqueue_media();
-		$kadence_starter_templates_meta = $this->get_asset_file( 'dist/starter-templates' );
-		wp_enqueue_style( 'templify-import-templates', TEMPLIFY_IMPORT_TEMPLATES_URL . 'dist/starter-templates.css', array( 'wp-components' ), KADENCE_STARTER_TEMPLATES_VERSION );
-		wp_enqueue_script( 'templify-import-templates', TEMPLIFY_IMPORT_TEMPLATES_URL . 'dist/starter-templates.js', array_merge( array( 'wp-api', 'wp-components', 'wp-plugins', 'wp-edit-post' ), $kadence_starter_templates_meta['dependencies'] ), $kadence_starter_templates_meta['version'], true );
+		$kadence_starter_templates_meta = $this->get_asset_file( 'dist/importer-templates' );
+		wp_enqueue_style( 'templify-import-templates', TEMPLIFY_IMPORT_TEMPLATES_URL . 'dist/importer-templates.css', array( 'wp-components' ), KADENCE_STARTER_TEMPLATES_VERSION );
+		wp_enqueue_script( 'templify-import-templates', TEMPLIFY_IMPORT_TEMPLATES_URL . 'dist/importer-templates.js', array_merge( array( 'wp-api', 'wp-components', 'wp-plugins', 'wp-edit-post' ), $kadence_starter_templates_meta['dependencies'] ), $kadence_starter_templates_meta['version'], true );
 		wp_localize_script(
 			'templify-import-templates',
 			'kadenceStarterParams',
@@ -656,12 +656,12 @@ class Importer_Templates {
 	 * @return array
 	 */
 	public function get_asset_file( $filepath ) {
-		$asset_path = KADENCE_STARTER_TEMPLATES_PATH . $filepath . '.asset.php';
+		$asset_path = TEMPLIFY_IMPORT_TEMPLATES_PATH . $filepath . '.asset.php';
 		return file_exists( $asset_path )
 			? include $asset_path
 			: array(
 				'dependencies' => array( 'lodash', 'react', 'react-dom', 'wp-block-editor', 'wp-blocks', 'wp-data', 'wp-element', 'wp-i18n', 'wp-polyfill', 'wp-primitives', 'wp-api' ),
-				'version'      => KADENCE_STARTER_TEMPLATES_VERSION,
+				'version'      => TEMPLIFY_IMPORT_TEMPLATES_VERSION,
 			);
 	}
 
