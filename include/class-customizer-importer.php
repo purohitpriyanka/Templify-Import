@@ -30,7 +30,7 @@ class CustomizerImporter {
 
 			// Add any error messages to the frontend_error_messages variable in starter_templates main class.
 			$starter_templates->append_to_frontend_error_messages( $error_message );
-			if ( apply_filters( 'kadence_starter_templates_save_log_files', false ) ) {
+			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
 				// Write error to log file.
 				Helpers::append_to_file(
 					$error_message,
@@ -39,7 +39,7 @@ class CustomizerImporter {
 				);
 			}
 		} else {
-			if ( apply_filters( 'kadence_starter_templates_save_log_files', false ) ) {
+			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
 				// Add this message to log file.
 				$log_added = Helpers::append_to_file(
 					esc_html__( 'Customizer settings import finished!', 'templify-import-templates' ),
@@ -118,6 +118,8 @@ class CustomizerImporter {
 			foreach ( $data['options'] as $option_key => $option_value ) {
 				if ( 'kadence_global_palette' === $option_key ) {
 					$palette = json_decode( $option_value, 'true' );
+
+
 					$info = update_option( 'kadence_global_palette', json_encode( $palette ) );
 					if ( ! $info ) {
 						$info = add_option( 'kadence_global_palette', json_encode( $palette ) );
@@ -132,6 +134,9 @@ class CustomizerImporter {
 				}
 			}
 		}
+
+
+
 
 		// If wp_css is set then import it.
 		if ( function_exists( 'wp_update_custom_css_post' ) && isset( $data['wp_css'] ) && '' !== $data['wp_css'] ) {
@@ -161,6 +166,7 @@ class CustomizerImporter {
 		do_action( 'templify-importer-templates/after_customizer_import', $data );
 	}
 
+
     /**
 	 * Helper function: Customizer import - imports images for settings saved as mods.
 	 *
@@ -187,6 +193,8 @@ class CustomizerImporter {
 		return $mods;
 	}
 
+
+	
 
     /**
 	 * Helper function: Customizer import

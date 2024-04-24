@@ -59,14 +59,14 @@ class Downloader {
 		if ( empty( $url ) ) {
 			return new \WP_Error(
 				'missing_url',
-				__( 'Missing URL for downloading a file!', 'kadence-starter-templates' )
+				__( 'Missing URL for downloading a file!', 'templify-import-templates' )
 			);
 		}
 
 		// Get file content from the server.
 		$response = wp_remote_get(
 			$url,
-			array( 'timeout' => apply_filters( 'kadence-starter-templates/timeout_for_downloading_import_file', 20 ) )
+			array( 'timeout' => apply_filters( 'templify-import-templates/timeout_for_downloading_import_file', 20 ) )
 		);
 
 		// Test if the get request was not successful.
@@ -77,7 +77,7 @@ class Downloader {
 			return new \WP_Error(
 				'download_error',
 				sprintf(
-					__( 'An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s - %6$s.', 'kadence-starter-templates' ),
+					__( 'An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s - %6$s.', 'templify-import-templates' ),
 					'<strong>',
 					$url,
 					'</strong>',
@@ -85,7 +85,7 @@ class Downloader {
 					$response_error['error_code'],
 					$response_error['error_message']
 				) . '<br>' .
-				apply_filters( 'kadence-starter-templates/message_after_file_fetching_error', '' )
+				apply_filters( 'templify-import-templates/message_after_file_fetching_error', '' )
 			);
 		}
 
@@ -134,7 +134,7 @@ class Downloader {
 			$this->download_directory_path = $download_directory_path;
 		} else {
 			$upload_dir = wp_upload_dir();
-			$this->download_directory_path = apply_filters( 'kadence-starter-templates/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+			$this->download_directory_path = apply_filters( 'templify-import-templates/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 		}
 	}
 }
