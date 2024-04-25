@@ -2,9 +2,8 @@
 /**
  * Class for downloading a file from a given URL.
  *
-* @package templify Import Templates
+ * @package templify Import Templates
  */
-
 
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -346,6 +345,9 @@ class CustomizerImporter {
 			}
 		}
 	}
+
+
+	
 
 	/**
 	 * Imports uploaded mods and calls WordPress core customize_save actions so
