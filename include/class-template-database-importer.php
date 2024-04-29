@@ -16,6 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Template_Database_Importer {
 
+	
 	/**
 	 * Instance of this class
 	 *

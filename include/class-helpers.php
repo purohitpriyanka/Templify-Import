@@ -146,6 +146,164 @@ class Helpers {
 
 
 	/**
+	 * Download import files. Content .xml and widgets .wie|.json files.
+	 *
+	 * @param  array  $import_file_info array with import file details.
+	 * @return array|WP_Error array of paths to the downloaded files or WP_Error object with error message.
+	 */
+	public static function download_import_files( $import_file_info ) {
+		$downloaded_files = array(
+			'content'    => '',
+			'widgets'    => '',
+			'customizer' => '',
+			'redux'      => '',
+			'forms'      => '',
+		);
+		$downloader = new Downloader();
+		// ----- Set content file path -----
+		// Check if 'content' is not defined. That would mean a local file.
+		if ( empty( $import_file_info['content'] ) ) {
+			if ( isset( $import_file_info['local_content'] ) && file_exists( $import_file_info['local_content'] ) ) {
+				$downloaded_files['content'] = $import_file_info['local_content'];
+			}
+		} else {
+			// Set the filename string for content import file.
+			$content_filename = apply_filters( 'kadence-starter-templates/downloaded_content_file_prefix', 'demo-content-import-file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/downloaded_content_file_suffix_and_file_extension', '.xml' );
+
+			// Download the content import file.
+			$downloaded_files['content'] = $downloader->download_file( $import_file_info['content'], $content_filename );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $downloaded_files['content'] ) ) {
+				return $downloaded_files['content'];
+			}
+		}
+
+		// ----- Set widget file path -----
+		// Get widgets file as well. If defined!
+		if ( ! empty( $import_file_info['widget_data'] ) ) {
+			// Set the filename string for widgets import file.
+			$widget_filename = apply_filters( 'kadence-starter-templates/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+
+			// Download the widgets import file.
+			$downloaded_files['widgets'] = $downloader->download_file( $import_file_info['widget_data'], $widget_filename );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $downloaded_files['widgets'] ) ) {
+				return $downloaded_files['widgets'];
+			}
+		} else if ( ! empty( $import_file_info['local_widget_data'] ) ) {
+			if ( file_exists( $import_file_info['local_widget_data'] ) ) {
+				$downloaded_files['widgets'] = $import_file_info['local_widget_data'];
+			}
+		}
+
+		// ----- Set customizer file path -----
+		// Get customizer import file as well. If defined!
+		if ( ! empty( $import_file_info['theme_options'] ) ) {
+			// Setup filename path to save the customizer content.
+			$customizer_filename = apply_filters( 'kadence-starter-templates/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
+
+			// Download the customizer import file.
+			$downloaded_files['customizer'] = $downloader->download_file( $import_file_info['theme_options'], $customizer_filename );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $downloaded_files['customizer'] ) ) {
+				return $downloaded_files['customizer'];
+			}
+		} else if ( ! empty( $import_file_info['local_theme_options'] ) ) {
+			if ( file_exists( $import_file_info['local_theme_options'] ) ) {
+				$downloaded_files['customizer'] = $import_file_info['local_theme_options'];
+			}
+		}
+		// ----- Set form file path -----
+		// Get form file as well. If defined!
+		if ( ! empty( $import_file_info['form_data'] ) ) {
+			// Set the filename string for form import file.
+			$form_filename = apply_filters( 'kadence-starter-templates/downloaded_forms_file_prefix', 'demo-forms-import-file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/downloaded_form_file_suffix_and_file_extension', '.json' );
+
+			// Download the form import file.
+			$downloaded_files['forms'] = $downloader->download_file( $import_file_info['form_data'], $form_filename );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $downloaded_files['forms'] ) ) {
+				return $downloaded_files['forms'];
+			}
+		} else if ( ! empty( $import_file_info['local_form_data'] ) ) {
+			if ( file_exists( $import_file_info['local_form_data'] ) ) {
+				$downloaded_files['forms'] = $import_file_info['local_form_data'];
+			}
+		}
+		// ----- Set give form file path -----
+		// Get form file as well. If defined!
+		if ( ! empty( $import_file_info['give_donation_data'] ) ) {
+			// Set the filename string for form import file.
+			$give_filename = apply_filters( 'kadence-starter-templates/downloaded_forms_file_prefix', 'demo-give-donations-import-file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/downloaded_give_donations_file_suffix_and_file_extension', '.json' );
+
+			// Download the form import file.
+			$downloaded_files['give-donations'] = $downloader->download_file( $import_file_info['give_donation_data'], $give_filename );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $downloaded_files['give-donations'] ) ) {
+				return $downloaded_files['give-donations'];
+			}
+		}
+		// ----- Set give form file path -----
+		// Get form file as well. If defined!
+		if ( ! empty( $import_file_info['give_form_data'] ) ) {
+			// Set the filename string for form import file.
+			$give_form_filename = apply_filters( 'kadence-starter-templates/downloaded_forms_file_prefix', 'demo-give-forms-import-file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/downloaded_give_form_file_suffix_and_file_extension', '.json' );
+
+			// Download the form import file.
+			$downloaded_files['give-forms'] = $downloader->download_file( $import_file_info['give_form_data'], $give_form_filename );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $downloaded_files['give-forms'] ) ) {
+				return $downloaded_files['give-forms'];
+			}
+		}
+		// Get the slider
+		if ( ! empty( $import_file_info['depicter_data'] ) ) {
+			// Set the filename string for form import file.
+			$depicter_filename = apply_filters( 'kadence-starter-templates/downloaded_depicter_file_prefix', 'demo-depicter-import-file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/downloaded_depicter_file_suffix_and_file_extension', '.zip' );
+
+			// Download the form import file.
+			$downloaded_files['depicter'] = $downloader->download_file( $import_file_info['depicter_data'], $depicter_filename );
+
+			// Return from this function if there was an error.
+			if ( is_wp_error( $downloaded_files['depicter'] ) ) {
+				return $downloaded_files['depicter'];
+			}
+		}
+
+		return $downloaded_files;
+	}
+
+
+	/**
+	 * Write the error to the log file and send the AJAX response.
+	 *
+	 * @param string $error_text text to display in the log file and in the AJAX response.
+	 * @param string $log_file_path path to the log file.
+	 * @param string $separator title separating the old and new content.
+	 */
+	public static function log_error_and_send_ajax_response( $error_text, $log_file_path, $separator = '' ) {
+		if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+			// Add this error to log file.
+			$log_added = self::append_to_file(
+				$error_text,
+				$log_file_path,
+				$separator
+			);
+		}
+
+		// Send JSON Error response to the AJAX call.
+		wp_send_json( $error_text );
+	}
+
+
+
+	/**
 	 * Process import file - this parses the widget data and returns it.
 	 *
 	 * @param string $file path to json file.
@@ -210,6 +368,61 @@ class Helpers {
 		);
 		// Return results.
 		return apply_filters( 'templify-import-templates/give_import_results', $results );
+	}
+
+	
+	/**
+	 * Check if the AJAX call is valid.
+	 */
+	public static function verify_ajax_call() {
+		check_ajax_referer( 'kadence-ajax-verification', 'security' );
+
+		// Check if user has the WP capability to import data.
+		if ( ! current_user_can( 'import' ) ) {
+			wp_die(
+				sprintf(
+					__( '%sYour user role isn\'t high enough. You don\'t have permission to import demo data.%s', 'kadence-starter-templates' ),
+					'<div class="notice  notice-error"><p>',
+					'</p></div>'
+				)
+			);
+		}
+	}
+
+
+	/**
+	 * Get log file path
+	 *
+	 * @return string, path to the log file
+	 */
+	public static function get_log_path() {
+		$upload_dir  = wp_upload_dir();
+		$upload_path = apply_filters( 'kadence-starter-templates/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+
+		$log_path = $upload_path . apply_filters( 'kadence-starter-templates/log_file_prefix', 'log_file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/log_file_suffix_and_file_extension', '.txt' );
+
+		self::register_file_as_media_attachment( $log_path );
+
+		return $log_path;
+	}
+
+
+		/**
+	 * Set the $demo_import_start_time class variable with the current date and time string.
+	 */
+	public static function set_demo_import_start_time() {
+		self::$demo_import_start_time = date( apply_filters( 'kadence-starter-templates/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
+	}
+
+
+
+	/**
+	 * Set the Kadence transient with the current importer data.
+	 *
+	 * @param array $data Data to be saved to the transient.
+	 */
+	public static function set_import_data_transient( $data ) {
+		set_transient( 'templify_importer_data', $data, 0.1 * HOUR_IN_SECONDS );
 	}
 
 

@@ -1716,6 +1716,7 @@ class Importer_Templates {
 			$this->selected_font    = empty( $_POST['font'] ) ? '' : sanitize_text_field( $_POST['font'] );
 			$this->selected_builder = empty( $_POST['builder'] ) ? 'blocks' : sanitize_text_field( $_POST['builder'] );
 
+			
 			if ( empty( $this->import_files ) || ( is_array( $this->import_files ) && ! isset( $this->import_files[ $this->selected_index ] ) ) ) {
 				$template_database  = Template_Database_Importer::get_instance();
 				$this->import_files = $template_database->get_importer_files( $this->selected_index, $this->selected_builder );
