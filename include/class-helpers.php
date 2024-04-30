@@ -375,7 +375,7 @@ class Helpers {
 	 * Check if the AJAX call is valid.
 	 */
 	public static function verify_ajax_call() {
-		check_ajax_referer( 'kadence-ajax-verification', 'security' );
+		check_ajax_referer( 'templify-ajax-verification', 'security' );
 
 		// Check if user has the WP capability to import data.
 		if ( ! current_user_can( 'import' ) ) {

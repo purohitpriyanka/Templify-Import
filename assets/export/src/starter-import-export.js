@@ -26,7 +26,7 @@
 					body		= $( 'body' ),
 					form		= $( '<form class="templify-import-import-form" method="POST" enctype="multipart/form-data"></form>' ),
 					controls	= $( '.templify-import-import-controls' ),
-					file		= $( 'input[name=templify-import-import-file]' ),
+					file		= $( 'input[name=templify-importer-import-file]' ),
 					message		= $( '.templify-import-uploading' );
 				
 				if ( '' == file.val() ) {
