@@ -51,14 +51,14 @@ class Templify_Importer_Control_Import_Export extends WP_Customize_Control {
 			</span>
 			<div class="templify-importer-import-controls">
 				<input type="file" name="templify-importer-import-file" class="templify-importer-import-file" />
-				<?php wp_nonce_field( 'templify-importer-importing', 'templify-importer-import' ); ?>
+				<? wp_nonce_field( 'templify-importer-importing', 'templify-importer-import' ); ?>
 			</div>
 			<div class="templify-import-uploading"><?php esc_html_e( 'Uploading...', 'templify' ); ?></div>
 			<input type="button" class="button templify-importer-import templify-import-button" name="templify-importer-import-button" value="<?php esc_attr_e( 'Import', 'templify' ); ?>" />
 
 			<hr class="kt-theme-hr" />
 			<span class="customize-control-title">
-				<?php esc_html_e( 'Reset', 'templify' ); ?>
+				<? esc_html_e( 'Reset', 'templify' ); ?>
 			</span>
 			<span class="description customize-control-description">
 				<?php esc_html_e( 'Click the button to reset all theme settings.', 'templify' ); ?>
