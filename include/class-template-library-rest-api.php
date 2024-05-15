@@ -377,54 +377,54 @@ class Library_REST_Controller extends WP_REST_Controller {
 				),
 			)
 		);
-		register_rest_route(
-			$this->namespace,
-			'/ai-base',
-			array(
-				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_ai_base_sites' ),
-					'permission_callback' => array( $this, 'get_items_permission_check' ),
-					'args'                => $this->get_collection_params(),
-				),
-			)
-		);
-		register_rest_route(
-			$this->namespace,
-			'/get-all-local-ai',
-			array(
-				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_all_local_ai_items' ),
-					'permission_callback' => array( $this, 'get_items_permission_check' ),
-					'args'                => $this->get_collection_params(),
-				),
-			)
-		);
-		register_rest_route(
-			$this->namespace,
-			'/get-all-ai',
-			array(
-				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_all_ai_items' ),
-					'permission_callback' => array( $this, 'get_items_permission_check' ),
-					'args'                => $this->get_collection_params(),
-				),
-			)
-		);
-		register_rest_route(
-			$this->namespace,
-			'/remove-content',
-			array(
-				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'remove_content' ),
-					'permission_callback' => array( $this, 'get_items_permission_check' ),
-					'args'                => $this->get_collection_params(),
-				),
-			)
-		);
+		// register_rest_route(
+		// 	$this->namespace,
+		// 	'/ai-base',
+		// 	array(
+		// 		array(
+		// 			'methods'             => WP_REST_Server::READABLE,
+		// 			'callback'            => array( $this, 'get_ai_base_sites' ),
+		// 			'permission_callback' => array( $this, 'get_items_permission_check' ),
+		// 			'args'                => $this->get_collection_params(),
+		// 		),
+		// 	)
+		// );
+		// register_rest_route(
+		// 	$this->namespace,
+		// 	'/get-all-local-ai',
+		// 	array(
+		// 		array(
+		// 			'methods'             => WP_REST_Server::READABLE,
+		// 			'callback'            => array( $this, 'get_all_local_ai_items' ),
+		// 			'permission_callback' => array( $this, 'get_items_permission_check' ),
+		// 			'args'                => $this->get_collection_params(),
+		// 		),
+		// 	)
+		// );
+		// register_rest_route(
+		// 	$this->namespace,
+		// 	'/get-all-ai',
+		// 	array(
+		// 		array(
+		// 			'methods'             => WP_REST_Server::READABLE,
+		// 			'callback'            => array( $this, 'get_all_ai_items' ),
+		// 			'permission_callback' => array( $this, 'get_items_permission_check' ),
+		// 			'args'                => $this->get_collection_params(),
+		// 		),
+		// 	)
+		// );
+		// register_rest_route(
+		// 	$this->namespace,
+		// 	'/remove-content',
+		// 	array(
+		// 		array(
+		// 			'methods'             => WP_REST_Server::READABLE,
+		// 			'callback'            => array( $this, 'remove_content' ),
+		// 			'permission_callback' => array( $this, 'get_items_permission_check' ),
+		// 			'args'                => $this->get_collection_params(),
+		// 		),
+		// 	)
+		// );
 		register_rest_route(
 			$this->namespace,
 			'/install-plugins',
@@ -723,12 +723,12 @@ class Library_REST_Controller extends WP_REST_Controller {
 			}
 		}
 
-		$args = array(
-			'key'       => $this->api_key,
-			'site_url'  => $site_url,
-			'beta'      => defined( 'KADENCE_STARTER_TEMPLATES_BETA' ) && KADENCE_STARTER_TEMPLATES_BETA ? 'true' : 'false',
-		);
-		$api_url  = add_query_arg( $args, 'https://base.startertemplatecloud.com/wp-json/kadence-starter-base/v1/sites' );
+		// $args = array(
+		// 	'key'       => $this->api_key,
+		// 	'site_url'  => $site_url,
+		// 	'beta'      => defined( 'KADENCE_STARTER_TEMPLATES_BETA' ) && KADENCE_STARTER_TEMPLATES_BETA ? 'true' : 'false',
+		// );
+		// $api_url  = add_query_arg( $args, 'https://base.startertemplatecloud.com/wp-json/kadence-starter-base/v1/sites' );
 		// Get the response.
 		$response = wp_safe_remote_get(
 			$api_url,
@@ -3125,16 +3125,16 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @return string The base64 encoded string.
 	 */
 	public function get_token_header( $args = array() ) {
-		$this->get_license_keys();
-		$site_url     = get_original_domain();
-		$site_name    = get_bloginfo( 'name' );
+		// $this->get_license_keys();
+		// $site_url     = get_original_domain();
+		// $site_name    = get_bloginfo( 'name' );
 		$defaults = [
-			'domain'          => $site_url,
-			'key'             => ! empty( $this->api_key ) ? $this->api_key : '',
-			'email'           => ! empty( $this->api_email ) ? $this->api_email : '',
-			'site_name'       => $site_name,
-			'product_slug'    => apply_filters( 'kadence-blocks-auth-slug', 'kadence-blocks' ),
-			'product_version' => KADENCE_STARTER_TEMPLATES_VERSION,
+			// 'domain'          => $site_url,
+			// 'key'             => ! empty( $this->api_key ) ? $this->api_key : '',
+			// 'email'           => ! empty( $this->api_email ) ? $this->api_email : '',
+			// 'site_name'       => $site_name,
+			// 'product_slug'    => apply_filters( 'kadence-blocks-auth-slug', 'kadence-blocks' ),
+			// 'product_version' => KADENCE_STARTER_TEMPLATES_VERSION,
 		];
 
 		$parsed_args = wp_parse_args( $args, $defaults );
@@ -4525,15 +4525,15 @@ class Library_REST_Controller extends WP_REST_Controller {
 	/**
 	 * Get the current license key for the plugin.
 	 */
-	public function get_current_license_key() {
-		if ( function_exists( 'kadence_blocks_get_current_license_data' ) ) {
-			$data = kadence_blocks_get_current_license_data();
-			if ( ! empty( $data['key'] ) ) {
-				return $data['key'];
-			}
-		}
-		return get_license_key( 'kadence-starter-templates' );
-	}
+	// public function get_current_license_key() {
+	// 	if ( function_exists( 'kadence_blocks_get_current_license_data' ) ) {
+	// 		$data = kadence_blocks_get_current_license_data();
+	// 		if ( ! empty( $data['key'] ) ) {
+	// 			return $data['key'];
+	// 		}
+	// 	}
+	// 	return get_license_key( 'kadence-starter-templates' );
+	// }
 	/**
 	 * Get the current license key for the plugin.
 	 */

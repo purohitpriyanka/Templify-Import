@@ -14,7 +14,7 @@ use KadenceWP\KadenceStarterTemplates\StellarWP\ProphecyMonorepo\Storage\Excepti
  */
 class Block_Library_Cache implements Terminable {
 
-	/**
+	/*
 	 * @var Storage
 	 */
 	protected $storage;

@@ -9,8 +9,6 @@
  * @package Templify Import Templates
  */
 
-
-
 use WP_Customize_Setting;
 
 /**

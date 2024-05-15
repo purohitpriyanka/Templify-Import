@@ -7,6 +7,7 @@ namespace KadenceWP\KadenceStarterTemplates\Cache;
  */
 final class Ai_Cache extends Block_Library_Cache {
 
+	
 	/**
 	 * Create a hashed file name from provided identifier.
 	 *

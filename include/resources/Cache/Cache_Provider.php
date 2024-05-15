@@ -9,6 +9,7 @@ use KadenceWP\KadenceStarterTemplates\StellarWP\ProphecyMonorepo\Container\Contr
 
 final class Cache_Provider extends Provider {
 
+	
 	/**
 	 * @inheritDoc
 	 */
