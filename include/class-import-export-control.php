@@ -67,3 +67,4 @@ class Templify_Importer_Control_Import_Export extends WP_Customize_Control {
 			<?php
 	}
 }
+

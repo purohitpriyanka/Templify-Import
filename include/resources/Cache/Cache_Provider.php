@@ -8,8 +8,6 @@ use KadenceWP\KadenceStarterTemplates\Symfony\Component\Filesystem\Filesystem;
 use KadenceWP\KadenceStarterTemplates\StellarWP\ProphecyMonorepo\Container\Contracts\Provider;
 
 final class Cache_Provider extends Provider {
-
-	
 	/**
 	 * @inheritDoc
 	 */

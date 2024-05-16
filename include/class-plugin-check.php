@@ -16,6 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Plugin_Check {
 
+
+	
+
 	/**
 	 * Static var active plugins
 	 *

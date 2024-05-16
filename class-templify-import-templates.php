@@ -846,6 +846,7 @@ class Importer_Templates {
 					$log_added = Helpers::append_to_file(
 						sprintf(
 							__( 'The import files for: %s were successfully downloaded!', 'templify-import-templates' ),
+		
 							$this->import_files[ $this->selected_index ]['slug']
 						) . Helpers::import_file_info( $this->selected_import_files ),
 						$this->log_file_path,
@@ -1234,23 +1235,24 @@ class Importer_Templates {
 			$response['message'] = '';
 
 			$response['message'] .= sprintf(
-				__( '%1$sFinished! View your page%2$s', 'kadence-starter-templates' ),
-				'<div class="finshed-notice-success"><p><a href="' . esc_url( get_permalink( $extra ) ) . '" class="button-primary button kadence-starter-templates-finish-button">',
+				__( '%1$sFinished! View your page%2$s', 'templify-import-templates' ),
+				'<div class="finshed-notice-success"><p><a href="' . esc_url( get_permalink( $extra ) ) . '" class="button-primary button templify-import-templates-finish-button">',
 				'</a></p></div>'
 			);
 		} elseif ( empty( $this->frontend_error_messages ) ) {
 			$response['message'] = '';
 
 			$response['message'] .= sprintf(
-				__( '%1$sFinished! View your site%2$s', 'kadence-starter-templates' ),
-				'<div class="finshed-notice-success"><p><a href="' . esc_url( home_url( '/' ) ) . '" class="button-primary button kadence-starter-templates-finish-button">',
+				__( '%1$sFinished! View your site%2$s', 'templify-import-templates' ),
+				'<div class="finshed-notice-success"><p><a href="' . esc_url( home_url( '/' ) ) . '" class="button-primary button templify-import-templates-finish-button">',
 				'</a></p></div>'
 			);
+			
 		} else {
 			$response['message'] = $this->frontend_error_messages_display() . '<br>';
-			if ( apply_filters( 'kadence_starter_templates_save_log_files', false ) ) {
+			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
 				$response['message'] .= sprintf(
-					__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'kadence-starter-templates' ),
+					__( '%1$sThe demo import has finished, but there were some import errors.%2$sMore details about the errors can be found in this %3$s%5$slog file%6$s%4$s%7$s', 'templify-import-templates' ),
 					'<div class="notice  notice-warning"><p>',
 					'<br>',
 					'<strong>',
@@ -1261,7 +1263,7 @@ class Importer_Templates {
 				);
 			} else {
 				$response['message'] .= sprintf(
-					__( '%1$sThe demo import has finished, but there were some import errors.%2$sPlease check your php error logs if site is incomplete.%3$s', 'kadence-starter-templates' ),
+					__( '%1$sThe demo import has finished, but there were some import errors.%2$sPlease check your php error logs if site is incomplete.%3$s', 'templify-import-templates' ),
 					'<div class="notice  notice-warning"><p>',
 					'<br>',
 					'</p></div>'

@@ -509,18 +509,18 @@ class Library_REST_Controller extends WP_REST_Controller {
 				),
 			)
 		);
-		register_rest_route(
-			$this->namespace,
-			'/install-settings',
-			array(
-				array(
-					'methods'             => WP_REST_Server::CREATABLE,
-					'callback'            => array( $this, 'install_settings' ),
-					'permission_callback' => array( $this, 'get_items_permission_check' ),
-					'args'                => $this->get_collection_params(),
-				),
-			)
-		);
+		// register_rest_route(
+		// 	$this->namespace,
+		// 	'/install-settings',
+		// 	array(
+		// 		array(
+		// 			'methods'             => WP_REST_Server::CREATABLE,
+		// 			'callback'            => array( $this, 'install_settings' ),
+		// 			'permission_callback' => array( $this, 'get_items_permission_check' ),
+		// 			'args'                => $this->get_collection_params(),
+		// 		),
+		// 	)
+		// );
 		register_rest_route(
 			$this->namespace,
 			'/install-navigation',
@@ -545,30 +545,32 @@ class Library_REST_Controller extends WP_REST_Controller {
 				),
 			)
 		);
-		register_rest_route(
-			$this->namespace,
-			'/get_remaining_credits',
-			array(
-				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_remaining_credits' ),
-					'permission_callback' => array( $this, 'get_items_permission_check' ),
-					'args'                => $this->get_collection_params(),
-				),
-			)
-		);
-		register_rest_route(
-			$this->namespace,
-			'/get_auth_data',
-			array(
-				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_auth_data' ),
-					'permission_callback' => array( $this, 'get_items_permission_check' ),
-					'args'                => $this->get_collection_params(),
-				),
-			)
-		);
+		// register_rest_route(
+		// 	$this->namespace,
+		// 	'/get_remaining_credits',
+		// 	array(
+		// 		array(
+		// 			'methods'             => WP_REST_Server::READABLE,
+		// 			'callback'            => array( $this, 'get_remaining_credits' ),
+		// 			'permission_callback' => array( $this, 'get_items_permission_check' ),
+		// 			'args'                => $this->get_collection_params(),
+		// 		),
+		// 	)
+		// );
+		// register_rest_route(
+		// 	$this->namespace,
+		// 	'/get_auth_data',
+		// 	array(
+		// 		array(
+		// 			'methods'             => WP_REST_Server::READABLE,
+		// 			'callback'            => array( $this, 'get_auth_data' ),
+		// 			'permission_callback' => array( $this, 'get_items_permission_check' ),
+		// 			'args'                => $this->get_collection_params(),
+		// 		),
+		// 	)
+		//);
+
+
 		register_rest_route(
 			$this->namespace,
 			'/get_initial_jobs',
@@ -687,12 +689,12 @@ class Library_REST_Controller extends WP_REST_Controller {
 	public function get_items( $request ) {
 		$this->template_type = $request->get_param( self::PROP_LIBRARY );
 		$reload              = $request->get_param( self::PROP_FORCE_RELOAD );
-		$this->get_license_keys();
+		//$this->get_license_keys();
 		// Do you have the data?
 		$get_data = $this->get_template_data( $reload );
 		if ( ! $get_data ) {
 			// Send JSON Error response to the AJAX call.
-			wp_send_json( esc_html__( 'No template data', 'kadence-starter-templates' ) );
+			wp_send_json( esc_html__( 'No template data', 'templify-import-templates' ) );
 		} else {
 			wp_send_json( $get_data );
 		}
@@ -705,7 +707,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function get_ai_base_sites( $request ) {
-		$this->get_license_keys();
+		//$this->get_license_keys();
 		$site_url = get_original_domain();
 		$reload   = $request->get_param( self::PROP_FORCE_RELOAD );
 
@@ -721,6 +723,8 @@ class Library_REST_Controller extends WP_REST_Controller {
 				return rest_ensure_response( $this->block_library_cache->get( $identifier ) );
 			} catch ( NotFoundException $e ) {
 			}
+
+
 		}
 
 		// $args = array(
@@ -752,43 +756,43 @@ class Library_REST_Controller extends WP_REST_Controller {
 
 		return rest_ensure_response( $contents );
 	}
-	/**
-	 * Retrieves remaining credits.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function get_auth_data( $request ) {
-		$this->get_license_keys();
-		if ( is_callable( 'network_home_url' ) ) {
-			$site_url = network_home_url( '', 'http' );
-		} else {
-			$site_url = get_bloginfo( 'url' );
-		}
-		$site_url = str_replace( array( 'http://', 'https://', 'www.' ), array( '', '', '' ), $site_url );
-		$auth = array(
-			'domain' => $site_url,
-			'key'    => $this->api_key,
-		);
-		return rest_ensure_response( $auth );
-	}
-	/**
-	 * Retrieves remaining credits.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function get_remaining_credits( $request ) {
-		$this->get_license_keys();
-		// Check if we have a remote file.
-		$response = $this->get_remote_remaining_credits();
-		$data = json_decode( $response, true );
-		if ( $response === 'error' ) {
-			return rest_ensure_response( 'error' );
-		} else {
-			return rest_ensure_response( $response );
-		}
-	}
+	// /**
+	//  * Retrieves remaining credits.
+	//  *
+	//  * @param WP_REST_Request $request Full details about the request.
+	//  * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	//   */
+	// public function get_auth_data( $request ) {
+	// 	//$this->get_license_keys();
+	// 	if ( is_callable( 'network_home_url' ) ) {
+	// 		$site_url = network_home_url( '', 'http' );
+	// 	} else {
+	// 		$site_url = get_bloginfo( 'url' );
+	// 	}
+	// 	$site_url = str_replace( array( 'http://', 'https://', 'www.' ), array( '', '', '' ), $site_url );
+	// 	$auth = array(
+	// 		'domain' => $site_url,
+	// 		'key'    => $this->api_key,
+	// 	);
+	// 	return rest_ensure_response( $auth );
+	// }
+	// /**
+	//  * Retrieves remaining credits.
+	//  *
+	//  * @param WP_REST_Request $request Full details about the request.
+	//  * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+	//  */
+	// public function get_remaining_credits( $request ) {
+	// 	//$this->get_license_keys();
+	// 	// Check if we have a remote file.
+	// 	$response = $this->get_remote_remaining_credits();
+	// 	$data = json_decode( $response, true );
+	// 	if ( $response === 'error' ) {
+	// 		return rest_ensure_response( 'error' );
+	// 	} else {
+	// 		return rest_ensure_response( $response );
+	// 	}
+	// }
 	/**
 	 * Retrieves all the currently available ai content.
 	 *
@@ -796,7 +800,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function get_all_local_ai_items( $request ) {
-		$this->get_license_keys();
+		//$this->get_license_keys();
 		$available_prompts = get_option( 'kb_design_library_prompts', array() );
 		$return_data = array();
 		if ( ! empty( $available_prompts ) && is_array( $available_prompts ) ) {
@@ -835,7 +839,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function get_all_ai_items( $request ) {
-		$this->get_license_keys();
+		//$this->get_license_keys();
 		$reload = $request->get_param( self::PROP_FORCE_RELOAD );
 		$available_prompts = get_option( 'kb_design_library_prompts', array() );
 		if ( ! $reload ) {
@@ -884,7 +888,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function get_initial_jobs() {
-		$this->get_license_keys();
+		////$this->get_license_keys();
 		update_option( 'kb_design_library_prompts', array() );
 		$contexts = $this->initial_contexts;
 		$available_prompts = array();
@@ -922,7 +926,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
 	 */
 	public function has_initial_jobs() {
-		$this->get_license_keys();
+		////$this->get_license_keys();
 		$contexts = $this->initial_contexts;
 		$available_prompts = get_option( 'kb_design_library_prompts', array() );
 		$contexts_available = array();
@@ -968,7 +972,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 */
 	public function get_remaining_jobs( $request ) {
 		$reload = $request->get_param( self::PROP_FORCE_RELOAD );
-		$this->get_license_keys();
+		////$this->get_license_keys();
 		$available_prompts = get_option( 'kb_design_library_prompts', array() );
 		$contexts = array(
 			'about',
@@ -1037,7 +1041,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	public function get_single_job( $request ) {
 		$context = $request->get_param( self::PROP_CONTEXT );
 		$reload = $request->get_param( self::PROP_FORCE_RELOAD );
-		$this->get_license_keys();
+		//$this->get_license_keys();
 		$available_prompts = get_option( 'kb_design_library_prompts', array() );
 		// Check if we have captured prompt.
 		if ( ! empty( $available_prompts[ $context ] ) && ! $reload ) {
@@ -1159,16 +1163,16 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @return string Returns the remote URL contents.
 	 */
 	public function get_new_remote_contents( $context ) {
-		if ( is_callable( 'network_home_url' ) ) {
-			$site_url = network_home_url( '', 'http' );
-		} else {
-			$site_url = get_bloginfo( 'url' );
-		}
-		$site_url = str_replace( array( 'http://', 'https://', 'www.' ), array( '', '', '' ), $site_url );
-		$auth = array(
-			'domain' => $site_url,
-			'key'    => $this->api_key,
-		);
+		// if ( is_callable( 'network_home_url' ) ) {
+		// 	$site_url = network_home_url( '', 'http' );
+		// } else {
+		// 	$site_url = get_bloginfo( 'url' );
+		// }
+		// $site_url = str_replace( array( 'http://', 'https://', 'www.' ), array( '', '', '' ), $site_url );
+		// $auth = array(
+		// 	'domain' => $site_url,
+		// 	'key'    => $this->api_key,
+		// );
 		$prophecy_data = json_decode( get_option( 'kadence_blocks_prophecy' ), true );
 		// Get the response.
 		$body = array(
@@ -2226,7 +2230,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 				$sidebar_available    = false;
 				$use_sidebar_id       = 'wp_inactive_widgets'; // Add to inactive if sidebar does not exist in theme.
 				$sidebar_message_type = 'error';
-				$sidebar_message      = __( 'Sidebar does not exist in theme (moving widget to Inactive)', 'kadence-starter-templates' );
+				$sidebar_message      = __( 'Sidebar does not exist in theme (moving widget to Inactive)', 'templify-import-templates' );
 			}
 
 			// Result for sidebar.
@@ -2247,7 +2251,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 				if ( ! $fail && ! isset( $available_widgets[ $id_base ] ) ) {
 					$fail                = true;
 					$widget_message_type = 'error';
-					$widget_message      = __( 'Site does not support widget', 'kadence-starter-templates' ); // Explain why widget not imported.
+					$widget_message      = __( 'Site does not support widget', 'templify-import-templates' ); // Explain why widget not imported.
 				}
 				// Convert multidimensional objects to multidimensional arrays.
 				// Some plugins like Jetpack Widget Visibility store settings as multidimensional arrays.
@@ -2255,7 +2259,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 				$widget = json_decode( json_encode( $widget ), true );
 
 				// Filter to modify settings array.
-				$widget = apply_filters( 'kadence-starter-templates/rest_widget_settings_array', $widget );
+				$widget = apply_filters( 'templify-import-templates/rest_widget_settings_array', $widget );
 				// Skip (no changes needed), if this is not a custom menu widget.
 				if ( array_key_exists( 'nav_menu', $widget ) && ! empty( $widget['nav_menu'] ) && ! is_int( $widget['nav_menu'] ) ) {
 					$menu_exists = wp_get_nav_menu_object( $widget['nav_menu'] );
@@ -2357,16 +2361,16 @@ class Library_REST_Controller extends WP_REST_Controller {
 					// Success message.
 					if ( $sidebar_available ) {
 						$widget_message_type = 'success';
-						$widget_message      = __( 'Imported', 'kadence-starter-templates' );
+						$widget_message      = __( 'Imported', 'templify-import-templates' );
 					} else {
 						$widget_message_type = 'warning';
-						$widget_message      = __( 'Imported to Inactive', 'kadence-starter-templates' );
+						$widget_message      = __( 'Imported to Inactive', 'templify-import-templates' );
 					}
 				}
 
 				// Result for widget instance.
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['name']         = isset( $available_widgets[ $id_base ]['name'] ) ? $available_widgets[ $id_base ]['name'] : $id_base; // Widget name or ID if name not available (not supported by site).
-				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['title']        = ! empty( $widget['title'] ) ? $widget['title'] : __( 'No Title', 'kadence-starter-templates' ); // Show "No Title" if widget instance is untitled.
+				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['title']        = ! empty( $widget['title'] ) ? $widget['title'] : __( 'No Title', 'templify-import-templates' ); // Show "No Title" if widget instance is untitled.
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['message_type'] = $widget_message_type;
 				$results[ $sidebar_id ]['widgets'][ $widget_instance_id ]['message']      = $widget_message;
 
@@ -3125,7 +3129,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @return string The base64 encoded string.
 	 */
 	public function get_token_header( $args = array() ) {
-		// $this->get_license_keys();
+		// //$this->get_license_keys();
 		// $site_url     = get_original_domain();
 		// $site_name    = get_bloginfo( 'name' );
 		$defaults = [
@@ -3806,7 +3810,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 */
 	public function get_image_collections( WP_REST_Request $request ) {
 		$reload        = $request->get_param( self::PROP_FORCE_RELOAD );
-		$this->get_license_keys();
+		//$this->get_license_keys();
 		$identifier    = 'image_collections';
 
 		if ( ! $reload ) {
@@ -3837,7 +3841,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @throws InvalidArgumentException
 	 */
 	public function get_images_by_industry( WP_REST_Request $request ) {
-		$this->get_license_keys();
+		//$this->get_license_keys();
 		$industries    = $request->get_param( self::PROP_INDUSTRIES );
 		$search_query  = $request->get_param( self::PROP_INDUSTRY );
 		$image_type    = $request->get_param( self::PROP_IMAGE_TYPE );
@@ -4532,7 +4536,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	// 			return $data['key'];
 	// 		}
 	// 	}
-	// 	return get_license_key( 'kadence-starter-templates' );
+	// 	return get_license_key( 'templify-import-templates' );
 	// }
 	/**
 	 * Get the current license key for the plugin.

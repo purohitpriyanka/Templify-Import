@@ -12,6 +12,7 @@
 use WP_Customize_Setting;
 
 /**
+ * 
  * A class that extends WP_Customize_Setting so we can access
  * the protected updated method when importing options.
  */

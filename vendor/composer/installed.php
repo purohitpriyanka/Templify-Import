@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'kadencewp/kadence-starter-templates',
+        'name' => 'kadencewp/templify-import-templates',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
         'reference' => '1dac87f2505a4c7f6b2d77a0735dfd08f1ed4204',
@@ -28,7 +28,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'kadencewp/kadence-starter-templates' => array(
+        'kadencewp/templify-import-templates' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
             'reference' => '1dac87f2505a4c7f6b2d77a0735dfd08f1ed4204',
