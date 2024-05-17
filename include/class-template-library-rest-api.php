@@ -19,24 +19,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 // use KadenceWP\KadenceStarterTemplates\StellarWP\ProphecyMonorepo\ImageDownloader\Exceptions\ImageDownloadException;
 // use KadenceWP\KadenceStarterTemplates\StellarWP\ProphecyMonorepo\Storage\Exceptions\NotFoundException;
 // use KadenceWP\KadenceStarterTemplates\Traits\Rest\Image_Trait;
-use WP_REST_Controller;
-use WP_REST_Request;
-use WP_REST_Server;
-use WP_Filesystem;
-use Plugin_Upgrader;
-use WP_Ajax_Upgrader_Skin;
-use WC_Product_Simple;
-use WC_Product_Variable;
-use WC_Product_Variation;
-use WC_Product_Attribute;
-use WP_Error;
-use WC_Install;
-use function sanitize_file_name;
-use function wp_send_json;
-use function wp_remote_get;
-use function wp_remote_retrieve_body;
-use function wp_remote_retrieve_response_code;
-use function wp_get_attachment_url;
+// use WP_REST_Controller;
+// use WP_REST_Request;
+// use WP_REST_Server;
+// use WP_Filesystem;
+// use Plugin_Upgrader;
+// use WP_Ajax_Upgrader_Skin;
+// use WC_Product_Simple;
+// use WC_Product_Variable;
+// use WC_Product_Variation;
+// use WC_Product_Attribute;
+// use WP_Error;
+// use WC_Install;
+// use function sanitize_file_name;
+// use function wp_send_json;
+// use function wp_remote_get;
+// use function wp_remote_retrieve_body;
+// use function wp_remote_retrieve_response_code;
+// use function wp_get_attachment_url;
 // use function KadenceWP\KadenceStarterTemplates\StellarWP\Uplink\get_license_domain;
 // use function KadenceWP\KadenceStarterTemplates\StellarWP\Uplink\get_original_domain;
 // use function KadenceWP\KadenceStarterTemplates\StellarWP\Uplink\get_license_key;
@@ -213,7 +213,6 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @var string
 	 */
 	protected $remote_ai_url = 'https://content.startertemplatecloud.com/wp-json/prophecy/v1/';
-
 	/**
 	 * The remote URL.
 	 *
@@ -347,6 +346,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 			self::$instance = new self();
 		}
 		return self::$instance;
+
 	}
 	/**
 	 * Constructor.
@@ -708,10 +708,10 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 */
 	public function get_ai_base_sites( $request ) {
 		//$this->get_license_keys();
-		$site_url = get_original_domain();
+		//$site_url = get_original_domain();
 		$reload   = $request->get_param( self::PROP_FORCE_RELOAD );
 
-		$identifier = 'ai-base-templates' . KADENCE_STARTER_TEMPLATES_VERSION;
+		$identifier = 'ai-base-templates' . TEMPLIFY_IMPORT_TEMPLATES_VERSION;
 
 		if ( ! empty( $this->api_key ) ) {
 			$identifier .= '_' . $this->api_key;
@@ -1084,30 +1084,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 			}
 		}
 	}
-	/**
-	 * Retrieves a collection of objects.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 */
-	public function get_local_contexts( $request ) {
-		$available_prompts = get_option( 'kb_design_library_prompts', array() );
-		if ( ! empty( $available_prompts && is_array( $available_prompts ) ) ) {
-			$contexts_available = array();
-			foreach ( $available_prompts as $key => $prompt ) {
-				if ( ! empty( $prompt ) ) {
-					$contexts_available[] = $key;
-				}
-			}
-			if ( ! empty( $contexts_available ) ) {
-				return rest_ensure_response( $contexts_available );
-			} else {
-				return rest_ensure_response( 'failed' );
-			}
-		} else {
-			return rest_ensure_response( 'failed' );
-		}
-	}
+	
 	/**
 	 * Get remote file contents.
 	 *
@@ -1146,6 +1123,9 @@ class Library_REST_Controller extends WP_REST_Controller {
 		if ( $this->is_response_code_error( $response ) ) {
 			return 'error';
 		}
+
+		//eyJkb21haW4iOiJ0ZW1wbGlmeS1pbXBvcnQubG9jYWwiLCJrZXkiOiJyYm1ZT3ZEc1lTQk4ifQ==
+
 
 		// Get the CSS from our response.
 		$contents = wp_remote_retrieve_body( $response );
@@ -1844,7 +1824,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 */
 	public function get_industry_verticals( WP_REST_Request $request ) {
 		$reload     = $request->get_param( self::PROP_FORCE_RELOAD );
-		$identifier = 'industry_verticals' . ( defined( 'KADENCE_BLOCKS_VERSION' ) ? KADENCE_BLOCKS_VERSION : KADENCE_STARTER_TEMPLATES_VERSION );
+		$identifier = 'industry_verticals' . ( defined( 'KADENCE_BLOCKS_VERSION' ) ? KADENCE_BLOCKS_VERSION : TEMPLIFY_IMPORT_TEMPLATES_VERSION );
 
 		if ( ! $reload ) {
 			try {
@@ -2001,6 +1981,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 
 		return rest_ensure_response( $contents );
 	}
+
 	/**
 	 * Install Navigation.
 	 *
@@ -2268,6 +2249,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 					}
 				}
 				if ( ! empty( $widget['content'] ) ) {
+				
 					$widget['content'] = str_replace( 'Redwood', $site_name, $widget['content'] );
 					$widget['content'] = str_replace( 'Laurel', $site_name, $widget['content'] );
 					$widget['content'] = str_replace( 'Acorn', $site_name, $widget['content'] );
@@ -3138,7 +3120,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 			// 'email'           => ! empty( $this->api_email ) ? $this->api_email : '',
 			// 'site_name'       => $site_name,
 			// 'product_slug'    => apply_filters( 'kadence-blocks-auth-slug', 'kadence-blocks' ),
-			// 'product_version' => KADENCE_STARTER_TEMPLATES_VERSION,
+			// 'product_version' => TEMPLIFY_IMPORT_TEMPLATES_VERSION,
 		];
 
 		$parsed_args = wp_parse_args( $args, $defaults );
@@ -3341,115 +3323,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 			}
 		}
 	}
-	/**
-	 * Get attribute taxonomy ID from the imported data.
-	 * If does not exists register a new attribute.
-	 *
-	 * @param  string $raw_name Attribute name.
-	 * @return int
-	 * @throws Exception If taxonomy cannot be loaded.
-	 */
-	public function get_attribute_taxonomy_id( $raw_name ) {
-		global $wpdb, $wc_product_attributes;
-
-		// These are exported as labels, so convert the label to a name if possible first.
-		$attribute_labels = wp_list_pluck( wc_get_attribute_taxonomies(), 'attribute_label', 'attribute_name' );
-		$attribute_name   = array_search( $raw_name, $attribute_labels, true );
-
-		if ( ! $attribute_name ) {
-			$attribute_name = wc_sanitize_taxonomy_name( $raw_name );
-		}
-
-		$attribute_id = wc_attribute_taxonomy_id_by_name( $attribute_name );
-
-		// Get the ID from the name.
-		if ( $attribute_id ) {
-			return $attribute_id;
-		}
-
-		// If the attribute does not exist, create it.
-		$attribute_id = wc_create_attribute(
-			array(
-				'name'         => $raw_name,
-				'slug'         => $attribute_name,
-				'type'         => 'select',
-				'order_by'     => 'menu_order',
-				'has_archives' => false,
-			)
-		);
-
-		if ( is_wp_error( $attribute_id ) ) {
-			throw new Exception( $attribute_id->get_error_message(), 400 );
-		}
-
-		// Register as taxonomy while importing.
-		$taxonomy_name = wc_attribute_taxonomy_name( $attribute_name );
-		register_taxonomy(
-			$taxonomy_name,
-			apply_filters( 'woocommerce_taxonomy_objects_' . $taxonomy_name, array( 'product' ) ),
-			apply_filters(
-				'woocommerce_taxonomy_args_' . $taxonomy_name,
-				array(
-					'labels'       => array(
-						'name' => $raw_name,
-					),
-					'hierarchical' => true,
-					'show_ui'      => false,
-					'query_var'    => true,
-					'rewrite'      => false,
-				)
-			)
-		);
-
-		// Set product attributes global.
-		$wc_product_attributes = array();
-
-		foreach ( wc_get_attribute_taxonomies() as $taxonomy ) {
-			$wc_product_attributes[ wc_attribute_taxonomy_name( $taxonomy->attribute_name ) ] = $taxonomy;
-		}
-
-		return $attribute_id;
-	}
-	/**
-	 * Add terms to attribute and return an array of term ids 
-	 */
-	public function add_attribute_terms_by_id( $attribute_id, $terms ) {
-		$term_ids = [];
-		foreach ( $terms as $term ) {
-			$term_id = $this->add_attribute_term_by_id( $attribute_id, $term );
-			if ( $term_id ) {
-				$term_ids[] = $term_id;
-			}
-		}
-		return $term_ids;
-	}
-	/**
-	 * Add terms to attribute and return an array of term ids 
-	 */
-	public function add_attribute_term_by_id( $attribute_id, $term ) {
-		$term_id = 0;
-		if ( ! empty( $term['slug'] ) ) {
-			$term_id = get_term_by( 'slug', $term['slug'], wc_attribute_taxonomy_name_by_id( $attribute_id ) );
-		}
-		if ( ! $term_id ) {
-			$term_id = wp_insert_term(
-				$term['name'], // the term.
-				wc_attribute_taxonomy_name_by_id( $attribute_id ), // the taxonomy.
-				array(
-					'slug' => $term['slug']
-				)
-			);
-		}
-		if ( ! is_wp_error( $term_id ) ) {
-			if ( is_array( $term_id ) && ! empty( $term_id['term_id'] ) ) {
-				return $term_id['term_id'];
-			} else if ( is_object( $term_id ) && ! empty( $term_id->term_id ) ) {
-				update_term_meta( $term_id->term_id, '_kadence_starter_templates_imported_term', true );
-				return $term_id->term_id;
-			}
-		}
-		return 0;
-	}
+	
 	/**
 	 * Process images and links in page content.
 	 *
@@ -3525,6 +3399,52 @@ class Library_REST_Controller extends WP_REST_Controller {
 	public function sanitize_jpeg_filename( $filename ) {
 		return sanitize_file_name( $filename ) . '.jpeg';
 	}
+
+
+	/**
+	 * Add terms to attribute and return an array of term ids 
+	 */
+	public function add_attribute_terms_by_id( $attribute_id, $terms ) {
+		$term_ids = [];
+		foreach ( $terms as $term ) {
+			$term_id = $this->add_attribute_term_by_id( $attribute_id, $term );
+			if ( $term_id ) {
+				$term_ids[] = $term_id;
+			}
+		}
+		return $term_ids;
+	}
+	
+
+	/**
+	 * Add terms to attribute and return an array of term ids 
+	 */
+	public function add_attribute_term_by_id( $attribute_id, $term ) {
+		$term_id = 0;
+		if ( ! empty( $term['slug'] ) ) {
+			$term_id = get_term_by( 'slug', $term['slug'], wc_attribute_taxonomy_name_by_id( $attribute_id ) );
+		}
+		if ( ! $term_id ) {
+			$term_id = wp_insert_term(
+				$term['name'], // the term.
+				wc_attribute_taxonomy_name_by_id( $attribute_id ), // the taxonomy.
+				array(
+					'slug' => $term['slug']
+				)
+			);
+		}
+		if ( ! is_wp_error( $term_id ) ) {
+			if ( is_array( $term_id ) && ! empty( $term_id['term_id'] ) ) {
+				return $term_id['term_id'];
+			} else if ( is_object( $term_id ) && ! empty( $term_id->term_id ) ) {
+				update_term_meta( $term_id->term_id, '_kadence_starter_templates_imported_term', true );
+				return $term_id->term_id;
+			}
+		}
+		return 0;
+	}
+
+
 	/**
 	 * Create a filename from alt text.
 	 */
@@ -3784,6 +3704,78 @@ class Library_REST_Controller extends WP_REST_Controller {
 		// );
 		return $query_params;
 	}
+
+	/**
+	 * Get attribute taxonomy ID from the imported data.
+	 * If does not exists register a new attribute.
+	 *
+	 * @param  string $raw_name Attribute name.
+	 * @return int
+	 * @throws Exception If taxonomy cannot be loaded.
+	 */
+	public function get_attribute_taxonomy_id( $raw_name ) {
+		global $wpdb, $wc_product_attributes;
+
+		// These are exported as labels, so convert the label to a name if possible first.
+		$attribute_labels = wp_list_pluck( wc_get_attribute_taxonomies(), 'attribute_label', 'attribute_name' );
+		$attribute_name   = array_search( $raw_name, $attribute_labels, true );
+
+		if ( ! $attribute_name ) {
+			$attribute_name = wc_sanitize_taxonomy_name( $raw_name );
+		}
+
+		$attribute_id = wc_attribute_taxonomy_id_by_name( $attribute_name );
+
+		// Get the ID from the name.
+		if ( $attribute_id ) {
+			return $attribute_id;
+		}
+
+		// If the attribute does not exist, create it.
+		$attribute_id = wc_create_attribute(
+			array(
+				'name'         => $raw_name,
+				'slug'         => $attribute_name,
+				'type'         => 'select',
+				'order_by'     => 'menu_order',
+				'has_archives' => false,
+			)
+		);
+
+		if ( is_wp_error( $attribute_id ) ) {
+			throw new Exception( $attribute_id->get_error_message(), 400 );
+		}
+
+		// Register as taxonomy while importing.
+		$taxonomy_name = wc_attribute_taxonomy_name( $attribute_name );
+		register_taxonomy(
+			$taxonomy_name,
+			apply_filters( 'woocommerce_taxonomy_objects_' . $taxonomy_name, array( 'product' ) ),
+			apply_filters(
+				'woocommerce_taxonomy_args_' . $taxonomy_name,
+				array(
+					'labels'       => array(
+						'name' => $raw_name,
+					),
+					'hierarchical' => true,
+					'show_ui'      => false,
+					'query_var'    => true,
+					'rewrite'      => false,
+				)
+			)
+		);
+
+		// Set product attributes global.
+		$wc_product_attributes = array();
+
+		foreach ( wc_get_attribute_taxonomies() as $taxonomy ) {
+			$wc_product_attributes[ wc_attribute_taxonomy_name( $taxonomy->attribute_name ) ] = $taxonomy;
+		}
+
+		return $attribute_id;
+	}
+
+
 	/**
 	 * Sanitizes an array of industries.
 	 *
@@ -3831,141 +3823,8 @@ class Library_REST_Controller extends WP_REST_Controller {
 
 		return rest_ensure_response( $response );
 	}
-	/**
-	 * Retrieves a collection of objects.
-	 *
-	 * @param WP_REST_Request $request Full details about the request.
-	 *
-	 * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
-	 *
-	 * @throws InvalidArgumentException
-	 */
-	public function get_images_by_industry( WP_REST_Request $request ) {
-		//$this->get_license_keys();
-		$industries    = $request->get_param( self::PROP_INDUSTRIES );
-		$search_query  = $request->get_param( self::PROP_INDUSTRY );
-		$image_type    = $request->get_param( self::PROP_IMAGE_TYPE );
-		$image_sizes   = $request->get_param( self::PROP_IMAGE_SIZES );
-		$reload        = $request->get_param( self::PROP_FORCE_RELOAD );
 
-		if ( empty( $industries ) || ! is_array( $industries ) ) {
-			return rest_ensure_response( 'error' );
-		}
-
-		$identifier = 'imageCollection' . json_encode( $industries ) . ( defined( 'KADENCE_BLOCKS_VERSION' ) ? KADENCE_BLOCKS_VERSION : KADENCE_STARTER_TEMPLATES_VERSION );
-
-		if ( ! empty( $image_type ) ) {
-			$identifier .= '_' . $image_type;
-		}
-
-		if ( ! empty( $image_sizes ) && is_array( $image_sizes ) ) {
-			$identifier .= '_' . json_encode( $image_sizes );
-		}
-
-		if ( ! empty( $search_query ) ) {
-			$identifier .= '_' . $search_query;
-		}
-
-		// Whether this request will get saved to cache.
-		$store = false;
-
-		// Try to get results from the cache.
-		if ( ! $reload ) {
-			try {
-				$response = $this->block_library_cache->get( $identifier );
-			} catch ( NotFoundException $e ) {
-
-			}
-		}
-
-		// No cache, fetch live.
-		if ( ! isset( $response ) ) {
-			$store = true;
-
-			if ( ! empty( $search_query ) && in_array( 'aiGenerated', $industries, true ) ) {
-				// Fetch search image data.
-				$response = $this->get_remote_search_images( $search_query, $image_type, $image_sizes );
-			} else {
-				// Fetch industry image data.
-				$response = $this->get_remote_industry_images( $industries, $image_type, $image_sizes );
-			}
-		}
-
-		if ( $response === 'error' ) {
-			return rest_ensure_response( 'error' );
-		}
-
-		$data = json_decode( $response, true );
-
-		if ( ! isset( $data['data'] ) ) {
-			return rest_ensure_response( 'error' );
-		}
-
-		if ( $store ) {
-			// Create a cache file.
-			$this->block_library_cache->cache( $identifier, $response );
-		}
-
-		// Prime the cache for all image sizes for potential download.
-		$this->cache_primer->init( $data['data'] );
-
-		return rest_ensure_response( $response );
-	}
-	/**
-	 * Get remote file contents.
-	 *
-	 * @access public
-	 * @return string Returns the remote URL contents.
-	 */
-	public function get_remote_search_images( $search_query, $image_type = 'JPEG', $sizes = array() ) {
-		if ( empty( $search_query ) ) {
-			return 'error';
-		}
-		if ( empty( $sizes ) ) {
-			$sizes = array(
-				array(
-					"id" => "2048x2048",
-					"width" => 2048,
-					"height" => 2048,
-					"crop" => false,
-				),
-			);
-		}
-		if ( empty( $image_type ) ) {
-			$image_type = 'JPEG';
-		}
-		$body = array(
-			'query' => $search_query,
-			'image_type' => $image_type,
-			'sizes' => $sizes,
-			'page' => 1,
-			'per_page' => 24,
-		);
-		$response = wp_remote_post(
-			$this->remote_ai_url . 'images/search',
-			array(
-				'timeout' => 20,
-				'headers' => array(
-					'X-Prophecy-Token' => $this->get_token_header(),
-					'Content-Type'     => 'application/json',
-				),
-				'body'    => json_encode( $body ),
-			)
-		);
-		// Early exit if there was an error.
-		if ( is_wp_error( $response ) || $this->is_response_code_error( $response ) ) {
-			return 'error';
-		}
-
-		// Get the CSS from our response.
-		$contents = wp_remote_retrieve_body( $response );
-		// Early exit if there was an error.
-		if ( is_wp_error( $contents ) ) {
-			return 'error';
-		}
-
-		return $contents;
-	}
+	
 	/**
 	 * Get the Pexels industry image JSON definitions.
 	 *
@@ -4194,7 +4053,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 		if ( empty( $ktp_api ) ) {
 			$ktp_api = 'free';
 		}
-		return md5( $this->get_base_url() . $this->get_base_path() . $this->template_type . KADENCE_STARTER_TEMPLATES_VERSION . $ktp_api );
+		return md5( $this->get_base_url() . $this->get_base_path() . $this->template_type . TEMPLIFY_IMPORT_TEMPLATES_VERSION . $ktp_api );
 	}
 	/**
 	 * Schedule a cleanup.

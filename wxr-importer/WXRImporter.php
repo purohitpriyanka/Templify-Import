@@ -18,6 +18,7 @@ class WXRImporter extends \WP_Importer {
 	 */
 	const REGEX_HAS_ATTACHMENT_REFS = '!
 		(
+			
 			# Match anything with an image or attachment class
 			class=[\'"].*?\b(wp-image-\d+|attachment-[\w\-]+)\b
 		|
