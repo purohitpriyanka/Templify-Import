@@ -37,6 +37,8 @@ class templify_import_Templates_Fluent_Import {
 			$results = self::import_forms( $form_import_file_path );
 		}
 
+
+
 		// Check for errors, else write the results to the log file.
 		if ( is_wp_error( $results ) ) {
 			$error_message = $results->get_error_message();

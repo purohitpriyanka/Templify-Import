@@ -3,7 +3,7 @@
  * Class for pulling in template database and saving locally
  * Based on a package from the WPTT Team for local fonts.
  *
- * @package Templify Import Templates
+ * @package Kadence Import Templates
  */
 
 
@@ -241,7 +241,7 @@ class Template_Database_Importer {
 		$site_url = preg_replace( '/^https/', 'http', $site_url );
 		$site_url = preg_replace( '|/$|', '', $site_url );
 		$args = apply_filters(
-			'templify_import_get_templates_args',
+			'kadence_starter_get_templates_args',
 			array(
 				'request'   => ( $this->template_type ? $this->template_type : 'blocks' ),
 				'api_email' => $this->api_email,
@@ -267,6 +267,7 @@ class Template_Database_Importer {
 
 		return $contents;
 	}
+	
 	/**
 	 * Check if the local file exists.
 	 *
@@ -299,10 +300,10 @@ class Template_Database_Importer {
 	 */
 	public function get_local_template_data_filename() {
 		$ktp_api = 'free';
-		if ( class_exists( 'templify_Theme_Pro' ) ) {
+		if ( class_exists( 'Kadence_Theme_Pro' ) ) {
 			$pro_data = array();
-			if ( function_exists( '\TemplifyWP\TemplifyPro\StellarWP\Uplink\get_license_key' ) ) {
-				$pro_data['ktp_api_key'] = \TemplifyWP\TemplifyPro\StellarWP\Uplink\get_license_key( 'templify-theme-pro' );
+			if ( function_exists( '\KadenceWP\KadencePro\StellarWP\Uplink\get_license_key' ) ) {
+				$pro_data['ktp_api_key'] = \KadenceWP\KadencePro\StellarWP\Uplink\get_license_key( 'templify-theme-pro' );
 			}
 			if ( empty( $pro_data ) ) {
 				if ( is_multisite() && ! apply_filters( 'templify_activation_individual_multisites', false ) ) {

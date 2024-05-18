@@ -13,8 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
-
 /**
  * Class with static helper functions.
  */
@@ -322,6 +320,7 @@ class Helpers {
 		$data = give_get_raw_data_from_file( $file, 1, 25, ',' );
 		// // Get file contents and decode.
 		// $data = Helpers::data_from_file( $file );
+
 
 		// Return from this function if there was an error.
 		if ( is_wp_error( $data ) ) {

@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'KadenceWP\\KadenceStarterTemplates\\' => array($baseDir . '/inc/resources'),
+    'KadenceWP\\KadenceStarterTemplates\\' => array($baseDir . '/include/resources'),
 );

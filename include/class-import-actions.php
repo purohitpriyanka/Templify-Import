@@ -73,6 +73,7 @@ add_action( 'templify-import-templates/after_all_import_execution', array( $this
 		$this->do_import_action( 'templify-import-templates/before_widgets_import', $import_files[ $selected_index ], $selected_palette, $selected_font );
 	}
 
+	
 
 	
 	/**

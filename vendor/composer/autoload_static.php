@@ -16,7 +16,7 @@ class ComposerStaticInit8283c873e984087f8020f756403ba3f9
     public static $prefixDirsPsr4 = array (
         'KadenceWP\\KadenceStarterTemplates\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/inc/resources',
+            0 => __DIR__ . '/../..' . '/include/resources',
         ),
     );
 

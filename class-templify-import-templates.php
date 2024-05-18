@@ -187,7 +187,12 @@ class Importer_Templates {
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-customizer-importer.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-elementor.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-fluent.php';
-		
+		/**
+		 * AI-specific usage tracking. Only track if AI is opted in by user.
+		 */
+		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-starter-ai-events.php';
+		$ai_events = new \Kadence_Starter_Templates_AI_Events();
+		$ai_events->register();
 		
 		
 	}
@@ -502,6 +507,86 @@ class Importer_Templates {
 		return $forward;
 	}
 
+	/**
+	 * Get the current license key for the plugin.
+	 *
+	 * @return array{key: string, email: string}
+	 */
+	public function get_current_license_data(): array {
+
+		$license_data = array(
+			'ktp_api_key'   => $this->get_current_license_key(),
+			'activation_email' => $this->get_current_license_email(),
+		);
+
+		return $license_data;
+	}
+	/**
+	 * Get the current license key for the plugin.
+	 *
+	 * @return string 
+	 */
+	public function get_current_license_key() {
+
+		if ( function_exists( 'kadence_blocks_get_current_license_data' ) ) {
+			$data = kadence_blocks_get_current_license_data();
+			if ( ! empty( $data['key'] ) ) {
+				return $data['key'];
+			}
+		} elseif ( class_exists( 'Kadence_Theme_Pro' ) ) {
+			$pro_data = array();
+			if ( function_exists( '\KadenceWP\KadencePro\StellarWP\Uplink\get_license_key' ) ) {
+				$pro_data['ktp_api_key'] = \KadenceWP\KadencePro\StellarWP\Uplink\get_license_key( 'kadence-theme-pro' );
+			}
+			if ( empty( $pro_data ) ) {
+				if ( is_multisite() && ! apply_filters( 'kadence_activation_individual_multisites', false ) ) {
+					$pro_data = get_site_option( 'ktp_api_manager' );
+				} else {
+					$pro_data = get_option( 'ktp_api_manager' );
+				}
+			}
+			if ( ! empty( $pro_data['ktp_api_key'] ) ) {
+				return $pro_data['ktp_api_key'];
+			}
+		} else {
+			$key = get_license_key( 'kadence-starter-templates' );
+			if ( ! empty( $key ) ) {
+				return $key;
+			}
+		}
+		return '';
+	}
+	/**
+	 * Get the current license email for the plugin.
+	 *
+	 * @return string 
+	 */
+	public function get_current_license_email() {
+
+		if ( function_exists( 'kadence_blocks_get_current_license_data' ) ) {
+			$data = kadence_blocks_get_current_license_data();
+			if ( ! empty( $data['email'] ) ) {
+				return $data['email'];
+			}
+		} else if ( class_exists( 'Kadence_Theme_Pro' ) ) {
+			$pro_data = array();
+			if ( function_exists( '\KadenceWP\KadencePro\StellarWP\Uplink\get_license_key' ) ) {
+				$pro_data['ktp_api_key'] = \KadenceWP\KadencePro\StellarWP\Uplink\get_license_key( 'kadence-theme-pro' );
+			}
+			if ( empty( $pro_data ) ) {
+				if ( is_multisite() && ! apply_filters( 'kadence_activation_individual_multisites', false ) ) {
+					$pro_data = get_site_option( 'ktp_api_manager' );
+				} else {
+					$pro_data = get_option( 'ktp_api_manager' );
+				}
+			}
+			if ( ! empty( $pro_data['activation_email'] ) ) {
+				return $pro_data['activation_email'];
+			}
+		}
+		$current_user = wp_get_current_user();
+		return $current_user->user_email;
+	}
 
     
 	/**
