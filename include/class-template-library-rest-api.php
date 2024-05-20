@@ -4268,6 +4268,8 @@ class Library_REST_Controller extends WP_REST_Controller {
 	 * @access public
 	 * @return string
 	 */
+
+	 
 	public function get_base_path() {
 		if ( ! $this->base_path ) {
 			$upload_dir = wp_upload_dir();

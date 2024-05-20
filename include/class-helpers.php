@@ -41,6 +41,8 @@ class Helpers {
 			$existing_data = $wp_filesystem->get_contents( $file_path );
 		}
 
+
+		
 		// Style separator.
 		$separator = PHP_EOL . '---' . $separator_text . '---' . PHP_EOL;
 

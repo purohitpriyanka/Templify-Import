@@ -149,6 +149,8 @@ class Kadence_Starter_Templates_AI_Events {
 			return;
 		}
 
+		
+
 		/**
 		 * Filters the URL used to send events to.
 		 *
