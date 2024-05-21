@@ -2,7 +2,7 @@
 /**
  * Adds the author meta for use in the Templify Import Author box.
  *
- * Used in the TEmplify Import
+ * Used in the Templify Import
  *
  * @since 1.0.4
 * @package Templify Import Templates
@@ -47,7 +47,7 @@ class Author_Meta {
 	public function extra_profile_fields( $user ) {
 		if ( current_user_can( 'edit_posts' ) && current_user_can( 'edit_user', $user->ID ) ) {
 			?>
-			<?php wp_nonce_field( 'kadence-profile-extras', 'kadence-profile-nonce' ); ?>
+			<?php wp_nonce_field( 'templify-profile-extras', 'templify-profile-nonce' ); ?>
 			<h3><?php echo esc_html__( 'Extra profile information for author box', 'templify' ); ?></h3>
 			<table class="form-table">
 				<tr>
@@ -192,7 +192,7 @@ class Author_Meta {
 		if ( ! current_user_can( 'edit_posts' ) || ! current_user_can( 'edit_user', $user_id ) ) {
 			return false;
 		}
-		if ( ! isset( $_POST['kadence-profile-nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['kadence-profile-nonce'] ), 'kadence-profile-extras' ) ) {
+		if ( ! isset( $_POST['templify-profile-nonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['templify-profile-nonce'] ), 'templify-profile-extras' ) ) {
 			return;
 		}
 		if ( isset( $_POST['occupation'] ) ) {

@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-class WXRImporter extends \AwesomeMotive\WPContentImporter2\WXRImporter {
+class WXRImporter extends WXR_Importer {
     /**
 	 * Constructor method.
 	 *

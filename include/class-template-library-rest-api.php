@@ -349,6 +349,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 		}
 		return self::$instance;
 	}
+	
 	/**
 	 * Constructor.
 	 */

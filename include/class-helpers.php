@@ -218,65 +218,7 @@ class Helpers {
 				$downloaded_files['customizer'] = $import_file_info['local_theme_options'];
 			}
 		}
-		// ----- Set form file path -----
-		// Get form file as well. If defined!
-		if ( ! empty( $import_file_info['form_data'] ) ) {
-			// Set the filename string for form import file.
-			$form_filename = apply_filters( 'templify-import-templates/downloaded_forms_file_prefix', 'demo-forms-import-file_' ) . self::$demo_import_start_time . apply_filters( 'templify-import-templates/downloaded_form_file_suffix_and_file_extension', '.json' );
-
-			// Download the form import file.
-			$downloaded_files['forms'] = $downloader->download_file( $import_file_info['form_data'], $form_filename );
-
-			// Return from this function if there was an error.
-			if ( is_wp_error( $downloaded_files['forms'] ) ) {
-				return $downloaded_files['forms'];
-			}
-		} else if ( ! empty( $import_file_info['local_form_data'] ) ) {
-			if ( file_exists( $import_file_info['local_form_data'] ) ) {
-				$downloaded_files['forms'] = $import_file_info['local_form_data'];
-			}
-		}
-		// ----- Set give form file path -----
-		// Get form file as well. If defined!
-		if ( ! empty( $import_file_info['give_donation_data'] ) ) {
-			// Set the filename string for form import file.
-			$give_filename = apply_filters( 'templify-import-templates/downloaded_forms_file_prefix', 'demo-give-donations-import-file_' ) . self::$demo_import_start_time . apply_filters( 'templify-import-templates/downloaded_give_donations_file_suffix_and_file_extension', '.json' );
-
-			// Download the form import file.
-			$downloaded_files['give-donations'] = $downloader->download_file( $import_file_info['give_donation_data'], $give_filename );
-
-			// Return from this function if there was an error.
-			if ( is_wp_error( $downloaded_files['give-donations'] ) ) {
-				return $downloaded_files['give-donations'];
-			}
-		}
-		// ----- Set give form file path -----
-		// Get form file as well. If defined!
-		if ( ! empty( $import_file_info['give_form_data'] ) ) {
-			// Set the filename string for form import file.
-			$give_form_filename = apply_filters( 'templify-import-templates/downloaded_forms_file_prefix', 'demo-give-forms-import-file_' ) . self::$demo_import_start_time . apply_filters( 'templify-import-templates/downloaded_give_form_file_suffix_and_file_extension', '.json' );
-
-			// Download the form import file.
-			$downloaded_files['give-forms'] = $downloader->download_file( $import_file_info['give_form_data'], $give_form_filename );
-
-			// Return from this function if there was an error.
-			if ( is_wp_error( $downloaded_files['give-forms'] ) ) {
-				return $downloaded_files['give-forms'];
-			}
-		}
-		// Get the slider
-		if ( ! empty( $import_file_info['depicter_data'] ) ) {
-			// Set the filename string for form import file.
-			$depicter_filename = apply_filters( 'templify-import-templates/downloaded_depicter_file_prefix', 'demo-depicter-import-file_' ) . self::$demo_import_start_time . apply_filters( 'templify-import-templates/downloaded_depicter_file_suffix_and_file_extension', '.zip' );
-
-			// Download the form import file.
-			$downloaded_files['depicter'] = $downloader->download_file( $import_file_info['depicter_data'], $depicter_filename );
-
-			// Return from this function if there was an error.
-			if ( is_wp_error( $downloaded_files['depicter'] ) ) {
-				return $downloaded_files['depicter'];
-			}
-		}
+		
 
 		return $downloaded_files;
 	}
@@ -301,6 +243,39 @@ class Helpers {
 
 		// Send JSON Error response to the AJAX call.
 		wp_send_json( $error_text );
+	}
+
+		/**
+	 * Write content to a file.
+	 *
+	 * @param string $content content to be saved to the file.
+	 * @param string $file_path file path where the content should be saved.
+	 * @return string|WP_Error path to the saved file or WP_Error object with error message.
+	 */
+	public static function write_to_file( $content, $file_path ) {
+		// Verify WP file-system credentials.
+		$verified_credentials = self::check_wp_filesystem_credentials();
+
+		if ( is_wp_error( $verified_credentials ) ) {
+			return $verified_credentials;
+		}
+
+		// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
+		global $wp_filesystem;
+
+		if ( ! $wp_filesystem->put_contents( $file_path, $content ) ) {
+			return new \WP_Error(
+				'failed_writing_file_to_server',
+				sprintf(
+					__( 'An error occurred while writing file to your server! Tried to write a file to: %s%s.', 'kadence-starter-templates' ),
+					'<br>',
+					$file_path
+				)
+			);
+		}
+
+		// Return the file path on successful file write.
+		return $file_path;
 	}
 
 

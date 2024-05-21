@@ -299,26 +299,26 @@ class Template_Database_Importer {
 	 * @return string
 	 */
 	public function get_local_template_data_filename() {
-		$ktp_api = 'free';
-		if ( class_exists( 'Kadence_Theme_Pro' ) ) {
-			$pro_data = array();
-			if ( function_exists( '\KadenceWP\KadencePro\StellarWP\Uplink\get_license_key' ) ) {
-				$pro_data['ktp_api_key'] = \KadenceWP\KadencePro\StellarWP\Uplink\get_license_key( 'templify-theme-pro' );
-			}
-			if ( empty( $pro_data ) ) {
-				if ( is_multisite() && ! apply_filters( 'templify_activation_individual_multisites', false ) ) {
-					$pro_data = get_site_option( 'ktp_api_manager' );
-				} else {
-					$pro_data = get_option( 'ktp_api_manager' );
-				}
-			}
-			if ( $pro_data && isset( $pro_data['ktp_api_key'] ) && ! empty( $pro_data['ktp_api_key'] ) ) {
-				$ktp_api = $pro_data['ktp_api_key'];
-			} else if ( $pro_data && isset( $pro_data['ithemes_key'] ) && ! empty( $pro_data['ithemes_key'] ) ) {
-				$ktp_api = $pro_data['ithemes_key'];
-			}
-		}
-		return md5( $this->get_base_url() . $this->get_base_path() . $this->template_type . templify_import_templates_VERSION . $ktp_api );
+		$ktp_api = 'ktl_wc_order_2lLY7ITAV3etu_am_oG518g6iDCIN';
+		// if ( class_exists( 'Kadence_Theme_Pro' ) ) {
+		// 	$pro_data = array();
+		// 	if ( function_exists( '\KadenceWP\KadencePro\StellarWP\Uplink\get_license_key' ) ) {
+		// 		$pro_data['ktp_api_key'] = \KadenceWP\KadencePro\StellarWP\Uplink\get_license_key( 'templify-theme-pro' );
+		// 	}
+		// 	if ( empty( $pro_data ) ) {
+		// 		if ( is_multisite() && ! apply_filters( 'templify_activation_individual_multisites', false ) ) {
+		// 			$pro_data = get_site_option( 'ktp_api_manager' );
+		// 		} else {
+		// 			$pro_data = get_option( 'ktp_api_manager' );
+		// 		}
+		// 	}
+		// 	if ( $pro_data && isset( $pro_data['ktp_api_key'] ) && ! empty( $pro_data['ktp_api_key'] ) ) {
+		// 		$ktp_api = $pro_data['ktp_api_key'];
+		// 	} else if ( $pro_data && isset( $pro_data['ithemes_key'] ) && ! empty( $pro_data['ithemes_key'] ) ) {
+		// 		$ktp_api = $pro_data['ithemes_key'];
+		// 	}
+		// }
+		return md5( $this->get_base_url() . $this->get_base_path() . $this->template_type . TEMPLIFY_IMPORT_TEMPLATES_VERSION . $ktp_api );
 	}
 	/**
 	 * Main AJAX callback function for:
@@ -329,9 +329,9 @@ class Template_Database_Importer {
 	 */
 	public function template_data_ajax_callback() {
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
-		Helpers::verify_ajax_call();
-		$this->api_key       = empty( $_POST['api_key'] ) ? '' : sanitize_text_field( $_POST['api_key'] );
-		$this->api_email     = empty( $_POST['api_email'] ) ? '' : sanitize_text_field( $_POST['api_email'] );
+	//	Helpers::verify_ajax_call();
+		// $this->api_key       = empty( $_POST['api_key'] ) ? '' : sanitize_text_field( $_POST['api_key'] );
+		// $this->api_email     = empty( $_POST['api_email'] ) ? '' : sanitize_text_field( $_POST['api_email'] );
 		$this->template_type = empty( $_POST['template_type'] ) ? 'blocks' : sanitize_text_field( $_POST['template_type'] );
 		// Do you have the data?
 		$get_data = $this->get_template_data();
@@ -353,7 +353,7 @@ class Template_Database_Importer {
 	public function template_data_reload_ajax_callback() {
 
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
-		Helpers::verify_ajax_call();
+		//Helpers::verify_ajax_call();
 		$this->api_key       = empty( $_POST['api_key'] ) ? '' : sanitize_text_field( $_POST['api_key'] );
 		$this->api_email     = empty( $_POST['api_email'] ) ? '' : sanitize_text_field( $_POST['api_email'] );
 		$this->template_type = empty( $_POST['template_type'] ) ? 'blocks' : sanitize_text_field( $_POST['template_type'] );

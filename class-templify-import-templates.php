@@ -171,28 +171,28 @@ class Importer_Templates {
 
 	 
 	private function include_plugin_files() {
-		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-template-library-rest-api.php';
+		//require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-template-library-rest-api.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-template-database-importer.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-author-meta.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-export-option.php';
-		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-plugin-check.php';
+	//	require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-plugin-check.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-helpers.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-actions.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-widget-importer.php';
-		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-give.php';
+		//require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-give.php';
         require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-importer.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-logger.php';
 	 	require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-logger-cli.php';
 	 	require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-downloader.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-customizer-importer.php';
 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-elementor.php';
-		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-fluent.php';
+	//	require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-import-fluent.php';
 		/**
 		 * AI-specific usage tracking. Only track if AI is opted in by user.
 		 */
-		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-starter-ai-events.php';
-		$ai_events = new \Kadence_Starter_Templates_AI_Events();
-		$ai_events->register();
+		// require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-starter-ai-events.php';
+		// $ai_events = new \Kadence_Starter_Templates_AI_Events();
+		// $ai_events->register();
 		
 		
 	}
@@ -732,10 +732,10 @@ class Importer_Templates {
 	 */
 	public function import_demo_single_data_ajax_callback() {
 		// Try to update PHP memory limit (so that it does not run out of it).
-		ini_set( 'memory_limit', apply_filters( 'templify-import-templates/import_memory_limit', '350M' ) );
+		ini_set( 'memory_limit', apply_filters( 'templify-import-templates/import_memory_limit', '512M' ) );
 
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
-		Helpers::verify_ajax_call();
+	//	Helpers::verify_ajax_call();
 		// Is this a new AJAX call to continue the previous import?
 		$use_existing_importer_data = $this->use_existing_importer_data();
 
@@ -858,11 +858,11 @@ class Importer_Templates {
 			
 
 		// If elementor make sure the defaults are off.
-		if ( isset( $this->import_files[ $this->selected_index ]['type'] ) && 'elementor' === $this->import_files[ $this->selected_index ]['type'] ) {
-			if ( class_exists( 'Elementor\Plugin' ) ) {
-				\Elementor\Plugin::instance()->files_manager->clear_cache();
-			}
-		}
+		// if ( isset( $this->import_files[ $this->selected_index ]['type'] ) && 'elementor' === $this->import_files[ $this->selected_index ]['type'] ) {
+		// 	if ( class_exists( 'Elementor\Plugin' ) ) {
+		// 		\Elementor\Plugin::instance()->files_manager->clear_cache();
+		// 	}
+		// }
 
 		// Send a JSON response with final report.
 		$this->final_response( $new_post );
@@ -878,9 +878,9 @@ class Importer_Templates {
 	 */
 	public function import_demo_data_ajax_callback() {
 		// Try to update PHP memory limit (so that it does not run out of it).
-		ini_set( 'memory_limit', apply_filters( 'templify-import-templates/import_memory_limit', '350M' ) );
+		ini_set( 'memory_limit', apply_filters( 'templify-import-templates/import_memory_limit', '512M' ) );
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
-		Helpers::verify_ajax_call();
+		//Helpers::verify_ajax_call();
 		// Is this a new AJAX call to continue the previous import?
 		$use_existing_importer_data = $this->use_existing_importer_data();
 		if ( ! $use_existing_importer_data ) {
@@ -1058,7 +1058,7 @@ class Importer_Templates {
 	 * @return boolean
 	 */
 	private function use_existing_importer_data() {
-		if ( $data = get_transient( 'templify_import_data' ) ) {
+		if ( $data = get_transient( 'templify_importer_data' ) ) {
 			$this->frontend_error_messages = empty( $data['frontend_error_messages'] ) ? array() : $data['frontend_error_messages'];
 			$this->log_file_path           = empty( $data['log_file_path'] ) ? '' : $data['log_file_path'];
 			$this->selected_index          = empty( $data['selected_index'] ) ? 0 : $data['selected_index'];
@@ -1079,7 +1079,7 @@ class Importer_Templates {
 	 * AJAX callback to install a plugin.
 	 */
 	public function initial_install_ajax_callback() {
-		Helpers::verify_ajax_call();
+		//Helpers::verify_ajax_call();
 
 		if ( ! isset( $_POST['selected'] ) || ! isset( $_POST['builder'] ) ) {
 			wp_send_json_error( 'Missing Information' );
@@ -1090,7 +1090,7 @@ class Importer_Templates {
 		if ( empty( $selected_index ) || empty( $selected_builder ) ) {
 			wp_send_json_error( 'Missing Parameters' );
 		}
-		delete_transient( 'templify_import_data' );
+		delete_transient( 'templify_importer_data' );
 		if ( empty( $this->import_files ) || ( is_array( $this->import_files ) && ! isset( $this->import_files[ $selected_index ] ) ) ) {
 			$template_database  = Template_Database_Importer::get_instance();
 			$this->import_files = $template_database->get_importer_files( $selected_index, $selected_builder );
@@ -1105,7 +1105,7 @@ class Importer_Templates {
 	 * AJAX callback to install a plugin.
 	 */
 	public function install_plugins_ajax_callback() {
-		Helpers::verify_ajax_call();
+		//
 
 		if ( ! isset( $_POST['selected'] ) || ! isset( $_POST['builder'] ) ) {
 			wp_send_json_error( 'Missing Information' );
@@ -1116,7 +1116,7 @@ class Importer_Templates {
 		if ( empty( $selected_index ) || empty( $selected_builder ) ) {
 			wp_send_json_error( 'Missing Parameters' );
 		}
-		delete_transient( 'templify_import_data' );
+		delete_transient( 'templify_importer_data' );
 		if ( empty( $this->import_files ) || ( is_array( $this->import_files ) && ! isset( $this->import_files[ $selected_index ] ) ) ) {
 			$template_database  = Template_Database_Importer::get_instance();
 			$this->import_files = $template_database->get_importer_files( $selected_index, $selected_builder );
@@ -1368,7 +1368,7 @@ class Importer_Templates {
 	 */
 	public function import_customizer_data_ajax_callback() {
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
-		Helpers::verify_ajax_call();
+	//	Helpers::verify_ajax_call();
 		$use_existing_importer_data = $this->use_existing_importer_data();
 
 		if ( ! $use_existing_importer_data ) {
@@ -1498,7 +1498,7 @@ class Importer_Templates {
 	 */
 	public function after_all_import_data_ajax_callback() {
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
-		Helpers::verify_ajax_call();
+		//Helpers::verify_ajax_call();
 
 		// Get existing import data.
 		if ( $this->use_existing_importer_data() ) {
@@ -1521,7 +1521,7 @@ class Importer_Templates {
 	 * AJAX callback to remove past content..
 	 */
 	public function remove_past_data_ajax_callback() {
-		Helpers::verify_ajax_call();
+	//	Helpers::verify_ajax_call();
 
 		if ( ! current_user_can( 'customize' ) ) {
 			wp_send_json_error();
@@ -1565,7 +1565,7 @@ class Importer_Templates {
 	 * AJAX callback to install a plugin.
 	 */
 	public function check_plugin_data_ajax_callback() {
-		Helpers::verify_ajax_call();
+		//Helpers::verify_ajax_call();
 		if ( ! isset( $_POST['selected'] ) || ! isset( $_POST['builder'] ) ) {
 			wp_send_json_error( 'Missing Parameters' );
 		}
