@@ -6,7 +6,7 @@
  * @package Kadence Import Templates
  */
 
-
+namespace TemplifyWP\TemplifyImporterTemplates;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -143,21 +143,21 @@ class Template_Database_Importer {
 			return wp_json_encode( apply_filters( 'templify_import_templates_custom_array', array() ) );
 		}
 		// Check if the local data file exists. (true means the file doesn't exist).
-		if ( $skip_local || $this->local_file_exists() ) {
+		//if ( $skip_local || $this->local_file_exists() ) {
 			// Attempt to create the file.
 			if ( $this->create_template_data_file( $skip_local ) ) {
 				return $this->get_local_template_data_contents();
 			}
-		}
-		if ( '[]' === $this->get_local_template_data_contents() ) {
-			if ( $this->create_template_data_file( $skip_local ) ) {
-				return $this->get_local_template_data_contents();
-			}
-		}
-		// If the local file exists, return it's data.
-		return file_exists( $this->get_local_template_data_path() )
-			? $this->get_local_template_data_contents()
-			: '';
+		//}
+		// if ( '[]' === $this->get_local_template_data_contents() ) {
+		// 	if ( $this->create_template_data_file( $skip_local ) ) {
+		// 		return $this->get_local_template_data_contents();
+		// 	}
+		// }
+		// // If the local file exists, return it's data.
+		// return file_exists( $this->get_local_template_data_path() )
+		// 	? $this->get_local_template_data_contents()
+		// 	: '';
 	}
 	/**
 	 * Write the data to the filesystem.
@@ -170,13 +170,13 @@ class Template_Database_Importer {
 		$filesystem = $this->get_filesystem();
 
 		// If the folder doesn't exist, create it.
-		if ( ! file_exists( $this->get_templify_import_templates_folder() ) ) {
+		//if ( ! file_exists( $this->get_templify_import_templates_folder() ) ) {
 			$chmod_dir = ( 0755 & ~ umask() );
 			if ( defined( 'FS_CHMOD_DIR' ) ) {
 				$chmod_dir = FS_CHMOD_DIR;
 			}
 			$this->get_filesystem()->mkdir( $this->get_templify_import_templates_folder(), $chmod_dir );
-		}
+		//}
 
 		// If the file doesn't exist, create it. Return false if it can not be created.
 		if ( ! $filesystem->exists( $file_path ) && ! $filesystem->touch( $file_path ) ) {
@@ -233,37 +233,37 @@ class Template_Database_Importer {
 	 * @return string Returns the remote URL contents.
 	 */
 	public function get_remote_url_contents() {
-		if ( is_callable( 'network_home_url' ) ) {
-			$site_url = network_home_url( '', 'http' );
-		} else {
-			$site_url = get_bloginfo( 'url' );
-		}
-		$site_url = preg_replace( '/^https/', 'http', $site_url );
-		$site_url = preg_replace( '|/$|', '', $site_url );
-		$args = apply_filters(
-			'kadence_starter_get_templates_args',
-			array(
-				'request'   => ( $this->template_type ? $this->template_type : 'blocks' ),
-				'api_email' => $this->api_email,
-				'api_key'   => $this->api_key,
-				'site_url'  => $site_url,
-			)
-		);
-		// Get the response.
-		$api_url  = add_query_arg( $args, $this->remote_url );
-		$response = wp_remote_get( $api_url );
-		// Early exit if there was an error.
-		if ( is_wp_error( $response ) ) {
-			return '';
-		}
+		// if ( is_callable( 'network_home_url' ) ) {
+		// 	$site_url = network_home_url( '', 'http' );
+		// } else {
+		// 	$site_url = get_bloginfo( 'url' );
+		// }
+		// $site_url = preg_replace( '/^https/', 'http', $site_url );
+		// $site_url = preg_replace( '|/$|', '', $site_url );
+		// $args = apply_filters(
+		// 	'kadence_starter_get_templates_args',
+		// 	array(
+		// 		'request'   => ( $this->template_type ? $this->template_type : 'blocks' ),
+		// 		'api_email' => $this->api_email,
+		// 		'api_key'   => $this->api_key,
+		// 		'site_url'  => $site_url,
+		// 	)
+		// );
+		// // Get the response.
+		// $api_url  = add_query_arg( $args, $this->remote_url );
+		// $response = wp_remote_get( $api_url );
+		// // Early exit if there was an error.
+		// if ( is_wp_error( $response ) ) {
+		// 	return '';
+		// }
 
 		// Get the CSS from our response.
 		$contents = wp_remote_retrieve_body( $response );
 
 		// Early exit if there was an error.
-		if ( is_wp_error( $contents ) ) {
-			return;
-		}
+		// if ( is_wp_error( $contents ) ) {
+		// 	return;
+		// }
 
 		return $contents;
 	}
@@ -330,8 +330,8 @@ class Template_Database_Importer {
 	public function template_data_ajax_callback() {
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 	//	Helpers::verify_ajax_call();
-		// $this->api_key       = empty( $_POST['api_key'] ) ? '' : sanitize_text_field( $_POST['api_key'] );
-		// $this->api_email     = empty( $_POST['api_email'] ) ? '' : sanitize_text_field( $_POST['api_email'] );
+		 $this->api_key       = empty( $_POST['api_key'] ) ? 'ktl_wc_order_2lLY7ITAV3etu_am_oG518g6iDCIN' : sanitize_text_field( $_POST['api_key'] );
+		$this->api_email     = empty( $_POST['api_email'] ) ? 'admin@bloggertutor .com' : sanitize_text_field( $_POST['api_email'] );
 		$this->template_type = empty( $_POST['template_type'] ) ? 'blocks' : sanitize_text_field( $_POST['template_type'] );
 		// Do you have the data?
 		$get_data = $this->get_template_data();
@@ -354,8 +354,8 @@ class Template_Database_Importer {
 
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		//Helpers::verify_ajax_call();
-		$this->api_key       = empty( $_POST['api_key'] ) ? '' : sanitize_text_field( $_POST['api_key'] );
-		$this->api_email     = empty( $_POST['api_email'] ) ? '' : sanitize_text_field( $_POST['api_email'] );
+		// $this->api_key       = empty( $_POST['api_key'] ) ? '' : sanitize_text_field( $_POST['api_key'] );
+		// $this->api_email     = empty( $_POST['api_email'] ) ? '' : sanitize_text_field( $_POST['api_email'] );
 		$this->template_type = empty( $_POST['template_type'] ) ? 'blocks' : sanitize_text_field( $_POST['template_type'] );
 
 		$removed = $this->delete_templify_import_templates_folder();
@@ -457,10 +457,10 @@ class Template_Database_Importer {
 	 * @return string
 	 */
 	public function get_base_path() {
-		if ( ! $this->base_path ) {
+		//if ( ! $this->base_path ) {
 			$upload_dir = wp_upload_dir();
 			$this->base_path = apply_filters( 'templify_import_templates_local_data_base_path', trailingslashit( $upload_dir['basedir'] ) );
-		}
+		//}
 		return $this->base_path;
 	}
 	/**
@@ -470,9 +470,9 @@ class Template_Database_Importer {
 	 * @return string
 	 */
 	public function get_base_url() {
-		if ( ! $this->base_url ) {
+		//if ( ! $this->base_url ) {
 			$this->base_url = apply_filters( 'templify_import_templates_local_data_base_url', content_url() );
-		}
+		//}
 		return $this->base_url;
 	}
 	/**
@@ -486,11 +486,11 @@ class Template_Database_Importer {
 
 		// If the filesystem has not been instantiated yet, do it here.
 		if ( ! $wp_filesystem ) {
-			if ( ! function_exists( 'WP_Filesystem' ) ) {
+			//if ( ! function_exists( 'WP_Filesystem' ) ) {
 				require_once wp_normalize_path( ABSPATH . '/wp-admin/includes/file.php' );
-			}
-			$credentials = apply_filters( 'templify_wpfs_credentials', false );
-			WP_Filesystem( $credentials );
+			//}
+			//$credentials = apply_filters( 'templify_wpfs_credentials', false );
+			//WP_Filesystem( $credentials );
 		}
 		return $wp_filesystem;
 	}

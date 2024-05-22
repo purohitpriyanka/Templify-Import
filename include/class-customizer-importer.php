@@ -101,7 +101,7 @@ class CustomizerImporter {
 		}
 
 		// Import images.
-		if ( apply_filters( 'templify-import-templates/customizer_import_images', true ) ) {
+		if ( apply_filters( 'kadence-starter-templates/customizer_import_images', true ) ) {
 			$data['mods'] = self::import_customizer_images( $data['mods'] );
 		}
 

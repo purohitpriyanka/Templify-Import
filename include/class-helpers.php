@@ -6,8 +6,9 @@
  */
 
 
+namespace TemplifyWP\TemplifyImporterTemplates;
 
-//use function request_filesystem_credentials;
+use function request_filesystem_credentials;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -27,11 +28,11 @@ class Helpers {
 	 */
 	public static function append_to_file( $content, $file_path, $separator_text = '' ) {
 		// Verify WP file-system credentials.
-		$verified_credentials = self::check_wp_filesystem_credentials();
+		//$verified_credentials = self::check_wp_filesystem_credentials();
 
-		if ( is_wp_error( $verified_credentials ) ) {
-			return $verified_credentials;
-		}
+		// if ( is_wp_error( $verified_credentials ) ) {
+		// 	return $verified_credentials;
+		// }
 
 		// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
 		global $wp_filesystem;
@@ -68,11 +69,11 @@ class Helpers {
 	 */
 	public static function data_from_file( $file_path ) {
 		// Verify WP file-system credentials.
-		$verified_credentials = self::check_wp_filesystem_credentials();
+		// $verified_credentials = self::check_wp_filesystem_credentials();
 
-		if ( is_wp_error( $verified_credentials ) ) {
-			return $verified_credentials;
-		}
+		// if ( is_wp_error( $verified_credentials ) ) {
+		// 	return $verified_credentials;
+		// }
 
 		// By this point, the $wp_filesystem global should be working, so let's use it to read a file.
 		global $wp_filesystem;
@@ -102,7 +103,7 @@ class Helpers {
 	 */
 	private static function check_wp_filesystem_credentials() {
 		// Check if the file-system method is 'direct', if not display an error.
-		$file_system_method = apply_filters( 'templify-import-templates/file_system_method', 'direct' );
+		$file_system_method = apply_filters( 'kadence-starter-templates/file_system_method', 'direct' );
 		if ( ! ( $file_system_method === get_filesystem_method() ) ) {
 			return new \WP_Error(
 				'no_direct_file_access',
@@ -116,7 +117,7 @@ class Helpers {
 		}
 
 		// Get plugin page settings.
-		$plugin_page_setup = apply_filters( 'templify-import-templates/plugin_page_setup', array(
+		$plugin_page_setup = apply_filters( 'kadence-starter-templates/plugin_page_setup', array(
 				'parent_slug' => 'themes.php',
 				'page_title'  => esc_html__( 'One Click Demo Import' , 'templify-import-templates' ),
 				'menu_title'  => esc_html__( 'Import Demo Data' , 'templify-import-templates' ),
@@ -158,8 +159,6 @@ class Helpers {
 			'content'    => '',
 			'widgets'    => '',
 			'customizer' => '',
-			'redux'      => '',
-			'forms'      => '',
 		);
 		$downloader = new Downloader();
 		// ----- Set content file path -----
@@ -170,7 +169,7 @@ class Helpers {
 			}
 		} else {
 			// Set the filename string for content import file.
-			$content_filename = apply_filters( 'templify-import-templates/downloaded_content_file_prefix', 'demo-content-import-file_' ) . self::$demo_import_start_time . apply_filters( 'templify-import-templates/downloaded_content_file_suffix_and_file_extension', '.xml' );
+			$content_filename = apply_filters( 'kadence-starter-templates/downloaded_content_file_prefix', 'demo-content-import-file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/downloaded_content_file_suffix_and_file_extension', '.xml' );
 
 			// Download the content import file.
 			$downloaded_files['content'] = $downloader->download_file( $import_file_info['content'], $content_filename );
@@ -185,7 +184,7 @@ class Helpers {
 		// Get widgets file as well. If defined!
 		if ( ! empty( $import_file_info['widget_data'] ) ) {
 			// Set the filename string for widgets import file.
-			$widget_filename = apply_filters( 'templify-import-templates/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . self::$demo_import_start_time . apply_filters( 'templify-import-templates/downloaded_widgets_file_suffix_and_file_extension', '.json' );
+			$widget_filename = apply_filters( 'kadence-starter-templates/downloaded_widgets_file_prefix', 'demo-widgets-import-file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/downloaded_widgets_file_suffix_and_file_extension', '.json' );
 
 			// Download the widgets import file.
 			$downloaded_files['widgets'] = $downloader->download_file( $import_file_info['widget_data'], $widget_filename );
@@ -204,7 +203,7 @@ class Helpers {
 		// Get customizer import file as well. If defined!
 		if ( ! empty( $import_file_info['theme_options'] ) ) {
 			// Setup filename path to save the customizer content.
-			$customizer_filename = apply_filters( 'templify-import-templates/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . self::$demo_import_start_time . apply_filters( 'templify-import-templates/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
+			$customizer_filename = apply_filters( 'kadence-starter-templates/downloaded_customizer_file_prefix', 'demo-customizer-import-file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/downloaded_customizer_file_suffix_and_file_extension', '.dat' );
 
 			// Download the customizer import file.
 			$downloaded_files['customizer'] = $downloader->download_file( $import_file_info['theme_options'], $customizer_filename );
@@ -254,11 +253,11 @@ class Helpers {
 	 */
 	public static function write_to_file( $content, $file_path ) {
 		// Verify WP file-system credentials.
-		$verified_credentials = self::check_wp_filesystem_credentials();
+		// $verified_credentials = self::check_wp_filesystem_credentials();
 
-		if ( is_wp_error( $verified_credentials ) ) {
-			return $verified_credentials;
-		}
+		// if ( is_wp_error( $verified_credentials ) ) {
+		// 	return $verified_credentials;
+		// }
 
 		// By this point, the $wp_filesystem global should be working, so let's use it to create a file.
 		global $wp_filesystem;
@@ -346,7 +345,7 @@ class Helpers {
 			'message' => __( 'Give data has been successfully imported.', 'templify-import-templates' ),
 		);
 		// Return results.
-		return apply_filters( 'templify-import-templates/give_import_results', $results );
+		return apply_filters( 'kadence-starter-templates/give_import_results', $results );
 	}
 
 	
@@ -376,9 +375,9 @@ class Helpers {
 	 */
 	public static function get_log_path() {
 		$upload_dir  = wp_upload_dir();
-		$upload_path = apply_filters( 'templify-import-templates/upload_file_path', trailingslashit( $upload_dir['path'] ) );
+		$upload_path = apply_filters( 'kadence-starter-templates/upload_file_path', trailingslashit( $upload_dir['path'] ) );
 
-		$log_path = $upload_path . apply_filters( 'templify-import-templates/log_file_prefix', 'log_file_' ) . self::$demo_import_start_time . apply_filters( 'templify-import-templates/log_file_suffix_and_file_extension', '.txt' );
+		$log_path = $upload_path . apply_filters( 'kadence-starter-templates/log_file_prefix', 'log_file_' ) . self::$demo_import_start_time . apply_filters( 'kadence-starter-templates/log_file_suffix_and_file_extension', '.txt' );
 
 		self::register_file_as_media_attachment( $log_path );
 
@@ -390,7 +389,7 @@ class Helpers {
 	 * Set the $demo_import_start_time class variable with the current date and time string.
 	 */
 	public static function set_demo_import_start_time() {
-		self::$demo_import_start_time = date( apply_filters( 'templify-import-templates/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
+		self::$demo_import_start_time = date( apply_filters( 'kadence-starter-templates/date_format_for_file_names', 'Y-m-d__H-i-s' ) );
 	}
 
 

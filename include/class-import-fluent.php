@@ -206,7 +206,7 @@ class templify_import_Templates_Fluent_Import {
 				'inserted_forms' => $insertedForms,
 			);
 			// Return results.
-			return apply_filters( 'templify-import-templates/form_import_results', $results );
+			return apply_filters( 'kadence-starter-templates/form_import_results', $results );
 		}
 	} 
 }

@@ -5,7 +5,7 @@
  * @package Templify Import Templates
  */
 
-
+namespace TemplifyWP\TemplifyImporterTemplates;
 
 /**
  * Block direct access to the main plugin file.
@@ -515,8 +515,8 @@ class Importer_Templates {
 	public function get_current_license_data(): array {
 
 		$license_data = array(
-			'ktp_api_key'   => $this->get_current_license_key(),
-			'activation_email' => $this->get_current_license_email(),
+			'ktp_api_key'   => 'ktl_wc_order_2lLY7ITAV3etu_am_oG518g6iDCIN',
+			'activation_email' => 'admin@bloggertutor.com',
 		);
 
 		return $license_data;
@@ -528,33 +528,33 @@ class Importer_Templates {
 	 */
 	public function get_current_license_key() {
 
-		if ( function_exists( 'kadence_blocks_get_current_license_data' ) ) {
-			$data = kadence_blocks_get_current_license_data();
-			if ( ! empty( $data['key'] ) ) {
-				return $data['key'];
-			}
-		} elseif ( class_exists( 'Kadence_Theme_Pro' ) ) {
-			$pro_data = array();
-			if ( function_exists( '\KadenceWP\KadencePro\StellarWP\Uplink\get_license_key' ) ) {
-				$pro_data['ktp_api_key'] = \KadenceWP\KadencePro\StellarWP\Uplink\get_license_key( 'kadence-theme-pro' );
-			}
-			if ( empty( $pro_data ) ) {
-				if ( is_multisite() && ! apply_filters( 'kadence_activation_individual_multisites', false ) ) {
-					$pro_data = get_site_option( 'ktp_api_manager' );
-				} else {
-					$pro_data = get_option( 'ktp_api_manager' );
-				}
-			}
-			if ( ! empty( $pro_data['ktp_api_key'] ) ) {
-				return $pro_data['ktp_api_key'];
-			}
-		} else {
-			$key = get_license_key( 'kadence-starter-templates' );
-			if ( ! empty( $key ) ) {
-				return $key;
-			}
-		}
-		return '';
+		// if ( function_exists( 'kadence_blocks_get_current_license_data' ) ) {
+		// 	$data = kadence_blocks_get_current_license_data();
+		// 	if ( ! empty( $data['key'] ) ) {
+		// 		return $data['key'];
+		// 	}
+		// } elseif ( class_exists( 'Kadence_Theme_Pro' ) ) {
+		// 	$pro_data = array();
+		// 	if ( function_exists( '\KadenceWP\KadencePro\StellarWP\Uplink\get_license_key' ) ) {
+		// 		$pro_data['ktp_api_key'] = \KadenceWP\KadencePro\StellarWP\Uplink\get_license_key( 'kadence-theme-pro' );
+		// 	}
+		// 	if ( empty( $pro_data ) ) {
+		// 		if ( is_multisite() && ! apply_filters( 'kadence_activation_individual_multisites', false ) ) {
+		// 			$pro_data = get_site_option( 'ktp_api_manager' );
+		// 		} else {
+		// 			$pro_data = get_option( 'ktp_api_manager' );
+		// 		}
+		// 	}
+		// 	if ( ! empty( $pro_data['ktp_api_key'] ) ) {
+		// 		return $pro_data['ktp_api_key'];
+		// 	}
+		// } else {
+		// 	$key = get_license_key( 'kadence-starter-templates' );
+		// 	if ( ! empty( $key ) ) {
+		// 		return $key;
+		// 	}
+		// }
+		return 'ktl_wc_order_2lLY7ITAV3etu_am_oG518g6iDCIN';
 	}
 	/**
 	 * Get the current license email for the plugin.
@@ -563,29 +563,30 @@ class Importer_Templates {
 	 */
 	public function get_current_license_email() {
 
-		if ( function_exists( 'kadence_blocks_get_current_license_data' ) ) {
-			$data = kadence_blocks_get_current_license_data();
-			if ( ! empty( $data['email'] ) ) {
-				return $data['email'];
-			}
-		} else if ( class_exists( 'Kadence_Theme_Pro' ) ) {
-			$pro_data = array();
-			if ( function_exists( '\KadenceWP\KadencePro\StellarWP\Uplink\get_license_key' ) ) {
-				$pro_data['ktp_api_key'] = \KadenceWP\KadencePro\StellarWP\Uplink\get_license_key( 'kadence-theme-pro' );
-			}
-			if ( empty( $pro_data ) ) {
-				if ( is_multisite() && ! apply_filters( 'kadence_activation_individual_multisites', false ) ) {
-					$pro_data = get_site_option( 'ktp_api_manager' );
-				} else {
-					$pro_data = get_option( 'ktp_api_manager' );
-				}
-			}
-			if ( ! empty( $pro_data['activation_email'] ) ) {
-				return $pro_data['activation_email'];
-			}
-		}
-		$current_user = wp_get_current_user();
-		return $current_user->user_email;
+		// if ( function_exists( 'kadence_blocks_get_current_license_data' ) ) {
+		// 	$data = kadence_blocks_get_current_license_data();
+		// 	if ( ! empty( $data['email'] ) ) {
+		// 		return $data['email'];
+		// 	}
+		// } else if ( class_exists( 'Kadence_Theme_Pro' ) ) {
+		// 	$pro_data = array();
+		// 	if ( function_exists( '\KadenceWP\KadencePro\StellarWP\Uplink\get_license_key' ) ) {
+		// 		$pro_data['ktp_api_key'] = \KadenceWP\KadencePro\StellarWP\Uplink\get_license_key( 'kadence-theme-pro' );
+		// 	}
+		// 	if ( empty( $pro_data ) ) {
+		// 		if ( is_multisite() && ! apply_filters( 'kadence_activation_individual_multisites', false ) ) {
+		// 			$pro_data = get_site_option( 'ktp_api_manager' );
+		// 		} else {
+		// 			$pro_data = get_option( 'ktp_api_manager' );
+		// 		}
+		// 	}
+		// 	if ( ! empty( $pro_data['activation_email'] ) ) {
+		// 		return $pro_data['activation_email'];
+		// 	}
+		// }
+		// $current_user = wp_get_current_user();
+	//	return $current_user->user_email;
+	return 'admin@bloggertutor.com';
 	}
 
     
@@ -732,7 +733,7 @@ class Importer_Templates {
 	 */
 	public function import_demo_single_data_ajax_callback() {
 		// Try to update PHP memory limit (so that it does not run out of it).
-		ini_set( 'memory_limit', apply_filters( 'templify-import-templates/import_memory_limit', '512M' ) );
+		ini_set( 'memory_limit', apply_filters( 'kadence-starter-templates/import_memory_limit', '512M' ) );
 
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 	//	Helpers::verify_ajax_call();
@@ -741,7 +742,7 @@ class Importer_Templates {
 
 		if ( ! $use_existing_importer_data ) {
 			// Create a date and time string to use for demo and log file names.
-			Helpers::set_demo_import_start_time();
+			//Helpers::set_demo_import_start_time();
 
 			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
 				// Define log file path.
@@ -878,14 +879,14 @@ class Importer_Templates {
 	 */
 	public function import_demo_data_ajax_callback() {
 		// Try to update PHP memory limit (so that it does not run out of it).
-		ini_set( 'memory_limit', apply_filters( 'templify-import-templates/import_memory_limit', '512M' ) );
+		ini_set( 'memory_limit', apply_filters( 'kadence-starter-templates/import_memory_limit', '512M' ) );
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 		//Helpers::verify_ajax_call();
 		// Is this a new AJAX call to continue the previous import?
 		$use_existing_importer_data = $this->use_existing_importer_data();
 		if ( ! $use_existing_importer_data ) {
 			// Create a date and time string to use for demo and log file names.
-			Helpers::set_demo_import_start_time();
+			//Helpers::set_demo_import_start_time();
 
 			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
 				// Define log file path.
@@ -1277,9 +1278,9 @@ class Importer_Templates {
 			return;
 		}
 		// Get info of import data files and filter it.
-		//$this->import_files = apply_filters( 'templify-import-templates/import_files', array() );
+		//$this->import_files = apply_filters( 'kadence-starter-templates/import_files', array() );
 		$this->import_files = '';
-		//$this->import_files = Helpers::validate_import_file_info( apply_filters( 'templify-import-templates/import_files', array() ) );
+		//$this->import_files = Helpers::validate_import_file_info( apply_filters( 'kadence-starter-templates/import_files', array() ) );
 		/**
 		 * Register all default actions (before content import, widget, customizer import and other actions)
 		 * to the 'before_content_import_execution' and the 'templify-import-templates/after_content_import_execution' action hook.
@@ -1288,13 +1289,13 @@ class Importer_Templates {
 		$import_actions->register_hooks();
 
 		// Importer options array.
-		$importer_options = apply_filters( 'templify-import-templates/importer_options', array(
+		$importer_options = apply_filters( 'kadence-starter-templates/importer_options', array(
 			'fetch_attachments' => true,
 			'aggressive_url_search' => true,
 		) );
 
 		// Logger options for the logger used in the importer.
-		$logger_options = apply_filters( 'templify-import-templates/logger_options', array(
+		$logger_options = apply_filters( 'kadence-starter-templates/logger_options', array(
 			'logger_min_level' => 'warning',
 		) );
 
@@ -1373,7 +1374,7 @@ class Importer_Templates {
 
 		if ( ! $use_existing_importer_data ) {
 			// Create a date and time string to use for demo and log file names.
-			Helpers::set_demo_import_start_time();
+			//Helpers::set_demo_import_start_time();
 
 			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
 				// Define log file path.

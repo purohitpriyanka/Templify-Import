@@ -2088,7 +2088,7 @@ class Library_REST_Controller extends WP_REST_Controller {
 					$shop_page = get_post( $page_id );
 					if ( ! $shop_page ) {
 						// Create Shop page using wp_insert_post
-						$page_id = wp_insert_post(
+						$page_id = (
 							array(
 							'post_title'   => wp_strip_all_tags( $item['title'] ),
 							'post_content' => '',

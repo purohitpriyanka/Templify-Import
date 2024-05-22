@@ -155,7 +155,7 @@ class Importer {
 
 		// Increase PHP max execution time. Just in case, even though the AJAX calls are only 25 sec long.
 		if ( strpos( ini_get( 'disable_functions' ), 'set_time_limit' ) === false ) {
-			set_time_limit( apply_filters( 'templify-import-templates/set_time_limit_for_demo_data_import', 300 ) );
+			set_time_limit( apply_filters( 'kadence-starter-templates/set_time_limit_for_demo_data_import', 300 ) );
 		}
 
 		// Disable import of authors.
@@ -197,7 +197,7 @@ class Importer {
 		}
 
 		// Disables generation of multiple image sizes (thumbnails) in the content import step.
-		if ( ! apply_filters( 'templify-import-templates/regenerate_thumbnails_in_content_import', true ) ) {
+		if ( ! apply_filters( 'kadence-starter-templates/regenerate_thumbnails_in_content_import', true ) ) {
 			add_filter( 'intermediate_image_sizes_advanced', '__return_null' );
 		}
 
@@ -574,7 +574,7 @@ class Importer {
 		$time = microtime( true ) - $this->microtime;
 
 		// We should make a new ajax call, if the time is right.
-		if ( $time > apply_filters( 'templify-import-templates/time_for_one_ajax_call', 25 ) ) {
+		if ( $time > apply_filters( 'kadence-starter-templates/time_for_one_ajax_call', 25 ) ) {
 			$response = array(
 				'status'  => 'newAJAX',
 				'message' => 'Time for new AJAX request!: ' . $time,
@@ -798,7 +798,7 @@ class Importer {
 		$time = microtime( true ) - $this->microtime;
 
 		// We should make a new ajax call, if the time is right.
-		if ( $time > apply_filters( 'templify-import-templates/time_for_one_ajax_call', 25 ) ) {
+		if ( $time > apply_filters( 'kadence-starter-templates/time_for_one_ajax_call', 25 ) ) {
 			$response = array(
 				'status'  => 'newAJAX',
 				'message' => 'Time for new AJAX request!: ' . $time,
