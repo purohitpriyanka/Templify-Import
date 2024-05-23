@@ -62,7 +62,7 @@ final class Image_Downloader {
 	 */
 	public function download( array $images ): array {
 		$existing   = $this->get_existing_images( $images );
-		$downloaded = empty( $images['images'] ) ? [] : $this->download_images( $images );
+		$downloaded = $this->download_images( $images );
 
 		// Merge any imported images with existing images.
 		return array_merge( $existing, $downloaded );

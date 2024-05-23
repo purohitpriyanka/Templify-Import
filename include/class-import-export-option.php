@@ -105,7 +105,7 @@ class Customizer_Import_Export {
 			'TemplifyImporterImport',
 			array(
 				'resetConfirm'   => __( "Attention! This will remove all customizations to this theme!\n\nThis action is irreversible!", 'templify' ),
-				'emptyImport'	 => __( 'Please choose a file to import.', 'templify-import-templates' ),
+				'emptyImport'	 => __( 'Please choose a file to import.', 'templify-importer-templates' ),
 				'customizerURL'	 => admin_url( 'customize.php' ),
 				'nonce'          => array(
 					'reset'  => wp_create_nonce( 'templify-import-reseting' ),
@@ -155,7 +155,7 @@ class Customizer_Import_Export {
 	 */
 	public static function import_export_setup( $wp_customize ) {
 		$section_config = array(
-			'title'    => __( 'Import/Export', 'templify-import-templates' ),
+			'title'    => __( 'Import/Export', 'templify-importer-templates' ),
 			'priority' => 999,
 		);
 
@@ -262,7 +262,7 @@ class Customizer_Import_Export {
 			require_once( ABSPATH . 'wp-admin/includes/file.php' );
 		}
 		// Load the export/import option class.
-		require_once TEMPLIFY_IMPORTER_TEMPLATES_PATH . 'inc/class-import-customizer-option.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
+		require_once TEMPLIFY_IMPORTER_TEMPLATES_PATH . 'include/class-import-customizer-option.php'; // phpcs:ignore WPThemeReview.CoreFunctionality.FileInclude.FileIncludeFound
 
 		// Setup global vars.
 		global $wp_customize;
@@ -281,7 +281,7 @@ class Customizer_Import_Export {
 			return;
 		}
 		if ( ! file_exists( $file['file'] ) ) {
-			$templify_importer_import_error = __( 'Error importing settings! Please try again.', 'templify-import-templates' );
+			$templify_importer_import_error = __( 'Error importing settings! Please try again.', 'templify-importer-templates' );
 			return;
 		}
 		if ( ! is_object( $wp_filesystem ) ) {
@@ -301,35 +301,35 @@ class Customizer_Import_Export {
 
 		// Data checks.
 		if ( 'array' != gettype( $data ) ) {
-			$templify_importer_import_error = __( 'Error importing settings! Please check that you uploaded a customizer export file.', 'templify-import-templates' );
+			$templify_importer_import_error = __( 'Error importing settings! Please check that you uploaded a customizer export file.', 'templify-importer-templates' );
 			return;
 		}
 		if ( ! isset( $data['template'] ) ) {
-			$templify_importer_import_error = __( 'Error importing settings! Please check that you uploaded a customizer export file.', 'templify-import-templates' );
+			$templify_importer_import_error = __( 'Error importing settings! Please check that you uploaded a customizer export file.', 'templify-importer-templates' );
 			return;
 		}
 		if ( $data['template'] != $template ) {
-			$templify_importer_import_error = __( 'Error importing settings! The settings you uploaded are not for the Kadence Theme.', 'templify-import-templates' );
+			$templify_importer_import_error = __( 'Error importing settings! The settings you uploaded are not for the Kadence Theme.', 'templify-importer-templates' );
 			return;
 		}
 		// Import images.
 		$data['mods'] = self::import_images( $data['mods'] );
 
 		// Import custom options.
-		if ( isset( $data['options'] ) ) {
-			foreach ( $data['options'] as $option_key => $option_value ) {
-				$option = new Import_Option(
-					$wp_customize,
-					$option_key,
-					array(
-						'default'    => '',
-						'type'       => 'option',
-						'capability' => 'edit_theme_options'
-					)
-				);
-				$option->import( $option_value );
-			}
-		}
+		// if ( isset( $data['options'] ) ) {
+		// 	foreach ( $data['options'] as $option_key => $option_value ) {
+		// 		$option = new Import_Option(
+		// 			$wp_customize,
+		// 			$option_key,
+		// 			array(
+		// 				'default'    => '',
+		// 				'type'       => 'option',
+		// 				'capability' => 'edit_theme_options'
+		// 			)
+		// 		);
+		// 		$option->import( $option_value );
+		// 	}
+		// }
 		// If wp_css is set then import it.
 		if ( function_exists( 'wp_update_custom_css_post' ) && isset( $data['wp_css'] ) && '' !== $data['wp_css'] ) {
 			wp_update_custom_css_post( $data['wp_css'] );

@@ -5,7 +5,7 @@
  * Version: 1.0.0
  * Author: Templify Inner WP
  * License: GPLv2 or later
- * Text Domain: templify-import-templates
+ * Text Domain: templify-importer-templates
  *
  * @package Templify Import Templates
  */

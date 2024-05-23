@@ -45,26 +45,26 @@ class templify_import_Templates_Fluent_Import {
 
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
 			$templify_import_templates->append_to_frontend_error_messages( $error_message );
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+		
 				// Write error to log file.
 				Helpers::append_to_file(
 					$error_message,
 					$log_file_path,
-					esc_html__( 'Importing forms', 'templify-import-templates' )
+					esc_html__( 'Importing forms', 'templify-importer-templates' )
 				);
-			}
+			
 		} else {
 			ob_start();
 				self::format_results_for_log( $results );
 			$message = ob_get_clean();
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+
 				// Add this message to log file.
 				$log_added = Helpers::append_to_file(
 					$message,
 					$log_file_path,
-					esc_html__( 'Importing forms' , 'templify-import-templates' )
+					esc_html__( 'Importing forms' , 'templify-importer-templates' )
 				);
-			}
+			
 		}
 
 	}
@@ -99,7 +99,7 @@ class templify_import_Templates_Fluent_Import {
 		if ( ! file_exists( $file ) ) {
 			return new \WP_Error(
 				'form_import_file_not_found',
-				__( 'Error: Form import file could not be found.', 'templify-import-templates' )
+				__( 'Error: Form import file could not be found.', 'templify-importer-templates' )
 			);
 		}
 
@@ -124,7 +124,7 @@ class templify_import_Templates_Fluent_Import {
 		if ( empty( $forms ) ) {
 			return new \WP_Error(
 				'corrupted_form_import_data',
-				__( 'Error: Form import data could not be read. Please try a different file.', 'templify-import-templates' )
+				__( 'Error: Form import data could not be read. Please try a different file.', 'templify-importer-templates' )
 			);
 		}
 		$insertedForms = [];
@@ -139,7 +139,7 @@ class templify_import_Templates_Fluent_Import {
 				} else {
 					return new \WP_Error(
 						'corrupted_form_import_data',
-						__( 'Error: Form import data could not be read. Please try a different file.', 'templify-import-templates' )
+						__( 'Error: Form import data could not be read. Please try a different file.', 'templify-importer-templates' )
 					);
 				}
 
@@ -206,7 +206,7 @@ class templify_import_Templates_Fluent_Import {
 				'inserted_forms' => $insertedForms,
 			);
 			// Return results.
-			return apply_filters( 'kadence-starter-templates/form_import_results', $results );
+			return  $results;
 		}
 	} 
 }

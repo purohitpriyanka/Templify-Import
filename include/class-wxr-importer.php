@@ -101,13 +101,13 @@ class WXRImporter extends WXR_Importer {
 				// Register the taxonomy now so that the import works!
 				register_taxonomy(
 					$data['taxonomy'],
-					apply_filters( 'woocommerce_taxonomy_objects_' . $data['taxonomy'], array( 'product' ) ),
-					apply_filters( 'woocommerce_taxonomy_args_' . $data['taxonomy'], array(
+					 array( 'product' ) ,
+					 array(
 						'hierarchical' => true,
 						'show_ui'      => false,
 						'query_var'    => true,
 						'rewrite'      => false,
-					) )
+					) 
 				);
 			}
 		}

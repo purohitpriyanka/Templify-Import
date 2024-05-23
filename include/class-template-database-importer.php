@@ -6,7 +6,7 @@
  * @package Kadence Import Templates
  */
 
-namespace TemplifyWP\TemplifyImporterTemplates;
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -140,14 +140,14 @@ class Template_Database_Importer {
 	 */
 	public function get_template_data( $skip_local = false ) {
 		if ( 'custom' === $this->template_type ) {
-			return wp_json_encode( apply_filters( 'templify_import_templates_custom_array', array() ) );
+			return wp_json_encode(  array()  );
 		}
 		// Check if the local data file exists. (true means the file doesn't exist).
 		//if ( $skip_local || $this->local_file_exists() ) {
 			// Attempt to create the file.
-			if ( $this->create_template_data_file( $skip_local ) ) {
+			//if ( $this->create_template_data_file( $skip_local ) ) {
 				return $this->get_local_template_data_contents();
-			}
+		//	}
 		//}
 		// if ( '[]' === $this->get_local_template_data_contents() ) {
 		// 	if ( $this->create_template_data_file( $skip_local ) ) {
@@ -218,9 +218,9 @@ class Template_Database_Importer {
 		$local_path = $this->get_local_template_data_path();
 
 		// Check if the local stylesheet exists. (true means the file doesn't exist).
-		if ( $this->local_file_exists() ) {
-			return false;
-		}
+		// if ( $this->local_file_exists() ) {
+		// 	return false;
+		// }
 
 		ob_start();
 		include $local_path;
@@ -284,9 +284,9 @@ class Template_Database_Importer {
 	 * @return string
 	 */
 	public function get_local_template_data_path() {
-		if ( ! $this->local_template_data_path ) {
+		//if ( ! $this->local_template_data_path ) {
 			$this->local_template_data_path = $this->get_templify_import_templates_folder() . '/' . $this->get_local_template_data_filename() . '.json';
-		}
+		//}
 		return $this->local_template_data_path;
 	}
 	/**
@@ -330,14 +330,14 @@ class Template_Database_Importer {
 	public function template_data_ajax_callback() {
 		// Verify if the AJAX call is valid (checks nonce and current_user_can).
 	//	Helpers::verify_ajax_call();
-		 $this->api_key       = empty( $_POST['api_key'] ) ? 'ktl_wc_order_2lLY7ITAV3etu_am_oG518g6iDCIN' : sanitize_text_field( $_POST['api_key'] );
-		$this->api_email     = empty( $_POST['api_email'] ) ? 'admin@bloggertutor .com' : sanitize_text_field( $_POST['api_email'] );
+		 $this->api_key       =  'ktl_wc_order_2lLY7ITAV3etu_am_oG518g6iDCIN';
+		$this->api_email     = 'admin@bloggertutor .com';
 		$this->template_type = empty( $_POST['template_type'] ) ? 'blocks' : sanitize_text_field( $_POST['template_type'] );
 		// Do you have the data?
 		$get_data = $this->get_template_data();
 		if ( ! $get_data ) {
 			// Send JSON Error response to the AJAX call.
-			wp_send_json( esc_html__( 'No template data', 'templify-import-templates' ) );
+			wp_send_json( esc_html__( 'No template data', 'templify-importer-templates' ) );
 		} else {
 			wp_send_json( $get_data );
 		}
@@ -430,12 +430,12 @@ class Template_Database_Importer {
 	 * @return string
 	 */
 	public function get_templify_import_templates_folder() {
-		if ( ! $this->templify_import_templates_folder ) {
+		//if ( ! $this->templify_import_templates_folder ) {
 			$this->templify_import_templates_folder = $this->get_base_path();
 			if ( $this->get_subfolder_name() ) {
 				$this->templify_import_templates_folder .= $this->get_subfolder_name();
 			}
-		}
+		//}
 		return $this->templify_import_templates_folder;
 	}
 	/**
@@ -446,7 +446,7 @@ class Template_Database_Importer {
 	 */
 	public function get_subfolder_name() {
 		if ( ! $this->subfolder_name ) {
-			$this->subfolder_name = apply_filters( 'templify_import_templates_local_data_subfolder_name', 'templify_import_templates' );
+			$this->subfolder_name =  'templify_import_templates' ;
 		}
 		return $this->subfolder_name;
 	}
@@ -459,7 +459,7 @@ class Template_Database_Importer {
 	public function get_base_path() {
 		//if ( ! $this->base_path ) {
 			$upload_dir = wp_upload_dir();
-			$this->base_path = apply_filters( 'templify_import_templates_local_data_base_path', trailingslashit( $upload_dir['basedir'] ) );
+			$this->base_path = trailingslashit( $upload_dir['basedir']  );
 		//}
 		return $this->base_path;
 	}
@@ -471,7 +471,7 @@ class Template_Database_Importer {
 	 */
 	public function get_base_url() {
 		//if ( ! $this->base_url ) {
-			$this->base_url = apply_filters( 'templify_import_templates_local_data_base_url', content_url() );
+			$this->base_url = content_url() ;
 		//}
 		return $this->base_url;
 	}

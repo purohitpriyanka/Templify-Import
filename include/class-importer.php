@@ -155,7 +155,7 @@ class Importer {
 
 		// Increase PHP max execution time. Just in case, even though the AJAX calls are only 25 sec long.
 		if ( strpos( ini_get( 'disable_functions' ), 'set_time_limit' ) === false ) {
-			set_time_limit( apply_filters( 'kadence-starter-templates/set_time_limit_for_demo_data_import', 300 ) );
+			set_time_limit(  300  );
 		}
 
 		// Disable import of authors.
@@ -197,9 +197,9 @@ class Importer {
 		}
 
 		// Disables generation of multiple image sizes (thumbnails) in the content import step.
-		if ( ! apply_filters( 'kadence-starter-templates/regenerate_thumbnails_in_content_import', true ) ) {
-			add_filter( 'intermediate_image_sizes_advanced', '__return_null' );
-		}
+		// if ( ! apply_filters( 'kadence-starter-templates/regenerate_thumbnails_in_content_import', true ) ) {
+		// 	add_filter( 'intermediate_image_sizes_advanced', '__return_null' );
+		// }
 
 		// Import content.
 		if ( ! empty( $import_file_path ) ) {
@@ -363,7 +363,7 @@ class Importer {
 	 */
 	public function process_stop_woo_pages( $data, $meta, $comments, $terms ) {
 		if ( $data['post_type'] === 'page' ) {
-			if ( apply_filters( 'stop_importing_woo_pages', false ) ) {
+			
 				$woopages = array(
 					'woocommerce_shop_page_id'      => 'shop',
 					'woocommerce_cart_page_id'      => 'cart',
@@ -376,7 +376,7 @@ class Importer {
 						break;
 					}
 				}
-			}
+			
 		}
 		return $data;
 	}
@@ -574,7 +574,7 @@ class Importer {
 		$time = microtime( true ) - $this->microtime;
 
 		// We should make a new ajax call, if the time is right.
-		if ( $time > apply_filters( 'kadence-starter-templates/time_for_one_ajax_call', 25 ) ) {
+		if ( $time >  25  ) {
 			$response = array(
 				'status'  => 'newAJAX',
 				'message' => 'Time for new AJAX request!: ' . $time,
@@ -587,14 +587,14 @@ class Importer {
 			if ( ! empty( $message ) ) {
 				$this->templify_import_templates->append_to_frontend_error_messages( $message );
 			}
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+
 				// Add message to log file.
 				$log_added = Helpers::append_to_file(
-					__( 'New AJAX call!' , 'templify-import-templates' ) . PHP_EOL . $message,
+					__( 'New AJAX call!' , 'templify-importer-templates' ) . PHP_EOL . $message,
 					$this->templify_import_templates->get_log_file_path(),
 					''
 				);
-			}
+			
 
 			// Set the current importer stat, so it can be continued on the next AJAX call.
 			$this->set_current_importer_data();
@@ -798,7 +798,7 @@ class Importer {
 		$time = microtime( true ) - $this->microtime;
 
 		// We should make a new ajax call, if the time is right.
-		if ( $time > apply_filters( 'kadence-starter-templates/time_for_one_ajax_call', 25 ) ) {
+		if ( $time >  25  ) {
 			$response = array(
 				'status'  => 'newAJAX',
 				'message' => 'Time for new AJAX request!: ' . $time,
@@ -811,14 +811,14 @@ class Importer {
 			if ( ! empty( $message ) ) {
 				$this->templify_import_templates->append_to_frontend_error_messages( $message );
 			}
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+		
 				// Add message to log file.
 				$log_added = Helpers::append_to_file(
-					__( 'New AJAX call!' , 'templify-import-templates' ) . PHP_EOL . $message,
+					__( 'New AJAX call!' , 'templify-importer-templates' ) . PHP_EOL . $message,
 					$this->templify_import_templates->get_log_file_path(),
 					''
 				);
-			}
+			
 
 			// Set the current importer stat, so it can be continued on the next AJAX call.
 			$this->set_current_importer_data();

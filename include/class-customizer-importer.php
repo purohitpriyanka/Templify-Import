@@ -29,23 +29,23 @@ class CustomizerImporter {
 
 			// Add any error messages to the frontend_error_messages variable in starter_templates main class.
 			$starter_templates->append_to_frontend_error_messages( $error_message );
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+
 				// Write error to log file.
 				Helpers::append_to_file(
 					$error_message,
 					$log_file_path,
-					esc_html__( 'Importing customizer settings', 'templify-import-templates' )
+					esc_html__( 'Importing customizer settings', 'templify-importer-templates' )
 				);
-			}
+			
 		} else {
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+		
 				// Add this message to log file.
 				$log_added = Helpers::append_to_file(
-					esc_html__( 'Customizer settings import finished!', 'templify-import-templates' ),
+					esc_html__( 'Customizer settings import finished!', 'templify-importer-templates' ),
 					$log_file_path,
-					esc_html__( 'Importing customizer settings' , 'templify-import-templates' )
+					esc_html__( 'Importing customizer settings' , 'templify-importer-templates' )
 				);
-			}
+			
 		}
 	}
 
@@ -72,7 +72,7 @@ class CustomizerImporter {
 			return new \WP_Error(
 				'missing_cutomizer_import_file',
 				sprintf(
-					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'templify-import-templates' ),
+					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'templify-importer-templates' ),
 					$import_file_path
 				)
 			);
@@ -90,20 +90,19 @@ class CustomizerImporter {
 		if ( 'array' != gettype( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
 			return new \WP_Error(
 				'customizer_import_data_error',
-				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'templify-import-templates' )
+				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'templify-importer-templates' )
 			);
 		}
 		if ( $data['template'] !== $template ) {
 			return new \WP_Error(
 				'customizer_import_wrong_theme',
-				esc_html__( 'Error: The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme.', 'templify-import-templates' )
+				esc_html__( 'Error: The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme.', 'templify-importer-templates' )
 			);
 		}
 
-		// Import images.
-		if ( apply_filters( 'kadence-starter-templates/customizer_import_images', true ) ) {
+		
 			$data['mods'] = self::import_customizer_images( $data['mods'] );
-		}
+		
 
 		// Import custom options.
 		if ( isset( $data['options'] ) ) {
@@ -119,10 +118,9 @@ class CustomizerImporter {
 					$palette = json_decode( $option_value, 'true' );
 
 
-					$info = update_option( 'templify_global_palette', json_encode( $palette ) );
-					if ( ! $info ) {
+					
 						$info = add_option( 'templify_global_palette', json_encode( $palette ) );
-					}
+					
 				} else {
 					$option = new CustomizerOption( $wp_customize, $option_key, array(
 						'default'    => '',
@@ -143,7 +141,7 @@ class CustomizerImporter {
 		}
 
 		// Should the customizer import use the WP customize_save* hooks?
-		$use_wp_customize_save_hooks = apply_filters( 'templify-importer-templates/enable_wp_customize_save_hooks', false );
+		$use_wp_customize_save_hooks =  false;
 
 		if ( $use_wp_customize_save_hooks ) {
 			do_action( 'customize_save', $wp_customize );
@@ -309,7 +307,7 @@ class CustomizerImporter {
 			return new \WP_Error(
 				'missing_cutomizer_import_file',
 				sprintf(
-					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'templify-import-templates' ),
+					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'templify-importer-templates' ),
 					$import_file_path
 				)
 			);
@@ -328,13 +326,13 @@ class CustomizerImporter {
 		if ( 'array' != gettype( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
 			return new \WP_Error(
 				'customizer_import_data_error',
-				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'templify-import-templates' )
+				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'templify-importer-templates' )
 			);
 		}
 		if ( $data['template'] !== $template ) {
 			return new \WP_Error(
 				'customizer_import_wrong_theme',
-				esc_html__( 'Error: The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme.', 'templify-import-templates' )
+				esc_html__( 'Error: The customizer import file is not suitable for current theme. You can only import customizer settings for the same theme or a child theme.', 'templify-importer-templates' )
 			);
 		}
 
@@ -371,7 +369,7 @@ class CustomizerImporter {
 			return new \WP_Error(
 				'missing_cutomizer_import_file',
 				sprintf(
-					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'templify-import-templates' ),
+					esc_html__( 'Error: The customizer import file is missing! File path: %s', 'templify-importer-templates' ),
 					$import_file_path
 				)
 			);
@@ -390,7 +388,7 @@ class CustomizerImporter {
 		if ( 'array' != gettype( $data ) && ( ! isset( $data['template'] ) || ! isset( $data['mods'] ) ) ) {
 			return new \WP_Error(
 				'customizer_import_data_error',
-				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'templify-import-templates' )
+				esc_html__( 'Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.', 'templify-importer-templates' )
 			);
 		}
 		// Import custom options.

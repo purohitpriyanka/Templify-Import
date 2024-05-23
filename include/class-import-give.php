@@ -43,24 +43,24 @@ class Templify_Import_Templates_Give_Import {
 
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
 			$templify_import_templates->append_to_frontend_error_messages( $error_message );
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+			
 				// Write error to log file.
 				Helpers::append_to_file(
 					$error_message,
 					$log_file_path,
-					esc_html__( 'Importing Give forms', 'templify-import-templates' )
+					esc_html__( 'Importing Give forms', 'templify-importer-templates' )
 				);
-			}
+			
 		} else {
-			$message = ( ! empty( $results['message'] ) ? $results['message'] : esc_html__( 'No results for Give Form import!', 'templify-import-templates' ) );
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+			$message = ( ! empty( $results['message'] ) ? $results['message'] : esc_html__( 'No results for Give Form import!', 'templify-importer-templates' ) );
+			
 				// Add this message to log file.
 				$log_added = Helpers::append_to_file(
 					$message,
 					$log_file_path,
-					esc_html__( 'Importing Give forms' , 'templify-import-templates' )
+					esc_html__( 'Importing Give forms' , 'templify-importer-templates' )
 				);
-			}
+			
 		}
 	}
 	/**
@@ -91,7 +91,7 @@ class Templify_Import_Templates_Give_Import {
 		if ( empty( $raw_data ) || ! is_array( $raw_data ) ) {
 			return new \WP_Error(
 				'corrupted_give_forms_import_data',
-				__( 'Error: Widget import data could not be read. Please try a different file.', 'templify-import-templates' )
+				__( 'Error: Widget import data could not be read. Please try a different file.', 'templify-importer-templates' )
 			);
 		}
 		// Begin results.
@@ -135,24 +135,24 @@ class Templify_Import_Templates_Give_Import {
 			$error_message = $results->get_error_message();
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
 			$templify_import_templates->append_to_frontend_error_messages( $error_message );
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+			
 				// Write error to log file.
 				Helpers::append_to_file(
 					$error_message,
 					$log_file_path,
-					esc_html__( 'Importing Give Donations', 'templify-import-templates' )
+					esc_html__( 'Importing Give Donations', 'templify-importer-templates' )
 				);
-			}
+			
 		} else {
-			$message = ( ! empty( $results['message'] ) ? $results['message'] : esc_html__( 'No results for Give import!', 'templify-import-templates' ) );
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
+			$message = ( ! empty( $results['message'] ) ? $results['message'] : esc_html__( 'No results for Give import!', 'templify-importer-templates' ) );
+			
 				// Add this message to log file.
 				$log_added = Helpers::append_to_file(
 					$message,
 					$log_file_path,
-					esc_html__( 'Importing Give Donations' , 'templify-import-templates' )
+					esc_html__( 'Importing Give Donations' , 'templify-importer-templates' )
 				);
-			}
+			
 		}
 
 	}
@@ -188,7 +188,7 @@ class Templify_Import_Templates_Give_Import {
 		if ( ! file_exists( $file ) ) {
 			return new \WP_Error(
 				'form_import_file_not_found',
-				__( 'Error: Form import file could not be found.', 'templify-import-templates' )
+				__( 'Error: Form import file could not be found.', 'templify-importer-templates' )
 			);
 		}
 		// // Get file contents and decode.

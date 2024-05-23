@@ -15,34 +15,34 @@ class ImportActions {
 	 * Register all action hooks for this class.
 	 */
 	public function register_hooks() {
-		add_action( 'templify-import-templates/before_content_import_execution', array( $this, 'before_content_import_action' ), 10, 5 );
+		add_action( 'templify-importer-templates/before_content_import_execution', array( $this, 'before_content_import_action' ), 10, 5 );
     
 		// After content import.
-		add_action( 'templify-import-templates/after_content_import_execution', array( $this, 'before_widget_import_action' ), 10, 5 );
-		add_action( 'templify-import-templates/after_content_import_execution', array( $this, 'widgets_import' ), 20, 5 );
+		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'before_widget_import_action' ), 10, 5 );
+		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'widgets_import' ), 20, 5 );
 
-		add_action( 'templify-import-templates/after_content_import_execution', array( $this, 'forms_import' ), 20, 5 );
-		add_action( 'templify-import-templates/after_content_import_execution', array( $this, 'donations_import' ), 20, 5 );
-		add_action( 'templify-import-templates/after_content_import_execution', array( $this, 'give_forms_import' ), 20, 5 );
-		add_action( 'templify-import-templates/after_content_import_execution', array( $this, 'depicter_import' ), 20, 5 );
+		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'forms_import' ), 20, 5 );
+		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'donations_import' ), 20, 5 );
+		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'give_forms_import' ), 20, 5 );
+		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'depicter_import' ), 20, 5 );
 
 	
 
 		// Customizer import.
-		add_action( 'templify-import-templates/customizer_import_execution', array( $this, 'customizer_import' ), 10, 1 );
+		add_action( 'templify-importer-templates/customizer_import_execution', array( $this, 'customizer_import' ), 10, 1 );
 
 		// Customizer Color Only import.
-		add_action( 'templify-import-templates/customizer_import_color_only_execution', array( $this, 'customizer_import_color_only' ), 10, 1 );
+		add_action( 'templify-importer-templates/customizer_import_color_only_execution', array( $this, 'customizer_import_color_only' ), 10, 1 );
 			// Customizer font Only import.
-add_action( 'templify-import-templates/customizer_import_font_only_execution', array( $this, 'customizer_import_font_only' ), 10, 1 );
+add_action( 'templify-importer-templates/customizer_import_font_only_execution', array( $this, 'customizer_import_font_only' ), 10, 1 );
 
 // After full import action.
-add_action( 'templify-import-templates/after_all_import_execution', array( $this, 'after_import_action' ), 10, 5 );
+add_action( 'templify-importer-templates/after_all_import_execution', array( $this, 'after_import_action' ), 10, 5 );
 
 
 
 		// Special widget import cases.
-		add_action( 'templify-import-templates/widget_settings_array', array( $this, 'fix_custom_menu_widget_ids' ) );
+		add_action( 'templify-importer-templates/widget_settings_array', array( $this, 'fix_custom_menu_widget_ids' ) );
    
 	
 	
@@ -50,41 +50,41 @@ add_action( 'templify-import-templates/after_all_import_execution', array( $this
 
 
 	/**
-	 * Execute the action: 'templify-import-templates/before_content_import'.
+	 * Execute the action: 'templify-importer-templates/before_content_import'.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function before_content_import_action( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
-		$this->do_import_action( 'templify-import-templates/before_content_import', $import_files[ $selected_index ], $selected_palette, $selected_font );
+		$this->do_import_action( 'templify-importer-templates/before_content_import', $import_files[ $selected_index ], $selected_palette, $selected_font );
 	}
 
 
 
 		/**
-	 * Execute the action: 'templify-import-templates/before_widgets_import'.
+	 * Execute the action: 'templify-importer-templates/before_widgets_import'.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function before_widget_import_action( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
-		$this->do_import_action( 'templify-import-templates/before_widgets_import', $import_files[ $selected_index ], $selected_palette, $selected_font );
+		$this->do_import_action( 'templify-importer-templates/before_widgets_import', $import_files[ $selected_index ], $selected_palette, $selected_font );
 	}
 
 	
 
 	
 	/**
-	 * Execute the action: 'templify-import-templates/after_import'.
+	 * Execute the action: 'templify-importer-templates/after_import'.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function after_import_action( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
-		$this->do_import_action( 'templify-import-templates/after_import', $import_files[ $selected_index ], $selected_palette, $selected_font );
+		$this->do_import_action( 'templify-importer-templates/after_import', $import_files[ $selected_index ], $selected_palette, $selected_font );
 	}
 
 
@@ -119,7 +119,7 @@ add_action( 'templify-import-templates/after_all_import_execution', array( $this
 	 * Execute the widgets import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function widgets_import( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
@@ -132,7 +132,7 @@ add_action( 'templify-import-templates/after_all_import_execution', array( $this
 	 * Execute the customizer import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function customizer_import_color_only( $selected_import_files ) {
@@ -148,7 +148,7 @@ add_action( 'templify-import-templates/after_all_import_execution', array( $this
 	 * Execute the customizer import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function customizer_import_font_only( $selected_import_files ) {
@@ -160,7 +160,7 @@ add_action( 'templify-import-templates/after_all_import_execution', array( $this
 	 * Execute the customizer import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function customizer_import( $selected_import_files ) {
@@ -174,7 +174,7 @@ add_action( 'templify-import-templates/after_all_import_execution', array( $this
 	 * Execute the Give donations import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function donations_import( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
@@ -186,7 +186,7 @@ add_action( 'templify-import-templates/after_all_import_execution', array( $this
 	 * Execute the Give forms import.
 	 *
 	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-import-templates/import_files` filter.
+	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
 	 * @param int   $selected_index        Selected index of import.
 	 */
 	public function give_forms_import( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
@@ -201,7 +201,7 @@ add_action( 'templify-import-templates/after_all_import_execution', array( $this
 	 * Register the do_action hook, so users can hook to these during import.
 	 *
 	 * @param string $action          The action name to be executed.
-	 * @param array  $selected_import The data of selected import from `templify-import-templates/import_files` filter.
+	 * @param array  $selected_import The data of selected import from `templify-importer-templates/import_files` filter.
 	 */
 	private function do_import_action( $action, $selected_import, $selected_palette, $selected_font ) {
 		if ( false !== has_action( $action ) ) {
@@ -211,14 +211,13 @@ add_action( 'templify-import-templates/after_all_import_execution', array( $this
 			ob_start();
 				do_action( $action, $selected_import, $selected_palette, $selected_font );
 			$message = ob_get_clean();
-			if ( apply_filters( 'templify_import_templates_save_log_files', false ) ) {
-				// Add this message to log file.
+			
 				$log_added = Helpers::append_to_file(
 					$message,
 					$log_file_path,
 					$action
 				);
-			}
+			
 		}
 	}
 
