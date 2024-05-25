@@ -127,7 +127,7 @@ class WidgetImporter {
 		}
 
 		// Hook before import.
-		do_action( 'templify-importer-templates/widget_importer_before_widgets_import' );
+		do_action( 'kadence-starter-templates/widget_importer_before_widgets_import' );
 		$data =  $data;
 
 		// Get all available widgets site supports.
@@ -248,7 +248,7 @@ class WidgetImporter {
 					}
 
 					// Update option with new widget.
-					update_option( 'widget_' . $id_base, $single_widget_instances );
+					add_option( 'templify_widget_' . $id_base, $single_widget_instances );
 
 					// Assign widget instance to sidebar.
 					$sidebars_widgets = get_option( 'sidebars_widgets' ); // Which sidebars have which widgets, get fresh every time.
@@ -261,7 +261,7 @@ class WidgetImporter {
 
 					$new_instance_id = $id_base . '-' . $new_instance_id_number; // Use ID number from new widget instance.
 					$sidebars_widgets[ $use_sidebar_id ][] = $new_instance_id; // Add new instance to sidebar.
-					update_option( 'sidebars_widgets', $sidebars_widgets ); // Save the amended data.
+					add_option( 'templify_sidebars_widgets', $sidebars_widgets ); // Save the amended data.
 
 					// After widget import action.
 					$after_widget_import = array(
@@ -274,7 +274,7 @@ class WidgetImporter {
 						'widget_id_num'     => $new_instance_id_number,
 						'widget_id_num_old' => $instance_id_number,
 					);
-					do_action( 'templify-importer-templates/widget_importer_after_single_widget_import', $after_widget_import );
+					do_action( 'kadence-starter-templates/widget_importer_after_single_widget_import', $after_widget_import );
 
 					// Success message.
 					if ( $sidebar_available ) {
@@ -297,7 +297,7 @@ class WidgetImporter {
 		}
 
 		// Hook after import.
-		do_action( 'templify-importer-templates/widget_importer_after_widgets_import' );
+		do_action( 'kadence-starter-templates/widget_importer_after_widgets_import' );
 
 		// Return results.
 		return  $results;

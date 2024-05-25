@@ -3,7 +3,7 @@
  * The main importer class, extending the slightly modified WP importer 2.0 class WXRImporter
  */
 
-//namespace AwesomeMotive\WPContentImporter2;
+namespace AwesomeMotive\WPContentImporter2;
 
 use XMLReader;
 

@@ -162,7 +162,46 @@ class Importer_Templates {
 		// Set plugin constants.
 		$this->include_plugin_files();
 		add_action( 'init', array( $this, 'init_config' ) );
+
+		add_action( 'init', array( $this, 'load_api_settings' ), 15 );
+		add_action( 'init', array( $this, 'register_meta' ), 20 );
+		if ( is_admin() ) {
+			// Ajax Calls.
+			add_action( 'wp_ajax_templify_import_demo_data', array( $this, 'import_demo_data_ajax_callback' ) );
+			add_action( 'wp_ajax_templify_import_initial', array( $this, 'initial_install_ajax_callback' ) );
+			add_action( 'wp_ajax_templify_import_install_plugins', array( $this, 'install_plugins_ajax_callback' ) );
+			add_action( 'wp_ajax_templify_import_customizer_data', array( $this, 'import_customizer_data_ajax_callback' ) );
+			add_action( 'wp_ajax_templify_after_import_data', array( $this, 'after_all_import_data_ajax_callback' ) );
+			add_action( 'wp_ajax_templify_import_single_data', array( $this, 'import_demo_single_data_ajax_callback' ) );
+			add_action( 'wp_ajax_templify_remove_past_import_data', array( $this, 'remove_past_data_ajax_callback' ) );
+			add_action( 'wp_ajax_templify_check_plugin_data', array( $this, 'check_plugin_data_ajax_callback' ) );
+			add_action( 'wp_ajax_templify_importer_dismiss_notice', array( $this, 'ajax_dismiss_starter_notice' ) );
+		}
+
+		//add_action( 'init', array( $this, 'setup_plugin_with_filter_data' ) );
+	add_action( 'after_import', array( $this, 'templify_templify_theme_after_import' ), 10, 3 );
+
+	add_action( 'templify-importer-templates/after_import', array( $this, 'templify_elementor_after_import' ), 20, 3 );
+
+	add_filter( 'plugin_action_links_templify-importer-templates/templify-importer-templates.php', array( $this, 'add_settings_link' ) );
+
+	add_filter( 'update_post_metadata', array( $this, 'forcibly_fix_issue_with_metadata' ), 15, 5 );
+
+
     }
+
+
+	public function register_meta() {
+		register_post_meta(
+			'', // Pass an empty string to register the meta key across all existing post types.
+			'_templify_importer_templates_imported_post',
+			array(
+				'single'        => true,
+				'type'          => 'boolean',
+				'auth_callback' => '__return_true',
+			)
+		);
+	}
 
     	/**
 	 * Include all plugin files.
@@ -249,29 +288,7 @@ class Importer_Templates {
 	public function init_config() {
 			add_action( 'admin_menu', array( $this, 'create_admin_page' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'basic_css_menu_support' ) );
-			if ( is_admin() ) {
-				// Ajax Calls.
-				add_action( 'wp_ajax_templify_import_demo_data', array( $this, 'import_demo_data_ajax_callback' ) );
-				add_action( 'wp_ajax_templify_import_initial', array( $this, 'initial_install_ajax_callback' ) );
-				add_action( 'wp_ajax_templify_import_install_plugins', array( $this, 'install_plugins_ajax_callback' ) );
-				add_action( 'wp_ajax_templify_import_customizer_data', array( $this, 'import_customizer_data_ajax_callback' ) );
-				add_action( 'wp_ajax_templify_after_import_data', array( $this, 'after_all_import_data_ajax_callback' ) );
-				add_action( 'wp_ajax_templify_import_single_data', array( $this, 'import_demo_single_data_ajax_callback' ) );
-				add_action( 'wp_ajax_templify_remove_past_import_data', array( $this, 'remove_past_data_ajax_callback' ) );
-				add_action( 'wp_ajax_templify_check_plugin_data', array( $this, 'check_plugin_data_ajax_callback' ) );
-				add_action( 'wp_ajax_templify_importer_dismiss_notice', array( $this, 'ajax_dismiss_starter_notice' ) );
-			}
 
-			add_action( 'init', array( $this, 'setup_plugin_with_filter_data' ) );
-		add_action( 'templify-importer-templates/after_import', array( $this, 'templify_templify_theme_after_import' ), 10, 3 );
-
-		add_action( 'templify-importer-templates/after_import', array( $this, 'templify_elementor_after_import' ), 20, 3 );
-
-		add_filter( 'plugin_action_links_templify-importer-templates/templify-importer-templates.php', array( $this, 'add_settings_link' ) );
-
-		add_filter( 'update_post_metadata', array( $this, 'forcibly_fix_issue_with_metadata' ), 15, 5 );
-
-	
 	}
 
 
@@ -341,6 +358,7 @@ class Importer_Templates {
 		// Fix Custom Menu items.
 	
 			$site_url = $this->remove_trailing_slash( $selected_import['url'] );
+			//$site_url = site_url();
 
 			$menu_item_ids = $this->get_menu_item_ids();
 			if ( is_array( $menu_item_ids ) ) {
@@ -381,10 +399,36 @@ class Importer_Templates {
 				$default['palette'][6]['color'] = $palette_presets[ $selected_palette ][6]['color'];
 				$default['palette'][7]['color'] = $palette_presets[ $selected_palette ][7]['color'];
 				$default['palette'][8]['color'] = $palette_presets[ $selected_palette ][8]['color'];
-				update_option( 'templify_global_palette', json_encode( $default ) );
+				add_option( 'templify_global_palette', json_encode( $default ) );
 			
 		
 		
+	}
+
+
+	/**
+	 * Get all menu item id's
+	 *
+	 * @return array
+	 */
+	public function get_menu_item_ids() {
+
+		$args = array(
+			'post_type'     => 'nav_menu_item',
+			// Query performance optimization.
+			'fields'        => 'ids',
+			'no_found_rows' => true,
+			'post_status'   => 'any',
+		);
+		$query = new WP_Query( $args );
+
+		// Have posts?
+		if ( $query->have_posts() ) :
+
+			return $query->posts;
+
+		endif;
+		return null;
 	}
 
 
@@ -693,7 +737,7 @@ class Importer_Templates {
 		return file_exists( $asset_path )
 			? include $asset_path
 			: array(
-				'dependencies' => array( 'lodash', 'react', 'react-dom', 'wp-block-editor', 'wp-blocks', 'wp-data', 'wp-element', 'wp-i18n', 'wp-polyfill', 'wp-primitives', 'wp-api' ),
+				'dependencies' => array( 'lodash', 'react', 'react-dom', 'wp-block-editor', 'wp-blocks', 'wp-data', 'wp-element', 'wp-i18n', 'wp-polyfill', 'wp-primitives'),
 				'version'      => TEMPLIFY_IMPORT_TEMPLATES_VERSION,
 			);
 	}
@@ -738,6 +782,31 @@ class Importer_Templates {
     }
 
 
+	public function load_api_settings() {
+		register_setting(
+			'kadence_starter_templates_config',
+			'kadence_starter_templates_config',
+			array(
+				'type'              => 'string',
+				'description'       => __( 'Config Kadence Starter Templates', 'kadence-blocks' ),
+				'sanitize_callback' => 'sanitize_text_field',
+				'default'           => '',
+			)
+		);
+		if ( ! $this->is_setting_registered( 'kadence_blocks_prophecy' ) ) {
+			register_setting(
+				'kadence_blocks_prophecy',
+				'kadence_blocks_prophecy',
+				array(
+					'type'              => 'string',
+					'description'       => __( 'Config Kadence Block Prophecy AI', 'kadence-blocks' ),
+					'sanitize_callback' => 'sanitize_text_field',
+					'default'           => '',
+				)
+			);
+		}
+	}
+
 	
 	/**
 	 * Getter function to retrieve the private log_file_path value.
@@ -768,13 +837,13 @@ class Importer_Templates {
 			$this->log_file_path = Helpers::get_log_path();
 			
 			// Get selected file index or set it to 0.
-			$this->selected_index = empty( $_POST['selected'] ) ? '' : sanitize_text_field( $_POST['selected'] );
-			$this->selected_builder = empty( $_POST['builder'] ) ? 'blocks' : sanitize_text_field( $_POST['builder'] );
-			$this->selected_page = empty( $_POST['page_id'] ) ? '' : sanitize_text_field( $_POST['page_id'] );
-			$this->override_colors = 'true' === $_POST['override_colors'] ? true : false;
-			$this->override_fonts = 'true' === $_POST['override_fonts'] ? true : false;
-			$this->selected_palette = empty( $_POST['palette'] ) ? '' : sanitize_text_field( $_POST['palette'] );
-			$this->selected_font    = empty( $_POST['font'] ) ? '' : sanitize_text_field( $_POST['font'] );
+			$this->selected_index =  sanitize_text_field( $_POST['selected'] );
+			$this->selected_builder = sanitize_text_field( $_POST['builder'] );
+			$this->selected_page = sanitize_text_field( $_POST['page_id'] );
+			$this->override_colors =  true;
+			$this->override_fonts =  true;
+			$this->selected_palette = sanitize_text_field( $_POST['palette'] );
+			$this->selected_font  =   sanitize_text_field( $_POST['font'] );
 
 			
 			$template_database  = Template_Database_Importer::get_instance();
@@ -841,7 +910,7 @@ class Importer_Templates {
 			}
 		}
 
-		if ( $this->override_colors ) {
+	
 			if ( $this->selected_palette && ! empty( $this->selected_palette ) ) {
 				$palette_presets = json_decode( '{"base":[{"color":"#2B6CB0"},{"color":"#265E9A"},{"color":"#222222"},{"color":"#3B3B3B"},{"color":"#515151"},{"color":"#626262"},{"color":"#E1E1E1"},{"color":"#F7F7F7"},{"color":"#ffffff"}],"bright":[{"color":"#255FDD"},{"color":"#00F2FF"},{"color":"#1A202C"},{"color":"#2D3748"},{"color":"#4A5568"},{"color":"#718096"},{"color":"#EDF2F7"},{"color":"#F7FAFC"},{"color":"#ffffff"}],"darkmode":[{"color":"#3296ff"},{"color":"#003174"},{"color":"#ffffff"},{"color":"#f7fafc"},{"color":"#edf2f7"},{"color":"#cbd2d9"},{"color":"#2d3748"},{"color":"#252c39"},{"color":"#1a202c"}],"orange":[{"color":"#e47b02"},{"color":"#ed8f0c"},{"color":"#1f2933"},{"color":"#3e4c59"},{"color":"#52606d"},{"color":"#7b8794"},{"color":"#f3f4f7"},{"color":"#f9f9fb"},{"color":"#ffffff"}],"pinkish":[{"color":"#E21E51"},{"color":"#4d40ff"},{"color":"#040037"},{"color":"#032075"},{"color":"#514d7c"},{"color":"#666699"},{"color":"#deddeb"},{"color":"#efeff5"},{"color":"#f8f9fa"}],"pinkishdark":[{"color":"#E21E51"},{"color":"#4d40ff"},{"color":"#f8f9fa"},{"color":"#efeff5"},{"color":"#deddeb"},{"color":"#c3c2d6"},{"color":"#514d7c"},{"color":"#221e5b"},{"color":"#040037"}],"green":[{"color":"#049f82"},{"color":"#008f72"},{"color":"#222222"},{"color":"#353535"},{"color":"#454545"},{"color":"#676767"},{"color":"#eeeeee"},{"color":"#f7f7f7"},{"color":"#ffffff"}],"fire":[{"color":"#dd6b20"},{"color":"#cf3033"},{"color":"#27241d"},{"color":"#423d33"},{"color":"#504a40"},{"color":"#625d52"},{"color":"#e8e6e1"},{"color":"#faf9f7"},{"color":"#ffffff"}],"mint":[{"color":"#2cb1bc"},{"color":"#13919b"},{"color":"#0f2a43"},{"color":"#133453"},{"color":"#587089"},{"color":"#829ab1"},{"color":"#e0fcff"},{"color":"#f5f7fa"},{"color":"#ffffff"}],"rich":[{"color":"#295CFF"},{"color":"#0E94FF"},{"color":"#1C0D5A"},{"color":"#3D3D3D"},{"color":"#57575D"},{"color":"#636363"},{"color":"#E1EBEE"},{"color":"#EFF7FB"},{"color":"#ffffff"}],"fem":[{"color":"#D86C97"},{"color":"#282828"},{"color":"#282828"},{"color":"#333333"},{"color":"#4d4d4d"},{"color":"#646464"},{"color":"#f7dede"},{"color":"#F6F2EF"},{"color":"#ffffff"}],"hot":[{"color":"#FF5698"},{"color":"#000000"},{"color":"#020202"},{"color":"#020202"},{"color":"#4E4E4E"},{"color":"#808080"},{"color":"#FDEDEC"},{"color":"#FDF6EE"},{"color":"#ffffff"}],"bold":[{"color":"#000000"},{"color":"#D1A155"},{"color":"#000000"},{"color":"#010101"},{"color":"#111111"},{"color":"#282828"},{"color":"#F6E7BC"},{"color":"#F9F7F7"},{"color":"#ffffff"}],"teal":[{"color":"#7ACFC4"},{"color":"#044355"},{"color":"#000000"},{"color":"#010101"},{"color":"#111111"},{"color":"#282828"},{"color":"#F5ECE5"},{"color":"#F9F7F7"},{"color":"#ffffff"}]}', true );
 				if ( isset( $palette_presets[ $this->selected_palette ] ) ) {
@@ -861,9 +930,13 @@ class Importer_Templates {
 				/**
 				 * Execute the customizer import actions.
 				 */
-				do_action( 'templify-importer-templates/customizer_import_color_only_execution', $this->selected_import_files );
+				do_action( 'kadence-starter-templates/customizer_import_color_only_execution', $this->selected_import_files );
 			}
-		}
+		
+
+		do_action( 'kadence-starter-templates/customizer_import_font_only_execution', $this->selected_import_files );
+
+
 		
 			
 
@@ -1020,7 +1093,7 @@ class Importer_Templates {
 			delete_option( 'theme_mods_' . get_option( 'stylesheet' ) );
 			// Reset Global Palette
 			update_option( 'kadence_global_palette', '{"palette":[{"color":"#3182CE","slug":"palette1","name":"Palette Color 1"},{"color":"#2B6CB0","slug":"palette2","name":"Palette Color 2"},{"color":"#1A202C","slug":"palette3","name":"Palette Color 3"},{"color":"#2D3748","slug":"palette4","name":"Palette Color 4"},{"color":"#4A5568","slug":"palette5","name":"Palette Color 5"},{"color":"#718096","slug":"palette6","name":"Palette Color 6"},{"color":"#EDF2F7","slug":"palette7","name":"Palette Color 7"},{"color":"#F7FAFC","slug":"palette8","name":"Palette Color 8"},{"color":"#ffffff","slug":"palette9","name":"Palette Color 9"}],"second-palette":[{"color":"#3182CE","slug":"palette1","name":"Palette Color 1"},{"color":"#2B6CB0","slug":"palette2","name":"Palette Color 2"},{"color":"#1A202C","slug":"palette3","name":"Palette Color 3"},{"color":"#2D3748","slug":"palette4","name":"Palette Color 4"},{"color":"#4A5568","slug":"palette5","name":"Palette Color 5"},{"color":"#718096","slug":"palette6","name":"Palette Color 6"},{"color":"#EDF2F7","slug":"palette7","name":"Palette Color 7"},{"color":"#F7FAFC","slug":"palette8","name":"Palette Color 8"},{"color":"#ffffff","slug":"palette9","name":"Palette Color 9"}],"third-palette":[{"color":"#3182CE","slug":"palette1","name":"Palette Color 1"},{"color":"#2B6CB0","slug":"palette2","name":"Palette Color 2"},{"color":"#1A202C","slug":"palette3","name":"Palette Color 3"},{"color":"#2D3748","slug":"palette4","name":"Palette Color 4"},{"color":"#4A5568","slug":"palette5","name":"Palette Color 5"},{"color":"#718096","slug":"palette6","name":"Palette Color 6"},{"color":"#EDF2F7","slug":"palette7","name":"Palette Color 7"},{"color":"#F7FAFC","slug":"palette8","name":"Palette Color 8"},{"color":"#ffffff","slug":"palette9","name":"Palette Color 9"}],"active":"palette"}' );
-			do_action( 'templify-importer-templates/before_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index, $this->selected_palette, $this->selected_font );
+			do_action( 'kadence-starter-templates/before_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index, $this->selected_palette, $this->selected_font );
 		}
 
 		/**
@@ -1039,7 +1112,7 @@ class Importer_Templates {
 		 * 2 - Import widgets (with priority 20).
 		 * 3 - Import Redux data (with priority 30).
 		 */
-		do_action( 'templify-importer-templates/after_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index, $this->selected_palette, $this->selected_font );
+		do_action( 'kadence-starter-templates/after_content_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index, $this->selected_palette, $this->selected_font );
 		// Save the import data as a transient, so other import parts (in new AJAX calls) can use that data.
 		Helpers::set_import_data_transient( $this->get_current_importer_data() );
 		// Request the customizer import AJAX call.
@@ -1065,14 +1138,14 @@ class Importer_Templates {
 	 */
 	private function use_existing_importer_data() {
 	
-			$this->frontend_error_messages = empty( $data['frontend_error_messages'] ) ? array() : $data['frontend_error_messages'];
-			$this->log_file_path           = empty( $data['log_file_path'] ) ? '' : $data['log_file_path'];
-			$this->selected_index          = empty( $data['selected_index'] ) ? 0 : $data['selected_index'];
-			$this->selected_palette        = empty( $data['selected_palette'] ) ? '' : $data['selected_palette'];
-			$this->selected_font           = empty( $data['selected_font'] ) ? '' : $data['selected_font'];
-			$this->selected_import_files   = empty( $data['selected_import_files'] ) ? array() : $data['selected_import_files'];
-			$this->import_files            = empty( $data['import_files'] ) ? array() : $data['import_files'];
-			$this->before_import_executed  = empty( $data['before_import_executed'] ) ? false : $data['before_import_executed'];
+			$this->frontend_error_messages =$data['frontend_error_messages'];
+			$this->log_file_path           = $data['log_file_path'];
+			$this->selected_index          = $data['selected_index'];
+			$this->selected_palette        =  $data['selected_palette'];
+			$this->selected_font           =  $data['selected_font'];
+			$this->selected_import_files   =  $data['selected_import_files'];
+			$this->import_files            =  $data['import_files'];
+			$this->before_import_executed  = $data['before_import_executed'];
 			$this->importer->set_importer_data( $data );
 
 			return true;
@@ -1280,33 +1353,35 @@ class Importer_Templates {
 			return;
 		}
 		// Get info of import data files and filter it.
-		//$this->import_files = apply_filters( 'templify-importer-templates/import_files', array() );
-		//$this->import_files = '';
-		$this->import_files = Helpers::validate_import_file_info( array()  );
+		//$this->import_files = apply_filters( 'kadence-starter-templates/import_files', array() );
+		$this->import_files = '';
+		//$this->import_files = Helpers::validate_import_file_info( apply_filters( 'kadence-starter-templates/import_files', array() ) );
 		/**
 		 * Register all default actions (before content import, widget, customizer import and other actions)
-		 * to the 'before_content_import_execution' and the 'templify-importer-templates/after_content_import_execution' action hook.
-		  */
-		// $import_actions = new ImportActions();
-		// $import_actions->register_hooks();
+		 * to the 'before_content_import_execution' and the 'kadence-starter-templates/after_content_import_execution' action hook.
+		 */
+		$import_actions = new ImportActions();
+		$import_actions->register_hooks();
 
-		// // Importer options array.
-		// $importer_options =  array(
-		// 	'fetch_attachments' => true,
-		// 	'aggressive_url_search' => true,
-		// ) ;
+		// Importer options array.
+		$importer_options = array(
+			'fetch_attachments' => true,
+			'aggressive_url_search' => true,
+		);
 
-		// // Logger options for the logger used in the importer.
-		// $logger_options =  array(
-		// 	'logger_min_level' => 'warning',
-		// ) ;
+		// Logger options for the logger used in the importer.
+		$logger_options = array(
+			'logger_min_level' => 'warning',
+		) ;
 
-		// // Configure logger instance and set it to the importer.
-		// $logger            = new Logger();
-		// $logger->min_level = $logger_options['logger_min_level'];
+		// Configure logger instance and set it to the importer.
+		$logger            = new Logger();
+		$logger->min_level = $logger_options['logger_min_level'];
 
-		// // Create importer instance with proper parameters.
-		// $this->importer = new Importer( $importer_options, $logger );
+		// Create importer instance with proper parameters.
+		$this->importer = new Importer( $importer_options, $logger );
+
+		
 	}
 
 
@@ -1463,7 +1538,7 @@ class Importer_Templates {
 		 * Default actions:
 		 * 1 - Customizer import (with priority 10).
 		 */
-		do_action( 'templify-importer-templates/customizer_import_execution', $this->selected_import_files );
+		do_action( 'kadence-starter-templates/customizer_import_execution', $this->selected_import_files );
 
 		// Request the after all import AJAX call.
 		if ( false !== has_action( 'templify-importer-templates/after_all_import_execution' ) ) {
@@ -1509,7 +1584,7 @@ class Importer_Templates {
 			 * Default actions:
 			 * 1 - after_import action (with priority 10).
 			 */
-			do_action( 'templify-importer-templates/after_all_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index, $this->selected_palette, $this->selected_font );
+			do_action( 'kadence-starter-templates/after_all_import_execution', $this->selected_import_files, $this->import_files, $this->selected_index, $this->selected_palette, $this->selected_font );
 		}
 
 		// Send a JSON response with final report.

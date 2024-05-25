@@ -64,11 +64,7 @@ final class WordPress_Importer {
 
 		// Override the WP image editor with our custom null editor.
 		$existing_editors = [];
-		add_filter( 'wp_image_editors', static function ( $editors ) use ( &$existing_editors ) {
-			$existing_editors = $editors;
-
-			return [ '\\KadenceWP\\KadenceStarterTemplates\\Image_Downloader\\Image_Editor' ];
-		}, 8, 1 );
+		
 
 		foreach ( $this->images as $id => $images ) {
 			// Grab the scaled image, or fallback to the largest size.

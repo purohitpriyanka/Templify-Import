@@ -58,7 +58,7 @@ class Importer {
 
 		// Set the WordPress Importer v2 as the importer used in this plugin.
 		// More: https://github.com/humanmade/WordPress-Importer.
-		$this->importer = new WXRImporter( $importer_options );
+//		$this->importer = new WXRImporter( $importer_options );
 
 		// Set logger to the importer.
 		$this->logger = $logger;
@@ -81,13 +81,13 @@ class Importer {
 		//if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\WXRImporter' ) ) {
 			require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'wxr-importer/WXRImporter.php';
 		//}
-		//if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\WXRImportInfo' ) ) {
-			require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'wxr-importer/WXRImportInfo.php';
-		//}
-		//	if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\Importer' ) ) {
-			require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'wxr-importer/Importer.php';
-		//}
-		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-wxr-importer.php';
+	// 	if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\WXRImportInfo' ) ) {
+	 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'wxr-importer/WXRImportInfo.php';
+	// }
+	// 		if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\Importer' ) ) {
+	 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'wxr-importer/Importer.php';
+	// 	}
+	// 	require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-wxr-importer.php';
 	}
 
 
@@ -150,12 +150,9 @@ class Importer {
 	public function import_content( $import_file_path, $single_page = false, $page_meta = '', $elementor = false ) {
 		$this->microtime = microtime( true );
 
-		//$wxr_importer = $this->get_preliminary_information();
-
-
 		// Increase PHP max execution time. Just in case, even though the AJAX calls are only 25 sec long.
 		if ( strpos( ini_get( 'disable_functions' ), 'set_time_limit' ) === false ) {
-			set_time_limit(  300  );
+			set_time_limit( apply_filters( 'templify-import-templates/set_time_limit_for_demo_data_import', 300 ) );
 		}
 
 		// Disable import of authors.
@@ -175,7 +172,7 @@ class Importer {
 				// Set the importing author to the current user and Import images.
 				add_filter( 'wxr_importer.pre_process.post', array( $this, 'check_for_content_images' ), 10, 4 );
 			}
-			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 4 );
+			//add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 4 );
 			if ( $elementor ) {
 				add_action( 'wxr_importer.processed.post', array( $this, 'process_elementor' ), 10, 5 );
 			}
@@ -184,17 +181,18 @@ class Importer {
 			}
 		} else {
 			add_filter( 'wxr_importer.pre_process.post_meta', array( $this, 'process_elementor_images' ), 10, 2 );
-			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_stop_woo_pages' ), 9, 4 );
-			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 4 );
-			add_filter( 'wp_import_post_data_processed', array( $this, 'process_kadence_block_css_post' ), 10, 2 );
+			//add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_stop_woo_pages' ), 9, 4 );
+			// add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 4 );
+				//add_filter( 'wp_import_post_data_processed', array( $this, 'process_kadence_block_css_post' ), 10, 2 );
 			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_internal_links' ), 11, 4 );
-			add_action( 'wxr_importer.processed.post', array( $this, 'process_internal_links' ), 10, 5 );
-			// Check, if we need to send another AJAX request and set the importing author to the current user.
+				//add_action( 'wxr_importer.processed.post', array( $this, 'process_internal_links' ), 10, 5 );
+				// Check, if we need to send another AJAX request and set the importing author to the current user.
 			add_filter( 'wxr_importer.pre_process.post', array( $this, 'new_ajax_request_maybe' ) );
-			add_action( 'wxr_importer.processed.post', array( $this, 'process_kadence_block_css_processed' ), 10, 5 );
-			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 5 );
-			add_action( 'wxr_importer.processed.post', array( $this, 'process_kadence_galleries' ), 10, 5 );
+				//add_action( 'wxr_importer.processed.post', array( $this, 'process_kadence_block_css_processed' ), 10, 5 );
+				//add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 5 );
+				//add_action( 'wxr_importer.processed.post', array( $this, 'process_kadence_galleries' ), 10, 5 );
 		}
+
 
 		// Disables generation of multiple image sizes (thumbnails) in the content import step.
 		// if ( ! apply_filters( 'kadence-starter-templates/regenerate_thumbnails_in_content_import', true ) ) {
@@ -608,7 +606,7 @@ class Importer {
 		$current_user_obj    = wp_get_current_user();
 		$data['post_author'] = $current_user_obj->user_login;
 
-		if ( isset( $data['post_content'] ) && ! empty( $data['post_content'] ) ) {
+		
 
 			$images = $this->find_all_image_urls( stripslashes( $data['post_content'] ) );
 			if ( count( $images ) == 0 ) {
@@ -628,7 +626,7 @@ class Importer {
 					}
 				}
 			}
-		}
+		
 
 		return $data;
 	}

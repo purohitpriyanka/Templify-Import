@@ -160,7 +160,7 @@ class CustomizerImporter {
 			do_action( 'customize_save_after', $wp_customize );
 		}
 
-		do_action( 'templify-importer-templates/after_customizer_import', $data );
+		do_action( 'kadence-starter-templates/after_customizer_import', $data );
 	}
 
 
@@ -396,7 +396,7 @@ class CustomizerImporter {
 			foreach ( $data['options'] as $option_key => $option_value ) {
 				if ( 'templify_global_palette' === $option_key ) {
 					$palette = json_decode( $option_value, 'true' );
-					update_option( 'templify_global_palette', json_encode( $palette ) );
+					add_option( 'templify_global_palette', json_encode( $palette ) );
 				}
 			}
 		}

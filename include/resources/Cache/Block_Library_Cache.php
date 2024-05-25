@@ -152,7 +152,6 @@ class Block_Library_Cache implements Terminable {
 	 *
 	 * @return string The file contents.
 	 * @throws InvalidArgumentException
-	 * @throws \KadenceWP\KadenceStarterTemplates\StellarWP\ProphecyMonorepo\Storage\Exceptions\NotFoundException
 	 * @throws \RuntimeException
 	 */
 	public function get( $identifier ): string {

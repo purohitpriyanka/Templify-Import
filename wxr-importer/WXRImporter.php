@@ -1,6 +1,10 @@
 <?php
+namespace AwesomeMotive\WPContentImporter2;
 
-class WXR_Importer extends WP_Importer {
+use WP_Error;
+use XMLReader;
+
+class WXRImporter extends \WP_Importer {
 	/**
 	 * Maximum supported WXR version
 	 */

@@ -162,11 +162,11 @@ class Helpers {
 		$downloader = new Downloader();
 		// ----- Set content file path -----
 		// Check if 'content' is not defined. That would mean a local file.
-		if ( empty( $import_file_info['content'] ) ) {
-			if ( isset( $import_file_info['local_content'] ) && file_exists( $import_file_info['local_content'] ) ) {
-				$downloaded_files['content'] = $import_file_info['local_content'];
-			}
-		} else {
+		// if ( empty( $import_file_info['content'] ) ) {
+		// 	if ( isset( $import_file_info['local_content'] ) && file_exists( $import_file_info['local_content'] ) ) {
+		// 		$downloaded_files['content'] = $import_file_info['local_content'];
+		// 	}
+		// } else {
 			// Set the filename string for content import file.
 			$content_filename = 'demo-content-import-file_'  . self::$demo_import_start_time . '.xml' ;
 
@@ -177,7 +177,7 @@ class Helpers {
 			if ( is_wp_error( $downloaded_files['content'] ) ) {
 				return $downloaded_files['content'];
 			}
-		}
+		//}
 
 		// ----- Set widget file path -----
 		// Get widgets file as well. If defined!

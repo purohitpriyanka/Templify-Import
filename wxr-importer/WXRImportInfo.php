@@ -1,6 +1,6 @@
 <?php
 
-//namespace AwesomeMotive\WPContentImporter2;
+namespace AwesomeMotive\WPContentImporter2;
 
 class WXRImportInfo {
 	public $home;
