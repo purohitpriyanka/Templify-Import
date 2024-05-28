@@ -43,6 +43,6 @@ function templify_import_deactivate() {
 register_deactivation_hook(__FILE__, 'templify_import_deactivate');
 
 
-require_once plugin_dir_path( __FILE__ ) . 'vendor/vendor-prefixed/autoload.php';
+//require_once plugin_dir_path( __FILE__ ) . 'vendor/vendor-prefixed/autoload.php';
 require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 require_once plugin_dir_path( __FILE__ ) . 'class-templify-import-templates.php';

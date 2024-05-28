@@ -464,6 +464,8 @@ class Importer {
 	 * @param array $comments Raw comment data, already processed by {@see process_comments}.
 	 * @param array $terms Raw term data, already processed.
 	 */
+
+	 
 	public function process_single_page_clean_meta( $post_id, $data, $meta, $comments, $terms ) {
 		update_post_meta( $post_id, '_kad_post_title', 'hide' );
 		update_post_meta( $post_id, '_kad_post_content_style', 'unboxed' );

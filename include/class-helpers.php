@@ -91,6 +91,8 @@ class Helpers {
 			);
 		}
 
+		
+
 		// Return the file data.
 		return $data;
 	}

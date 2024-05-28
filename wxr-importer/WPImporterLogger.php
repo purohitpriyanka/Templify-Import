@@ -1,5 +1,6 @@
 <?php
 namespace AwesomeMotive\WPContentImporter2;
+
 /**
  * Describes a logger instance
  *

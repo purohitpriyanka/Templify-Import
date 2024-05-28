@@ -306,6 +306,8 @@ class Template_Database_Importer {
 		// 		$pro_data['ktp_api_key'] = \KadenceWP\KadencePro\StellarWP\Uplink\get_license_key( 'templify-theme-pro' );
 		// 	}
 		// 	if ( empty( $pro_data ) ) {
+
+			
 		// 		if ( is_multisite() && ! apply_filters( 'templify_activation_individual_multisites', false ) ) {
 		// 			$pro_data = get_site_option( 'ktp_api_manager' );
 		// 		} else {

@@ -98,6 +98,8 @@ class WXRImporter extends \AwesomeMotive\WPContentImporter2\WXRImporter {
 					delete_transient( 'wc_attribute_taxonomies' );
 				}
 
+				
+
 				// Register the taxonomy now so that the import works!
 				register_taxonomy(
 					$data['taxonomy'],

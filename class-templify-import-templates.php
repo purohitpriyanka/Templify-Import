@@ -257,6 +257,8 @@ class Importer_Templates {
 			)
 		);
 
+		
+
 		if ( ! empty( $query->post ) ) {
 			$_post = $query->post;
 
@@ -721,6 +723,7 @@ class Importer_Templates {
 				'isNetworkAdmin'      => $is_network_admin,
 				'isNetworkEnabled'    => $using_network_enabled,
 				'blocksActive'        =>  true,
+				'svgMaskPath' =>"",
 			)
 		);
 	}
