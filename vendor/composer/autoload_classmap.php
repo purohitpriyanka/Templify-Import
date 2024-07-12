@@ -6,5 +6,11 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'AwesomeMotive\\WPContentImporter2\\Importer' => __DIR__ . '/../..' . '/wxr-importer/Importer.php',
+'AwesomeMotive\\WPContentImporter2\\WPImporterLogger' => __DIR__ . '/../..' . '/wxr-importer/WPImporterLogger.php',
+'AwesomeMotive\\WPContentImporter2\\WPImporterLoggerCLI' => __DIR__ . '/../..' . '/wxr-importer/WPImporterLoggerCLI.php',
+'AwesomeMotive\\WPContentImporter2\\WXRImportInfo' => __DIR__ . '/../..' . '/wxr-importer/WXRImportInfo.php',
+'AwesomeMotive\\WPContentImporter2\\WXRImporter' => __DIR__ . '/../..' . '/wxr-importer/WXRImporter.php'
+
+
 );

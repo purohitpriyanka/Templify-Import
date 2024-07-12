@@ -2,14 +2,16 @@
 /**
  * Class for downloading a file from a given URL.
  *
-* @package Templify Import Templates
+* @package Templify Importer Templates
  */
 
 
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+ namespace TemplifyWP\TemplifyImporterTemplates;
+
+ if ( ! defined( 'ABSPATH' ) ) {
+	 exit;
+ }
 
 class Downloader {
 	/**
@@ -64,33 +66,35 @@ class Downloader {
 		}
 
 		// Get file content from the server.
-		$response = wp_remote_get(
-			$url,
-			array( 'timeout' => 300 )
-		);
+		// $response = wp_remote_get(
+		// 	$url,
+		// 	array( 'timeout' => 300 )
+		// );
 
 		// Test if the get request was not successful.
-		if ( is_wp_error( $response ) || 200 !== $response['response']['code'] ) {
-			// Collect the right format of error data (array or WP_Error).
-			$response_error = $this->get_error_from_response( $response );
+		// if ( is_wp_error( $response ) || 200 !== $response['response']['code'] ) {
+		// 	// Collect the right format of error data (array or WP_Error).
+		// 	$response_error = $this->get_error_from_response( $response );
 
-			return new \WP_Error(
-				'download_error',
-				sprintf(
-					__( 'An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s - %6$s.', 'templify-importer-templates' ),
-					'<strong>',
-					$url,
-					'</strong>',
-					'<br>',
-					$response_error['error_code'],
-					$response_error['error_message']
-				) . '<br>' .
-				"Import File Fetching Error Templify"
-			);
-		}
+		// 	return new \WP_Error(
+		// 		'download_error',
+		// 		sprintf(
+		// 			__( 'An error occurred while fetching file from: %1$s%2$s%3$s!%4$sReason: %5$s - %6$s.', 'templify-importer-templates' ),
+		// 			'<strong>',
+		// 			$url,
+		// 			'</strong>',
+		// 			'<br>',
+		// 			$response_error['error_code'],
+		// 			$response_error['error_message']
+		// 		) . '<br>' .
+		// 		"Import File Fetching Error Templify"
+		// 	);
+		// }
 
 		// Return content retrieved from the URL.
-		return wp_remote_retrieve_body( $response );
+		//return wp_remote_retrieve_body( $response );
+		$filepath = get_stylesheet_directory() .'/statrter'."/".$url;
+		return get_file_data($filepath,"","");
 	}
 
 

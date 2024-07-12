@@ -9,19 +9,28 @@ class ComposerStaticInit8283c873e984087f8020f756403ba3f9
     public static $prefixLengthsPsr4 = array (
         'K' => 
         array (
-            'KadenceWP\\KadenceStarterTemplates\\' => 34,
+            'AwesomeMotive\\WPContentImporter2\\' => 33,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'KadenceWP\\KadenceStarterTemplates\\' => 
+        'TemplifyWP\\TemplifyImporterTemplates\\' => 
         array (
             0 => __DIR__ . '/../..' . '/include/resources',
+        ),
+        'AwesomeMotive\\WPContentImporter2\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/wxr-importer',
         ),
     );
 
     public static $classMap = array (
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'AwesomeMotive\\WPContentImporter2\\Importer' => __DIR__ . '/../..' . '/wxr-importer/Importer.php',
+        'AwesomeMotive\\WPContentImporter2\\WPImporterLogger' => __DIR__ . '/../..' . '/wxr-importer/WPImporterLogger.php',
+        'AwesomeMotive\\WPContentImporter2\\WPImporterLoggerCLI' => __DIR__ . '/../..' . '/wxr-importer/WPImporterLoggerCLI.php',
+        'AwesomeMotive\\WPContentImporter2\\WXRImportInfo' => __DIR__ . '/../..' . '/wxr-importer/WXRImportInfo.php',
+        'AwesomeMotive\\WPContentImporter2\\WXRImporter' => __DIR__ . '/../..' . '/wxr-importer/WXRImporter.php',
+        // 'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

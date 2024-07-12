@@ -117,4 +117,4 @@ if (PHP_VERSION_ID < 80000) {
     }
 }
 
-// include __DIR__ . '/..'.'/stellarwp/uplink/bin/stellar-uplink';
+include __DIR__ . '/..'.'/stellarwp/uplink/bin/stellar-uplink';

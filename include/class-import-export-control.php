@@ -2,19 +2,23 @@
 /**
  * The Import Export customize control extends the WP_Customize_Control class.
  *
- * @package Templify Import Templates
+ * @package Templify Importer Templates
  */
 
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+ namespace TemplifyWP\TemplifyImporterTemplates;
 
-//use WP_Customize_Control;
+ if ( ! defined( 'ABSPATH' ) ) {
+	 exit;
+ }
+
+use WP_Customize_Control;
 
 if ( ! class_exists( 'WP_Customize_Control' ) ) {
 	return;
 }
+
+
 
 /**
  * Class Templify_Importer_Control_Import_Export 

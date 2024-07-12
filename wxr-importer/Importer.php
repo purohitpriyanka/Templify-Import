@@ -3,11 +3,39 @@
  * The main importer class, extending the slightly modified WP importer 2.0 class WXRImporter
  */
 
-namespace AwesomeMotive\WPContentImporter2;
+ namespace AwesomeMotive\WPContentImporter2;
 
-use XMLReader;
+ use XMLReader;
+ 
+ class Importer extends WXRImporter {
 
-class Importer extends WXRImporter {
+	/**
+	 * The importer class object used for importing content.
+	 *
+	 * @var object
+	 */
+	private $importer;
+
+	/**
+	 * Time in milliseconds, marking the beginning of the import.
+	 *
+	 * @var float
+	 */
+	private $microtime;
+
+	/**
+	 * The instance of the OCDI\Logger class.
+	 *
+	 * @var object
+	 */
+	public $logger;
+
+	/**
+	 * The instance of the Templify Importer Templates class.
+	 *
+	 * @var object
+	 */
+	private $templify_importer_templates;
 
 	/**
 	 * Time in milliseconds, marking the beginning of the import.
@@ -480,26 +508,42 @@ class Importer extends WXRImporter {
 	 * @return array
 	 */
 	public function new_ajax_request_maybe( $data ) {
+		// if ( empty( $data ) ) {
+		// 	return $data;
+		// }
+
 		$time = microtime( true ) - $this->start_time;
 
 		// We should make a new ajax call, if the time is right.
-		if ( $time > apply_filters( 'pt-importer/time_for_one_ajax_call', 25 ) ) {
-			$response = apply_filters( 'pt-importer/new_ajax_request_response_data', array(
+		if ( $time >Helpers:: apply_filters( 'templify-importer-templates/time_for_one_ajax_call', 25 ) ) {
+			$response =  array(
 				'status'                => 'newAJAX',
 				'log'                   => 'Time for new AJAX request!: ' . $time,
 				'num_of_imported_posts' => count( $this->mapping['post'] ),
-			) );
+			);
+
+			// Add any output to the log file and clear the buffers.
+			$message = ob_get_clean();
+
+			// Add any error messages to the frontend_error_messages variable in OCDI main class.
+			if ( ! empty( $message ) ) {
+				$this->templify_importer_templates->append_to_frontend_error_messages( $message );
+			}
 
 			// Add message to log file.
-			$this->logger->info( __( 'New AJAX call!', 'wordpress-importer' ) );
+			$log_added = Helpers::append_to_file(
+				__( 'New AJAX call!' , 'templify-importer-templates' ) . PHP_EOL . $message,
+				$this->templify_importer_templates->get_log_file_path(),
+				''
+			);
 
-			// Set the current importer state, so it can be continued on the next AJAX call.
+			// Set the current importer stat, so it can be continued on the next AJAX call.
 			$this->set_current_importer_data();
 
 			// Send the request for a new AJAX call.
 			wp_send_json( $response );
 		}
-
+	
 		// Set importing author to the current user.
 		// Fixes the [WARNING] Could not find the author for ... log warning messages.
 		$current_user_obj    = wp_get_current_user();
@@ -507,6 +551,8 @@ class Importer extends WXRImporter {
 
 		return $data;
 	}
+
+
 
 	/**
 	 * Save current importer data to the DB, for later use.

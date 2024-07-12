@@ -1,11 +1,14 @@
 <?php
 /**
- * Class for declaring the content importer used in the One Click Demo Import plugin
+ * Class for declaring the content importer used in the Templify Importer Templates plugin
  *
- * @package Templify Import Templates
+ * @package Templify Importer Templates
  */
 
-
+ namespace TemplifyWP\TemplifyImporterTemplates;
+ if ( ! defined( 'ABSPATH' ) ) {
+	 exit;
+ }
 
 class Importer {
 	/**
@@ -46,19 +49,18 @@ class Importer {
 		'webp'         => 'image/webp',
 		'svg'          => 'image/svg+xml',
 	);
-	/**
-	 * Constructor method.
-	 *
-	 * @param array  $importer_options Importer options.
-	 * @param object $logger           Logger object used in the importer.
-	 */
+
+
+
+
+
 	public function __construct( $importer_options = array(), $logger = null ) {
 		// Include files that are needed for WordPress Importer v2.
 		$this->include_required_files();
 
 		// Set the WordPress Importer v2 as the importer used in this plugin.
 		// More: https://github.com/humanmade/WordPress-Importer.
-//		$this->importer = new WXRImporter( $importer_options );
+		$this->importer = new WXRImporter( $importer_options );
 
 		// Set logger to the importer.
 		$this->logger = $logger;
@@ -66,8 +68,8 @@ class Importer {
 			$this->set_logger( $this->logger );
 		}
 
-		// Get the tempilfy_import_templates (main plugin class) instance.
-		$this->templify_import_templates = Importer_Templates::get_instance();
+		// Get the kadence_starter_templates (main plugin class) instance.
+		$this->templify_importer_templates = Importer_Templates::get_instance();
 	}
 
 
@@ -78,16 +80,17 @@ class Importer {
 		if ( ! class_exists( '\WP_Importer' ) ) {
 			require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
 		}
-		//if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\WXRImporter' ) ) {
+		
+		if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\WXRImporter' ) ) {
 			require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'wxr-importer/WXRImporter.php';
-		//}
-	// 	if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\WXRImportInfo' ) ) {
-	 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'wxr-importer/WXRImportInfo.php';
-	// }
-	// 		if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\Importer' ) ) {
-	 		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'wxr-importer/Importer.php';
-	// 	}
-	// 	require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-wxr-importer.php';
+		}
+		if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\WXRImportInfo' ) ) {
+			require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'wxr-importer/WXRImportInfo.php';
+		}
+		if ( ! class_exists( '\AwesomeMotive\WPContentImporter2\Importer' ) ) {
+			require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'wxr-importer/Importer.php';
+		}
+		require_once TEMPLIFY_IMPORT_TEMPLATES_PATH . 'include/class-wxr-importer.php';
 	}
 
 
@@ -148,56 +151,25 @@ class Importer {
 	 * @param string $import_file_path Path to the import file.
 	 */
 	public function import_content( $import_file_path, $single_page = false, $page_meta = '', $elementor = false ) {
+
+
 		$this->microtime = microtime( true );
 
 		// Increase PHP max execution time. Just in case, even though the AJAX calls are only 25 sec long.
 		if ( strpos( ini_get( 'disable_functions' ), 'set_time_limit' ) === false ) {
-			set_time_limit( apply_filters( 'templify-import-templates/set_time_limit_for_demo_data_import', 300 ) );
+			set_time_limit( Helpers::apply_filters( 'templify-importer-templates/set_time_limit_for_demo_data_import', 300 ) );
 		}
 
 		// Disable import of authors.
-		add_filter( 'wxr_importer.pre_process.user', '__return_false', 20 );
+		add_filter( 'wxr_importer.pre_process.user', '__return_false' );
 
-		//add_filter( 'wp_import_post_data_processed', array( $this, 'pre_post_data' ), 10, 2 );
-		// Meta Save Tracking info so we can remove later if desired.
-		add_filter( 'wxr_importer.processed.term', array( $this, 'add_term_tracking' ), 10, 2 );
-		add_action( 'wxr_importer.processed.post', array( $this, 'add_post_tracking' ), 10, 5 );
-
-		if ( class_exists( 'Astra_WXR_Importer' ) ) {
-			$astra_site_instance = \Astra_WXR_Importer::instance();
-			remove_filter( 'wxr_importer.pre_process.post', array( $astra_site_instance, 'pre_process_post' ), 10 );
-		}
-		if ( $single_page ) {
-			if ( ! $elementor ) {
-				// Set the importing author to the current user and Import images.
-				add_filter( 'wxr_importer.pre_process.post', array( $this, 'check_for_content_images' ), 10, 4 );
-			}
-			//add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 4 );
-			if ( $elementor ) {
-				add_action( 'wxr_importer.processed.post', array( $this, 'process_elementor' ), 10, 5 );
-			}
-			if ( $page_meta && $page_meta === 'clear' ) {
-				add_action( 'wxr_importer.processed.post', array( $this, 'process_single_page_clean_meta' ), 10, 5 );
-			}
-		} else {
-			add_filter( 'wxr_importer.pre_process.post_meta', array( $this, 'process_elementor_images' ), 10, 2 );
-			//add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_stop_woo_pages' ), 9, 4 );
-			// add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 4 );
-				//add_filter( 'wp_import_post_data_processed', array( $this, 'process_kadence_block_css_post' ), 10, 2 );
-			add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_internal_links' ), 11, 4 );
-				//add_action( 'wxr_importer.processed.post', array( $this, 'process_internal_links' ), 10, 5 );
-				// Check, if we need to send another AJAX request and set the importing author to the current user.
-			add_filter( 'wxr_importer.pre_process.post', array( $this, 'new_ajax_request_maybe' ) );
-				//add_action( 'wxr_importer.processed.post', array( $this, 'process_kadence_block_css_processed' ), 10, 5 );
-				//add_filter( 'wxr_importer.pre_process.post', array( $this, 'process_kadence_block_css' ), 10, 5 );
-				//add_action( 'wxr_importer.processed.post', array( $this, 'process_kadence_galleries' ), 10, 5 );
-		}
-
+		// Check, if we need to send another AJAX request and set the importing author to the current user.
+		add_filter( 'wxr_importer.pre_process.post', array( $this, 'new_ajax_request_maybe' ) );
 
 		// Disables generation of multiple image sizes (thumbnails) in the content import step.
-		// if ( ! apply_filters( 'kadence-starter-templates/regenerate_thumbnails_in_content_import', true ) ) {
-		// 	add_filter( 'intermediate_image_sizes_advanced', '__return_null' );
-		// }
+		if ( ! Helpers::apply_filters( 'templify-importer-templates/regenerate_thumbnails_in_content_import', true ) ) {
+			add_filter( 'intermediate_image_sizes_advanced', '__return_null' );
+		}
 
 		// Import content.
 		if ( ! empty( $import_file_path ) ) {
@@ -205,15 +177,30 @@ class Importer {
 				$this->import( $import_file_path );
 			$message = ob_get_clean();
 		}
-		if ( $single_page ) {
-			return $this->logger;
-		}
+
 		// Return any error messages for the front page output (errors, critical, alert and emergency level messages only).
-		if ( is_object( $this->logger ) && property_exists( $this->logger, 'error_output' ) && $this->logger->error_output ) {
-			return $this->logger->error_output;
-		}
-		return '';
+		//return $this->logger->error_output;
+		return "";
 	}
+
+
+		/**
+	 * Get the demo import file for the provided slug.
+	 *
+	 * @param string $slug The pre-created content slug.
+	 *
+	 * @return string
+	 */
+	private function get_import_file( $slug ) {
+		$content_data = $this->get_content_data( $slug );
+
+		return ! empty( $content_data['file'] ) ? $content_data['file'] : '';
+	}
+
+
+	
+	
+
 	
 	/**
 	 * Run elementor Import.
@@ -227,14 +214,14 @@ class Importer {
 	public function process_elementor( $post_id, $data, $meta, $comments, $terms ) {
 		$meta_data = wp_list_pluck( $meta, 'key' );
 		if ( in_array( '_elementor_data', $meta_data, true ) ) {
-			if ( class_exists( '\Elementor\TemplateLibrary\Templify_Import_Templates_Elementor_Import' ) ) {
+			
 				$el_import = new \Elementor\TemplateLibrary\Templify_Import_Templates_Elementor_Import();
 				foreach ( $meta as $key => $value ) {
 					if ( '_elementor_data' === $value['key'] ) {
 						$import_data = $el_import->import( $post_id, $value['value'] );
 					}
 				}
-			}
+			
 		}
 	}
 	/**
@@ -585,13 +572,13 @@ class Importer {
 
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
 			if ( ! empty( $message ) ) {
-				$this->templify_import_templates->append_to_frontend_error_messages( $message );
+				$this->templify_importer_templates->append_to_frontend_error_messages( $message );
 			}
 
 				// Add message to log file.
 				$log_added = Helpers::append_to_file(
 					__( 'New AJAX call!' , 'templify-importer-templates' ) . PHP_EOL . $message,
-					$this->templify_import_templates->get_log_file_path(),
+					$this->templify_importer_templates->get_log_file_path(),
 					''
 				);
 			
@@ -794,11 +781,22 @@ class Importer {
 	 * @param array $data current post data.
 	 * @return array
 	 */
+	/**
+	 * Check if we need to create a new AJAX request, so that server does not timeout.
+	 *
+	 * @param array $data current post data.
+	 * @return array
+	 */
 	public function new_ajax_request_maybe( $data ) {
+
+		if ( empty( $data ) ) {
+			return $data;
+		}
+
 		$time = microtime( true ) - $this->microtime;
 
 		// We should make a new ajax call, if the time is right.
-		if ( $time >  25  ) {
+		if ( $time > Helpers::apply_filters( 'templify-importer-templates/time_for_one_ajax_call', 25 ) ) {
 			$response = array(
 				'status'  => 'newAJAX',
 				'message' => 'Time for new AJAX request!: ' . $time,
@@ -809,16 +807,15 @@ class Importer {
 
 			// Add any error messages to the frontend_error_messages variable in OCDI main class.
 			if ( ! empty( $message ) ) {
-				$this->templify_import_templates->append_to_frontend_error_messages( $message );
+				$this->templify_importer_templates->append_to_frontend_error_messages( $message );
 			}
-		
-				// Add message to log file.
-				$log_added = Helpers::append_to_file(
-					__( 'New AJAX call!' , 'templify-importer-templates' ) . PHP_EOL . $message,
-					$this->templify_import_templates->get_log_file_path(),
-					''
-				);
-			
+
+			// Add message to log file.
+			$log_added = Helpers::append_to_file(
+				__( 'New AJAX call!' , 'templify-importer-templates' ) . PHP_EOL . $message,
+				$this->templify_importer_templates->get_log_file_path(),
+				''
+			);
 
 			// Set the current importer stat, so it can be continued on the next AJAX call.
 			$this->set_current_importer_data();
@@ -829,13 +826,12 @@ class Importer {
 
 		// Set importing author to the current user.
 		// Fixes the [WARNING] Could not find the author for ... log warning messages.
-		if ( isset( $data['post_author'] ) ) {
-			$current_user_obj    = wp_get_current_user();
-			$data['post_author'] = $current_user_obj->user_login;
-		}
+		$current_user_obj    = wp_get_current_user();
+		$data['post_author'] = $current_user_obj->user_login;
 
 		return $data;
 	}
+
 	/**
 	 * Add Meta info so we can query this term later if needed to remove.
 	 *
@@ -862,7 +858,7 @@ class Importer {
 	 * Set current state of the content importer, so we can continue the import with new AJAX request.
 	 */
 	private function set_current_importer_data() {
-		$data = array_merge( $this->templify_import_templates->get_current_importer_data(), $this->get_importer_data() );
+		$data = array_merge( $this->templify_importer_templates->get_current_importer_data(), $this->get_importer_data() );
 
 		Helpers::set_import_data_transient( $data );
 	}

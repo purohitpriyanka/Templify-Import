@@ -6,8 +6,10 @@
  * Used in the Customizer importer.
  *
  * @since 1.1.1
-* @package Templify Import Templates
+* @package Templify Importer Templates
  */
+namespace TemplifyWP\TemplifyImporterTemplates;
+
 
 
 use WP_Customize_Setting;

@@ -6,27 +6,25 @@
  * Used in the Customizer importer.
  *
  * @since 1.0.4
- * @package Templify Import Templates
+ * @package Templify Importer Templates
  */
 
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+ namespace TemplifyWP\TemplifyImporterTemplates;
 
 
 
-// use WP_Customize_Control;
-// use WP_Filesystem;
-// use stdClass;
-// use templify_import_templates\Import_Option;
-// use function add_action;
-// use function add_filter;
-// use function wp_enqueue_style;
-// use function get_template_directory;
-// use function wp_style_add_data;
-// use function get_theme_file_uri;
-// use function get_theme_file_path;
+use WP_Customize_Control;
+use WP_Filesystem;
+use stdClass;
+use Templify_Importer_Templates\Import_Option;
+use function add_action;
+use function add_filter;
+use function wp_enqueue_style;
+use function get_template_directory;
+use function wp_style_add_data;
+use function get_theme_file_uri;
+use function get_theme_file_path;
 // use function wp_styles;
 // use function esc_attr;
 // use function esc_url;
@@ -316,20 +314,20 @@ class Customizer_Import_Export {
 		$data['mods'] = self::import_images( $data['mods'] );
 
 		// Import custom options.
-		// if ( isset( $data['options'] ) ) {
-		// 	foreach ( $data['options'] as $option_key => $option_value ) {
-		// 		$option = new Import_Option(
-		// 			$wp_customize,
-		// 			$option_key,
-		// 			array(
-		// 				'default'    => '',
-		// 				'type'       => 'option',
-		// 				'capability' => 'edit_theme_options'
-		// 			)
-		// 		);
-		// 		$option->import( $option_value );
-		// 	}
-		// }
+		if ( isset( $data['options'] ) ) {
+			foreach ( $data['options'] as $option_key => $option_value ) {
+				$option = new Import_Option(
+					$wp_customize,
+					$option_key,
+					array(
+						'default'    => '',
+						'type'       => 'option',
+						'capability' => 'edit_theme_options'
+					)
+				);
+				$option->import( $option_value );
+			}
+		}
 		// If wp_css is set then import it.
 		if ( function_exists( 'wp_update_custom_css_post' ) && isset( $data['wp_css'] ) && '' !== $data['wp_css'] ) {
 			wp_update_custom_css_post( $data['wp_css'] );

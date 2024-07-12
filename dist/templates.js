@@ -14978,16 +14978,16 @@
               , {getLibraryContent: h, isLoading: f, saveStarterData: m, getBaseContent: g} = J()
               , {mode: b, isPageSelected: v, isFinished: y, isFetching: w, ...x} = p;
             let E = (0,
-            X.__)("Block Editor", "templify-importer-templates")
+            X.__)("Block Editor", "kadence-starter-templates")
               , k = $;
             "ai" === s && (E = (0,
-            X.__)("Kadence AI", "templify-importer-templates"),
+            X.__)("Kadence AI", "kadence-starter-templates"),
             k = q),
             "elementor" === s && (E = (0,
-            X.__)("Elementor", "templify-importer-templates"),
+            X.__)("Elementor", "kadence-starter-templates"),
             k = W),
             "custom" === s && (E = kadenceStarterParams?.custom_name ? kadenceStarterParams.custom_name : (0,
-            X.__)("Pro Designs", "templify-importer-templates"),
+            X.__)("Pro Designs", "kadence-starter-templates"),
             k = kadenceStarterParams?.custom_icon ? (0,
             e.createElement)("img", {
                 className: "components-menu-items__item-icon custom-image-icon-src",
@@ -15057,14 +15057,14 @@
             e.createElement)(be.Button, {
                 className: "kt-import-back",
                 label: (0,
-                X.__)("Back to Individual Pages Grid", "templify-importer-templates"),
+                X.__)("Back to Individual Pages Grid", "kadence-starter-templates"),
                 showTooltip: !0,
                 icon: ye,
                 onClick: ()=>!w && onBackToGrid()
             }) : (0,
             e.createElement)(be.Button, {
                 label: (0,
-                X.__)("Back to Starter Templates Grid", "templify-importer-templates"),
+                X.__)("Back to Starter Templates Grid", "kadence-starter-templates"),
                 showTooltip: !0,
                 className: "kt-import-back",
                 icon: ye,
@@ -15076,7 +15076,7 @@
             e.createElement)(be.Button, {
                 className: "kt-import-back",
                 label: (0,
-                X.__)("Back to Starter Templates Grid", "templify-importer-templates"),
+                X.__)("Back to Starter Templates Grid", "kadence-starter-templates"),
                 showTooltip: !0,
                 icon: ye,
                 onClick: ()=>onBackToDash()
@@ -15115,7 +15115,7 @@
                             r()
                         }
                     }, (0,
-                    X.__)("Kadence AI", "templify-importer-templates")), (0,
+                    X.__)("Kadence AI", "kadence-starter-templates")), (0,
                     e.createElement)(be.MenuItem, {
                         icon: $,
                         className: "blocks" === s ? "active-item" : "",
@@ -15125,7 +15125,7 @@
                             r()
                         }
                     }, (0,
-                    X.__)("Block Editor", "templify-importer-templates")), (0,
+                    X.__)("Block Editor", "kadence-starter-templates")), (0,
                     e.createElement)(be.MenuItem, {
                         icon: W,
                         className: "elementor" === s ? "active-item" : "",
@@ -15135,7 +15135,7 @@
                             r()
                         }
                     }, (0,
-                    X.__)("Elementor", "templify-importer-templates")), kadenceStarterParams.ctemplates && (0,
+                    X.__)("Elementor", "kadence-starter-templates")), kadenceStarterParams.ctemplates && (0,
                     e.createElement)(be.MenuItem, {
                         icon: kadenceStarterParams?.custom_icon ? (0,
                         e.createElement)("img", {
@@ -15149,7 +15149,7 @@
                             r()
                         }
                     }, kadenceStarterParams?.custom_name ? kadenceStarterParams.custom_name : (0,
-                    X.__)("Pro Designs", "templify-importer-templates")))
+                    X.__)("Pro Designs", "kadence-starter-templates")))
                 }
             })), s && "custom" !== s && (0,
             e.createElement)("div", {
@@ -15157,7 +15157,7 @@
             }, (0,
             e.createElement)(be.Button, {
                 label: (0,
-                X.__)("Sync with Cloud", "templify-importer-templates"),
+                X.__)("Sync with Cloud", "kadence-starter-templates"),
                 showTooltip: !0,
                 className: "kt-reload-templates",
                 icon: xe,
@@ -15351,7 +15351,7 @@
                     icon: "saved"
                 }) : o),
                 "aria-label": sprintf((0,
-                X.__)("Page %1$d of %2$d", "templify-importer-templates"), s + 1, a),
+                X.__)("Page %1$d of %2$d", "kadence-starter-templates"), s + 1, a),
                 text: i,
                 onClick: l
             })
@@ -15478,11 +15478,11 @@
                     }))
                 }
             }, (0,
-            X.__)("Back to Starter Templates", "templify-importer-templates")), (0,
+            X.__)("Back to Starter Templates", "kadence-starter-templates")), (0,
             e.createElement)("ul", {
                 className: "tcw-main_nav-list",
                 "aria-label": (0,
-                X.__)("Guide controls", "templify-importer-templates")
+                X.__)("Guide controls", "kadence-starter-templates")
             }, g.map(((t,n)=>(0,
             e.createElement)("li", {
                 key: t.id,
@@ -15520,8 +15520,8 @@
                     })
                 }(a.currentPageIndex)
             }, u ? (0,
-            X.__)("Finish and Launch", "templify-importer-templates") : (0,
-            X.__)("Next", "templify-importer-templates"))), (0,
+            X.__)("Finish and Launch", "kadence-starter-templates") : (0,
+            X.__)("Next", "kadence-starter-templates"))), (0,
             e.createElement)("div", {
                 className: "tcw-main_page-wrapper"
             }, d && (0,
@@ -15562,11 +15562,11 @@
         const Ke = [{
             name: "colors",
             title: (0,
-            X.__)("Colors", "templify-importer-templates")
+            X.__)("Colors", "kadence-starter-templates")
         }, {
             name: "fonts",
             title: (0,
-            X.__)("Fonts", "templify-importer-templates")
+            X.__)("Fonts", "kadence-starter-templates")
         }];
         function Je(t) {
             const n = !!t?.hideNext
@@ -15629,11 +15629,11 @@
             e.createElement)("span", {
                 className: "tcw-font-pair_pre-text"
             }, (0,
-            X.__)("Selected font pair:", "templify-importer-templates")), " ", (0,
+            X.__)("Selected font pair:", "kadence-starter-templates")), " ", (0,
             e.createElement)("span", {
                 className: "tcw-font-pair_name"
             }, a.name ? a.name : (0,
-            X.__)("Default", "templify-importer-templates"))), (0,
+            X.__)("Default", "kadence-starter-templates"))), (0,
             e.createElement)(be.ButtonGroup, null, ze.map((t=>(0,
             e.createElement)(be.Button, {
                 className: "tcw-font-button" + (a.name === t.name ? " is-active" : ""),
@@ -15658,7 +15658,7 @@
                 onClick: ()=>(o({}),
                 void r({}))
             }, (0,
-            X.__)("Clear Selection", "templify-importer-templates")))
+            X.__)("Clear Selection", "kadence-starter-templates")))
         }
         function Qe(t) {
             let {defaultValue: n, setPalette: r} = t;
@@ -15719,7 +15719,7 @@
                 onClick: ()=>(o({}),
                 void r({}))
             }, (0,
-            X.__)("Clear Selection", "templify-importer-templates")))
+            X.__)("Clear Selection", "kadence-starter-templates")))
         }
         var et = n(9941)
           , tt = {}
@@ -22186,9 +22186,9 @@
                 const e = $o(a.mainColor);
                 let t = "";
                 a.isLight && !$o(a.mainColor).isReadable() && (t = (0,
-                X.__)("This color may be hard for people to read on light backgrounds. Consider making it darker.", "templify-importer-templates")),
+                X.__)("This color may be hard for people to read on light backgrounds. Consider making it darker.", "kadence-starter-templates")),
                 a.isLight || $o(a.mainColor).isReadable("#000000") || (t = (0,
-                X.__)("This color may be hard for people to read on dark backgrounds. Consider making it brighter.", "templify-importer-templates"));
+                X.__)("This color may be hard for people to read on dark backgrounds. Consider making it brighter.", "kadence-starter-templates"));
                 let n = a.mainColor
                   , i = e.darken(.2).mix("#222222", .8).toHex()
                   , s = e.darken(.2).mix("#353535", .8).toHex()
@@ -22264,7 +22264,7 @@
             }, (0,
             e.createElement)(yo, {
                 label: (0,
-                X.__)("Highlight Color", "templify-importer-templates"),
+                X.__)("Highlight Color", "kadence-starter-templates"),
                 value: a?.mainColor ? a.mainColor : "",
                 default: "",
                 alpha: !1,
@@ -22316,7 +22316,7 @@
             e.createElement)("label", {
                 class: "components-base-control-label kadence-radio-button-control-label"
             }, (0,
-            X.__)("Background Style", "templify-importer-templates")), (0,
+            X.__)("Background Style", "kadence-starter-templates")), (0,
             e.createElement)(be.ButtonGroup, {
                 "aria-label": (0,
                 X.__)("Background Mode")
@@ -22324,8 +22324,8 @@
                 let n = "light" === t && a.isLight ? "primary" : void 0;
                 n = "dark" !== t || a.isLight ? n : "primary";
                 let r = "light" === t ? (0,
-                X.__)("Light", "templify-importer-templates") : (0,
-                X.__)("Dark", "templify-importer-templates");
+                X.__)("Light", "kadence-starter-templates") : (0,
+                X.__)("Dark", "kadence-starter-templates");
                 return (0,
                 e.createElement)(Le, {
                     key: t,
@@ -22355,7 +22355,7 @@
             e.createElement)("label", {
                 class: "components-base-control-label kadence-radio-button-control-label"
             }, (0,
-            X.__)("Background Saturation", "templify-importer-templates")), (0,
+            X.__)("Background Saturation", "kadence-starter-templates")), (0,
             e.createElement)(be.ButtonGroup, {
                 className: "components-base-control-flex-fit",
                 "aria-label": (0,
@@ -22379,17 +22379,17 @@
             e.createElement)("label", {
                 class: "components-base-control-label kadence-radio-button-control-label"
             }, (0,
-            X.__)("Background Brightness", "templify-importer-templates")), (0,
+            X.__)("Background Brightness", "kadence-starter-templates")), (0,
             e.createElement)(be.ButtonGroup, {
                 className: "components-base-control-flex-fit",
                 "aria-label": (0,
                 X.__)("Background Vibrancy")
             }, [0, 1, 2].map((t=>{
                 let n = (0,
-                X.__)("Dark", "templify-importer-templates");
+                X.__)("Dark", "kadence-starter-templates");
                 return 1 === t ? n = (0,
-                X.__)("Darker", "templify-importer-templates") : 2 === t && (n = (0,
-                X.__)("Darkest", "templify-importer-templates")),
+                X.__)("Darker", "kadence-starter-templates") : 2 === t && (n = (0,
+                X.__)("Darkest", "kadence-starter-templates")),
                 (0,
                 e.createElement)(Le, {
                     key: t,
@@ -22504,11 +22504,11 @@
             e.createElement)(si, {
                 className: "tcw-button-list_item-tag"
             }, (0,
-            X.__)("Required", "templify-importer-templates")), t?.isActive && (0,
+            X.__)("Required", "kadence-starter-templates")), t?.isActive && (0,
             e.createElement)(si, {
                 primary: !0
             }, (0,
-            X.__)("Active", "templify-importer-templates")))))))
+            X.__)("Active", "kadence-starter-templates")))))))
         }
         function di(t) {
             let {progress: n} = t;
@@ -22537,13 +22537,13 @@
             }, r))
         }
         const fi = (0,
-        X.__)("This is a premium starter template. To import this starter template you need to install Kadence Pro and Kadence Blocks Pro and activate your license using an Essential or Full Bundle license.", "templify-importer-templates")
+        X.__)("This is a premium starter template. To import this starter template you need to install Kadence Pro and Kadence Blocks Pro and activate your license using an Essential or Full Bundle license.", "kadence-starter-templates")
           , mi = (0,
         X.__)("Get Kadence Pro Starter Templates", "kadence-starter-sites")
           , gi = (0,
         X.__)("This starter template requires the Kadence Theme.", "kadence-starter-sites")
           , bi = (0,
-        X.__)("Get the Free Theme", "templify-importer-templates");
+        X.__)("Get the Free Theme", "kadence-starter-templates");
         function vi(t) {
             let {errorType: n} = t;
             const [r,a] = (0,
@@ -22607,8 +22607,8 @@
                     })
                 }(t.currentPageIndex)
             }, r ? (0,
-            X.__)("Finish and Launch", "templify-importer-templates") : (0,
-            X.__)("Next", "templify-importer-templates")))
+            X.__)("Finish and Launch", "kadence-starter-templates") : (0,
+            X.__)("Next", "kadence-starter-templates")))
         }
         window.wp.blockEditor;
         var wi = window.wp.compose
@@ -23220,11 +23220,11 @@
             e.createElement)("h2", {
                 className: "tcw-completed-screen_heading"
             }, (0,
-            X.__)("Success", "templify-importer-templates"))), (0,
+            X.__)("Success", "kadence-starter-templates"))), (0,
             e.createElement)("p", {
                 className: "tcw-completed-screen_description"
             }, (0,
-            X.__)("You are so much closer to launch!", "templify-importer-templates")), (0,
+            X.__)("You are so much closer to launch!", "kadence-starter-templates")), (0,
             e.createElement)("div", {
                 className: "tcw-completed-screen_actions"
             }, (0,
@@ -23233,13 +23233,13 @@
                 variant: "primary",
                 href: kadenceStarterParams.homeUrl
             }, (0,
-            X.__)("See my site", "templify-importer-templates"), (0,
+            X.__)("See my site", "kadence-starter-templates"), (0,
             e.createElement)(Te, null)), (0,
             e.createElement)(Le, {
                 variant: "link",
                 href: kadenceStarterParams.pagesUrl
             }, (0,
-            X.__)("Go to My Pages", "templify-importer-templates"))))
+            X.__)("Go to My Pages", "kadence-starter-templates"))))
         }
         const Vi = ["home", "about", "contacts"];
         function Ui() {
@@ -23276,7 +23276,7 @@
                     image: t.activeTemplate.pages[e].thumbnail,
                     description: "",
                     tag: Vi.includes(e) ? (0,
-                    X.__)("Suggested", "templify-importer-templates") : "",
+                    X.__)("Suggested", "kadence-starter-templates") : "",
                     isIncluded: t.includePages.includes(e),
                     isRequired: !1
                 })));
@@ -23306,7 +23306,7 @@
             e.createElement)("h3", {
                 className: "tcw-page-selection_heading"
             }, (0,
-            X.__)("Select pages", "templify-importer-templates")), (0,
+            X.__)("Select pages", "kadence-starter-templates")), (0,
             e.createElement)(pi, {
                 items: r,
                 onChange: function(e) {
@@ -23316,7 +23316,7 @@
                     })
                 },
                 showMoreText: (0,
-                X.__)("See all Pages", "templify-importer-templates"),
+                X.__)("See all Pages", "kadence-starter-templates"),
                 allowOne: !0
             })), t.importFullSite && (0,
             e.createElement)("div", {
@@ -23393,7 +23393,7 @@
             e.createElement)("h3", {
                 className: "tcw-page-selection_heading"
             }, (0,
-            X.__)("Select pages", "templify-importer-templates")), (0,
+            X.__)("Select pages", "kadence-starter-templates")), (0,
             e.createElement)(Bi, {
                 items: o,
                 onChange: function(e) {
@@ -23429,7 +23429,7 @@
                         id: n,
                         title: Be[n].title,
                         required: a ? (0,
-                        X.__)("Required", "templify-importer-templates") : "",
+                        X.__)("Required", "kadence-starter-templates") : "",
                         description: Be[n]?.description ? Be[n].description : "",
                         isIncluded: a || t.plugins.includes(n),
                         isRequired: a || "woocommerce" === n && ("" === t.importWoocommerce ? t.activeTemplate?.has_woocommerce : t.importWoocommerce),
@@ -23468,7 +23468,7 @@
             e.createElement)("h3", {
                 className: "tcw-plugin-selection_heading"
             }, (0,
-            X.__)("Select plugins", "templify-importer-templates")), (0,
+            X.__)("Select plugins", "kadence-starter-templates")), (0,
             e.createElement)(pi, {
                 items: r,
                 defaultSelected: t.plugins,
@@ -23479,7 +23479,7 @@
                     })
                 },
                 showMoreText: (0,
-                X.__)("See all Plugins", "templify-importer-templates")
+                X.__)("See all Plugins", "kadence-starter-templates")
             }))
         }
         var Gi = (0,
@@ -23495,15 +23495,15 @@
             screen: (0,
             e.createElement)($i, null),
             navTitle: (0,
-            X.__)("Style", "templify-importer-templates"),
+            X.__)("Style", "kadence-starter-templates"),
             navIcon: (0,
             e.createElement)(Se, null),
             complete: !1,
             sidebar: {
                 title: (0,
-                X.__)("Style Starter", "templify-importer-templates"),
+                X.__)("Style Starter", "kadence-starter-templates"),
                 description: (0,
-                X.__)("Optionally customize colors and font styles on your site to match your brand.", "templify-importer-templates"),
+                X.__)("Optionally customize colors and font styles on your site to match your brand.", "kadence-starter-templates"),
                 component: (0,
                 e.createElement)(Je, null)
             }
@@ -23517,9 +23517,9 @@
             complete: !1,
             sidebar: {
                 title: (0,
-                X.__)("Content", "templify-importer-templates"),
+                X.__)("Content", "kadence-starter-templates"),
                 description: (0,
-                X.__)("Choose which content you would like to install", "templify-importer-templates"),
+                X.__)("Choose which content you would like to install", "kadence-starter-templates"),
                 component: (0,
                 e.createElement)((function() {
                     const {state: t, dispatch: n} = ge()
@@ -23532,11 +23532,11 @@
                     }, $e && (0,
                     e.createElement)(hi, {
                         message: (0,
-                        X.__)("Your site has starter template content. Check this box to confirm you wish to remove your existing site's content & images.", "templify-importer-templates"),
+                        X.__)("Your site has starter template content. Check this box to confirm you wish to remove your existing site's content & images.", "kadence-starter-templates"),
                         action: (0,
                         e.createElement)(ci, {
                             label: (0,
-                            X.__)("Delete previously imported content?", "templify-importer-templates"),
+                            X.__)("Delete previously imported content?", "kadence-starter-templates"),
                             onChange: function(e) {
                                 n({
                                     type: "SET_OVERWRITE_CONTENT",
@@ -23559,7 +23559,7 @@
                             })
                         }
                     }, (0,
-                    X.__)("Import Full Site", "templify-importer-templates")), (0,
+                    X.__)("Import Full Site", "kadence-starter-templates")), (0,
                     e.createElement)(be.Button, {
                         isPressed: !t.importFullSite,
                         className: "tcw-content-button",
@@ -23570,16 +23570,16 @@
                             })
                         }
                     }, (0,
-                    X.__)("Only Import Select Page", "templify-importer-templates"))), t.importFullSite && (0,
+                    X.__)("Only Import Select Page", "kadence-starter-templates"))), t.importFullSite && (0,
                     e.createElement)(be.PanelBody, {
                         title: (0,
-                        X.__)("Advanced Settings", "templify-importer-templates"),
+                        X.__)("Advanced Settings", "kadence-starter-templates"),
                         initialOpen: r,
                         onToggle: ()=>a(!r)
                     }, (0,
                     e.createElement)(be.ToggleControl, {
                         label: (0,
-                        X.__)("Import Customizer Settings", "templify-importer-templates"),
+                        X.__)("Import Customizer Settings", "kadence-starter-templates"),
                         checked: t.importCustomizer,
                         onChange: ()=>{
                             n({
@@ -23590,7 +23590,7 @@
                     }), (0,
                     e.createElement)(be.ToggleControl, {
                         label: (0,
-                        X.__)("Import Widgets", "templify-importer-templates"),
+                        X.__)("Import Widgets", "kadence-starter-templates"),
                         checked: t.importWidgets,
                         onChange: ()=>{
                             n({
@@ -23614,7 +23614,7 @@
             sidebar: {
                 title: "Plugins",
                 description: (0,
-                X.__)("Select plugins to install.", "templify-importer-templates"),
+                X.__)("Select plugins to install.", "kadence-starter-templates"),
                 component: (0,
                 e.createElement)((function() {
                     const {state: t, dispatch: n} = ge()
@@ -23631,7 +23631,7 @@
                     e.createElement)("div", {
                         className: "tcw-message_content"
                     }, (0,
-                    X.__)("Install Missing/Inactive Highlighted Premium plugins to Import, or proceed with partial content.", "templify-importer-templates")))), (0,
+                    X.__)("Install Missing/Inactive Highlighted Premium plugins to Import, or proceed with partial content.", "kadence-starter-templates")))), (0,
                     e.createElement)(yi, null))
                 }
                 ), null)
@@ -23652,61 +23652,61 @@
                 e.useState)([])
                   , [O,P] = (0,
                 e.useState)((0,
-                X.__)("Preparing to import...", "templify-importer-templates"))
+                X.__)("Preparing to import...", "kadence-starter-templates"))
                   , [T,I] = (0,
                 e.useState)((0,
-                X.__)("Just a moment while we update with your information...", "templify-importer-templates"))
+                X.__)("Just a moment while we update with your information...", "kadence-starter-templates"))
                   , [A,j] = (0,
                 e.useState)(0)
                   , [R,N] = (0,
                 e.useState)(0)
                   , M = {
                     remove: (0,
-                    X.__)("Removing Previous Starter Content...", "templify-importer-templates"),
+                    X.__)("Removing Previous Starter Content...", "kadence-starter-templates"),
                     plugins: (0,
-                    X.__)("Installing/Activating Plugins...", "templify-importer-templates"),
+                    X.__)("Installing/Activating Plugins...", "kadence-starter-templates"),
                     initial: (0,
-                    X.__)("Preparing Import", "templify-importer-templates"),
+                    X.__)("Preparing Import", "kadence-starter-templates"),
                     content: (0,
-                    X.__)("Importing Content", "templify-importer-templates"),
+                    X.__)("Importing Content", "kadence-starter-templates"),
                     pages: (0,
-                    X.__)("Building Pages", "templify-importer-templates"),
+                    X.__)("Building Pages", "kadence-starter-templates"),
                     posts: (0,
-                    X.__)("Importing Example Posts", "templify-importer-templates"),
+                    X.__)("Importing Example Posts", "kadence-starter-templates"),
                     products: (0,
-                    X.__)("Importing Example Products", "templify-importer-templates"),
+                    X.__)("Importing Example Products", "kadence-starter-templates"),
                     theme: (0,
-                    X.__)("Saving Site Styles", "templify-importer-templates"),
+                    X.__)("Saving Site Styles", "kadence-starter-templates"),
                     navigation: (0,
-                    X.__)("Building Site Navigation", "templify-importer-templates"),
+                    X.__)("Building Site Navigation", "kadence-starter-templates"),
                     widgets: (0,
-                    X.__)("Building Widgets", "templify-importer-templates"),
+                    X.__)("Building Widgets", "kadence-starter-templates"),
                     done: (0,
-                    X.__)("Finishing", "templify-importer-templates")
+                    X.__)("Finishing", "kadence-starter-templates")
                 }
                   , L = {
                     remove: (0,
-                    X.__)("Just a moment while we remove previously imported content...", "templify-importer-templates"),
+                    X.__)("Just a moment while we remove previously imported content...", "kadence-starter-templates"),
                     plugins: (0,
-                    X.__)("Just a moment while we install and activate plugins...", "templify-importer-templates"),
+                    X.__)("Just a moment while we install and activate plugins...", "kadence-starter-templates"),
                     initial: (0,
-                    X.__)("Just a moment while we prepare to install...", "templify-importer-templates"),
+                    X.__)("Just a moment while we prepare to install...", "kadence-starter-templates"),
                     content: (0,
-                    X.__)("Just a moment while we install content, this can take a few minutes.", "templify-importer-templates"),
+                    X.__)("Just a moment while we install content, this can take a few minutes.", "kadence-starter-templates"),
                     pages: (0,
-                    X.__)("Just a moment while we install pages", "templify-importer-templates"),
+                    X.__)("Just a moment while we install pages", "kadence-starter-templates"),
                     posts: (0,
-                    X.__)("Just a moment while we install posts", "templify-importer-templates"),
+                    X.__)("Just a moment while we install posts", "kadence-starter-templates"),
                     products: (0,
-                    X.__)("Just a moment while we install products", "templify-importer-templates"),
+                    X.__)("Just a moment while we install products", "kadence-starter-templates"),
                     theme: (0,
-                    X.__)("Just a moment while we install theme settings", "templify-importer-templates"),
+                    X.__)("Just a moment while we install theme settings", "kadence-starter-templates"),
                     navigation: (0,
-                    X.__)("Just a moment while we install the navigation", "templify-importer-templates"),
+                    X.__)("Just a moment while we install the navigation", "kadence-starter-templates"),
                     widgets: (0,
-                    X.__)("Just a moment while we install widgets", "templify-importer-templates"),
+                    X.__)("Just a moment while we install widgets", "kadence-starter-templates"),
                     done: (0,
-                    X.__)("Finishing", "templify-importer-templates")
+                    X.__)("Finishing", "kadence-starter-templates")
                 };
                 function z(e, n) {
                     "posts" !== e || t.importPosts || (e = "products"),
@@ -23770,22 +23770,22 @@
                         void 0 !== t.status && "newAJAX" === t.status ? U(e) : void 0 !== t.status && "customizerAJAX" === t.status ? z("theme", 70) : void 0 !== t.status && "afterAllImportAJAX" === t.status ? z("widgets", 85) : void 0 !== t.status && "initialSuccess" === t.status ? z("content", 25) : void 0 !== t.message ? z("done", 99) : void 0 === t.success || t.success ? (console.log(t),
                         _(!0),
                         P((0,
-                        X.__)("Error Importing", "templify-importer-templates")),
+                        X.__)("Error Importing", "kadence-starter-templates")),
                         I((0,
-                        X.__)("Please try again.", "templify-importer-templates"))) : (console.log(t),
+                        X.__)("Please try again.", "kadence-starter-templates"))) : (console.log(t),
                         _(!0),
                         P((0,
-                        X.__)("Error Importing", "templify-importer-templates")),
+                        X.__)("Error Importing", "kadence-starter-templates")),
                         I((0,
-                        X.__)("Failed Import. Something went wrong internally. Please try again.", "templify-importer-templates")))
+                        X.__)("Failed Import. Something went wrong internally. Please try again.", "kadence-starter-templates")))
                     }
                     )).fail((function(e) {
                         console.log(e),
                         _(!0),
                         P((0,
-                        X.__)("Error Importing", "templify-importer-templates")),
+                        X.__)("Error Importing", "kadence-starter-templates")),
                         I((0,
-                        X.__)("Please try again.", "templify-importer-templates"))
+                        X.__)("Please try again.", "kadence-starter-templates"))
                     }
                     ))
                 }
@@ -23799,9 +23799,9 @@
                             console.log("> removeContent response:", e),
                             e?.success ? z("plugins", 5) : (_(!0),
                             P((0,
-                            X.__)("Error removing previous content.", "templify-importer-templates")),
+                            X.__)("Error removing previous content.", "kadence-starter-templates")),
                             I((0,
-                            X.__)("Please manually install and activate required plugins, then try again", "templify-importer-templates")))
+                            X.__)("Please manually install and activate required plugins, then try again", "kadence-starter-templates")))
                         }()) : z("plugins", 1);
                         break;
                     case "plugins":
@@ -23810,9 +23810,9 @@
                             console.log("> Plugins response:", e),
                             e?.success ? z("initial", 10) : (_(!0),
                             P((0,
-                            X.__)("Error Installing Plugins.", "templify-importer-templates")),
+                            X.__)("Error Installing Plugins.", "kadence-starter-templates")),
                             I((0,
-                            X.__)("Please manually install and activate required plugins, then try again", "templify-importer-templates")))
+                            X.__)("Please manually install and activate required plugins, then try again", "kadence-starter-templates")))
                         }();
                         break;
                     case "initial":
@@ -23872,21 +23872,21 @@
                                     console.log("> Post publish:", e),
                                     e ? z("products", 30) : (_(!0),
                                     P((0,
-                                    X.__)("Error Importing Posts.", "templify-importer-templates")),
+                                    X.__)("Error Importing Posts.", "kadence-starter-templates")),
                                     I((0,
-                                    X.__)("Please manually try again.", "templify-importer-templates")))
+                                    X.__)("Please manually try again.", "kadence-starter-templates")))
                                 } else
                                     _(!0),
                                     P((0,
-                                    X.__)("Error Importing Posts.", "templify-importer-templates")),
+                                    X.__)("Error Importing Posts.", "kadence-starter-templates")),
                                     I((0,
-                                    X.__)("Please manually try again.", "templify-importer-templates"))
+                                    X.__)("Please manually try again.", "kadence-starter-templates"))
                             } else
                                 _(!0),
                                 P((0,
-                                X.__)("Error Importing Posts.", "templify-importer-templates")),
+                                X.__)("Error Importing Posts.", "kadence-starter-templates")),
                                 I((0,
-                                X.__)("Please manually try again.", "templify-importer-templates"))
+                                X.__)("Please manually try again.", "kadence-starter-templates"))
                         }();
                         break;
                     case "products":
@@ -23906,9 +23906,9 @@
                                 console.log("> movint to pages"),
                                 z("pages", 40)) : (_(!0),
                                 P((0,
-                                X.__)("Error Importing Products.", "templify-importer-templates")),
+                                X.__)("Error Importing Products.", "kadence-starter-templates")),
                                 I((0,
-                                X.__)("Please manually try again.", "templify-importer-templates")))
+                                X.__)("Please manually try again.", "kadence-starter-templates")))
                             }
                         }();
                         break;
@@ -23940,19 +23940,19 @@
                                 e ? (j(65),
                                 (await b(e)).success ? z("theme", 70) : (_(!0),
                                 P((0,
-                                X.__)("Error Importing Pages.", "templify-importer-templates")),
+                                X.__)("Error Importing Pages.", "kadence-starter-templates")),
                                 I((0,
-                                X.__)("Please manually try again.", "templify-importer-templates")))) : (_(!0),
+                                X.__)("Please manually try again.", "kadence-starter-templates")))) : (_(!0),
                                 P((0,
-                                X.__)("Error Importing Pages.", "templify-importer-templates")),
+                                X.__)("Error Importing Pages.", "kadence-starter-templates")),
                                 I((0,
-                                X.__)("Please manually try again.", "templify-importer-templates")))
+                                X.__)("Please manually try again.", "kadence-starter-templates")))
                             } else
                                 _(!0),
                                 P((0,
-                                X.__)("Error Importing Pages.", "templify-importer-templates")),
+                                X.__)("Error Importing Pages.", "kadence-starter-templates")),
                                 I((0,
-                                X.__)("Please manually try again.", "templify-importer-templates"))
+                                X.__)("Please manually try again.", "kadence-starter-templates"))
                         }();
                         break;
                     case "theme":
@@ -23972,9 +23972,9 @@
                             e?.success ? (console.log("> movint to widgets"),
                             z("widgets", 95)) : (_(!0),
                             P((0,
-                            X.__)("Error Importing Navigation.", "templify-importer-templates")),
+                            X.__)("Error Importing Navigation.", "kadence-starter-templates")),
                             I((0,
-                            X.__)("Please manually try again.", "templify-importer-templates")))
+                            X.__)("Please manually try again.", "kadence-starter-templates")))
                         }();
                         break;
                     case "widgets":
@@ -24022,7 +24022,7 @@
                         window.location.reload()
                     }
                 }, (0,
-                X.__)("Return", "templify-importer-templates"))) : (0,
+                X.__)("Return", "kadence-starter-templates"))) : (0,
                 e.createElement)("div", {
                     className: "tcw-page tcw-processing-screen"
                 }, (0,
@@ -24121,15 +24121,15 @@
             }
             ), null),
             navTitle: (0,
-            X.__)("Style", "templify-importer-templates"),
+            X.__)("Style", "kadence-starter-templates"),
             navIcon: (0,
             e.createElement)(Se, null),
             complete: !1,
             sidebar: {
                 title: (0,
-                X.__)("Style Starter", "templify-importer-templates"),
+                X.__)("Style Starter", "kadence-starter-templates"),
                 description: (0,
-                X.__)("Optionally customize colors and font styles on your site to match your brand.", "templify-importer-templates"),
+                X.__)("Optionally customize colors and font styles on your site to match your brand.", "kadence-starter-templates"),
                 component: (0,
                 e.createElement)(Je, null)
             }
@@ -24143,9 +24143,9 @@
             complete: !1,
             sidebar: {
                 title: (0,
-                X.__)("Content", "templify-importer-templates"),
+                X.__)("Content", "kadence-starter-templates"),
                 description: (0,
-                X.__)("Choose which content you would like to install", "templify-importer-templates"),
+                X.__)("Choose which content you would like to install", "kadence-starter-templates"),
                 component: (0,
                 e.createElement)((function() {
                     const {state: t, dispatch: n} = ge()
@@ -24158,11 +24158,11 @@
                     }, $e && (0,
                     e.createElement)(hi, {
                         message: (0,
-                        X.__)("Your site has starter template content. Check this box to confirm you wish to remove your existing site's content & images.", "templify-importer-templates"),
+                        X.__)("Your site has starter template content. Check this box to confirm you wish to remove your existing site's content & images.", "kadence-starter-templates"),
                         action: (0,
                         e.createElement)(ci, {
                             label: (0,
-                            X.__)("Delete Previously Imported Content?", "templify-importer-templates"),
+                            X.__)("Delete Previously Imported Content?", "kadence-starter-templates"),
                             onChange: function(e) {
                                 n({
                                     type: "SET_OVERWRITE_CONTENT",
@@ -24174,7 +24174,7 @@
                     }), (0,
                     e.createElement)(be.ToggleControl, {
                         label: (0,
-                        X.__)("Import Example Blog Posts?", "templify-importer-templates"),
+                        X.__)("Import Example Blog Posts?", "kadence-starter-templates"),
                         checked: t.importPosts,
                         onChange: ()=>{
                             n({
@@ -24185,7 +24185,7 @@
                     }), (0,
                     e.createElement)(be.ToggleControl, {
                         label: (0,
-                        X.__)("Import Example WooCommerce Products?", "templify-importer-templates"),
+                        X.__)("Import Example WooCommerce Products?", "kadence-starter-templates"),
                         checked: "" === t.importWoocommerce ? t.activeTemplate?.has_woocommerce : t.importWoocommerce,
                         onChange: ()=>{
                             let e = "" === t.importWoocommerce ? t.activeTemplate?.has_woocommerce : t.importWoocommerce;
@@ -24197,16 +24197,16 @@
                     }), (0,
                     e.createElement)(be.PanelBody, {
                         title: (0,
-                        X.__)("Advanced Settings", "templify-importer-templates"),
+                        X.__)("Advanced Settings", "kadence-starter-templates"),
                         initialOpen: r,
                         onToggle: ()=>a(!r)
                     }, (0,
                     e.createElement)(be.ToggleControl, {
                         label: (0,
-                        X.__)("Import Theme Settings", "templify-importer-templates"),
+                        X.__)("Import Theme Settings", "kadence-starter-templates"),
                         checked: t.importCustomizer,
                         help: (0,
-                        X.__)("If disabled the header, footer, colors and other style settings will not be imported.", "templify-importer-templates"),
+                        X.__)("If disabled the header, footer, colors and other style settings will not be imported.", "kadence-starter-templates"),
                         onChange: ()=>{
                             n({
                                 type: "SET_IMPORT_CUSTOMIZER",
@@ -24216,10 +24216,10 @@
                     }), (0,
                     e.createElement)(be.ToggleControl, {
                         label: (0,
-                        X.__)("Import Footer Widgets", "templify-importer-templates"),
+                        X.__)("Import Footer Widgets", "kadence-starter-templates"),
                         checked: t.importWidgets,
                         help: (0,
-                        X.__)("If disabled the footer widgets will not be imported.", "templify-importer-templates"),
+                        X.__)("If disabled the footer widgets will not be imported.", "kadence-starter-templates"),
                         onChange: ()=>{
                             n({
                                 type: "SET_IMPORT_WIDGETS",
@@ -24242,7 +24242,7 @@
             sidebar: {
                 title: "Plugins",
                 description: (0,
-                X.__)("Select plugins to install.", "templify-importer-templates"),
+                X.__)("Select plugins to install.", "kadence-starter-templates"),
                 component: (0,
                 e.createElement)(yi, null)
             }
@@ -24260,53 +24260,53 @@
                 e.useState)([])
                   , [x,E] = (0,
                 e.useState)((0,
-                X.__)("Preparing to import...", "templify-importer-templates"))
+                X.__)("Preparing to import...", "kadence-starter-templates"))
                   , [_,S] = (0,
                 e.useState)((0,
-                X.__)("Just a moment while we update with your information...", "templify-importer-templates"))
+                X.__)("Just a moment while we update with your information...", "kadence-starter-templates"))
                   , [C,O] = (0,
                 e.useState)(0)
                   , [P,T] = (0,
                 e.useState)(0)
                   , I = {
                     remove: (0,
-                    X.__)("Removing Previous Starter Content...", "templify-importer-templates"),
+                    X.__)("Removing Previous Starter Content...", "kadence-starter-templates"),
                     plugins: (0,
-                    X.__)("Installing/Activating Plugins...", "templify-importer-templates"),
+                    X.__)("Installing/Activating Plugins...", "kadence-starter-templates"),
                     pages: (0,
-                    X.__)("Building Pages", "templify-importer-templates"),
+                    X.__)("Building Pages", "kadence-starter-templates"),
                     posts: (0,
-                    X.__)("Importing Example Posts", "templify-importer-templates"),
+                    X.__)("Importing Example Posts", "kadence-starter-templates"),
                     products: (0,
-                    X.__)("Importing Example Products", "templify-importer-templates"),
+                    X.__)("Importing Example Products", "kadence-starter-templates"),
                     theme: (0,
-                    X.__)("Saving Site Styles", "templify-importer-templates"),
+                    X.__)("Saving Site Styles", "kadence-starter-templates"),
                     navigation: (0,
-                    X.__)("Building Site Navigation", "templify-importer-templates"),
+                    X.__)("Building Site Navigation", "kadence-starter-templates"),
                     widgets: (0,
-                    X.__)("Building Widgets", "templify-importer-templates"),
+                    X.__)("Building Widgets", "kadence-starter-templates"),
                     done: (0,
-                    X.__)("Finishing", "templify-importer-templates")
+                    X.__)("Finishing", "kadence-starter-templates")
                 }
                   , A = {
                     remove: (0,
-                    X.__)("Just a moment while we remove previously imported content...", "templify-importer-templates"),
+                    X.__)("Just a moment while we remove previously imported content...", "kadence-starter-templates"),
                     plugins: (0,
-                    X.__)("Just a moment while we install and activate plugins...", "templify-importer-templates"),
+                    X.__)("Just a moment while we install and activate plugins...", "kadence-starter-templates"),
                     pages: (0,
-                    X.__)("Just a moment while we install pages", "templify-importer-templates"),
+                    X.__)("Just a moment while we install pages", "kadence-starter-templates"),
                     posts: (0,
-                    X.__)("Just a moment while we install posts", "templify-importer-templates"),
+                    X.__)("Just a moment while we install posts", "kadence-starter-templates"),
                     products: (0,
-                    X.__)("Just a moment while we install products", "templify-importer-templates"),
+                    X.__)("Just a moment while we install products", "kadence-starter-templates"),
                     theme: (0,
-                    X.__)("Just a moment while we install theme settings", "templify-importer-templates"),
+                    X.__)("Just a moment while we install theme settings", "kadence-starter-templates"),
                     navigation: (0,
-                    X.__)("Just a moment while we install the navigation", "templify-importer-templates"),
+                    X.__)("Just a moment while we install the navigation", "kadence-starter-templates"),
                     widgets: (0,
-                    X.__)("Just a moment while we install widgets", "templify-importer-templates"),
+                    X.__)("Just a moment while we install widgets", "kadence-starter-templates"),
                     done: (0,
-                    X.__)("Finishing", "templify-importer-templates")
+                    X.__)("Finishing", "kadence-starter-templates")
                 };
                 function j(e, n) {
                     "posts" !== e || t.importPosts || (e = "products"),
@@ -24372,9 +24372,9 @@
                             console.log("> removeContent response:", e),
                             e?.success ? j("plugins", 5) : (v(!0),
                             E((0,
-                            X.__)("Error removing previous content.", "templify-importer-templates")),
+                            X.__)("Error removing previous content.", "kadence-starter-templates")),
                             S((0,
-                            X.__)("Please manually install and activate required plugins, then try again", "templify-importer-templates")))
+                            X.__)("Please manually install and activate required plugins, then try again", "kadence-starter-templates")))
                         }()) : j("plugins", 1);
                         break;
                     case "plugins":
@@ -24390,9 +24390,9 @@
                             console.log("> Plugins response:", e),
                             e?.success ? j("posts", 10) : (v(!0),
                             E((0,
-                            X.__)("Error Installing Plugins.", "templify-importer-templates")),
+                            X.__)("Error Installing Plugins.", "kadence-starter-templates")),
                             S((0,
-                            X.__)("Please manually install and activate required plugins, then try again", "templify-importer-templates")))
+                            X.__)("Please manually install and activate required plugins, then try again", "kadence-starter-templates")))
                         }();
                         break;
                     case "posts":
@@ -24424,21 +24424,21 @@
                                     }(r);
                                     e ? j("products", 30) : (v(!0),
                                     E((0,
-                                    X.__)("Error Importing Posts.", "templify-importer-templates")),
+                                    X.__)("Error Importing Posts.", "kadence-starter-templates")),
                                     S((0,
-                                    X.__)("Please manually try again.", "templify-importer-templates")))
+                                    X.__)("Please manually try again.", "kadence-starter-templates")))
                                 } else
                                     v(!0),
                                     E((0,
-                                    X.__)("Error Importing Posts.", "templify-importer-templates")),
+                                    X.__)("Error Importing Posts.", "kadence-starter-templates")),
                                     S((0,
-                                    X.__)("Please manually try again.", "templify-importer-templates"))
+                                    X.__)("Please manually try again.", "kadence-starter-templates"))
                             } else
                                 v(!0),
                                 E((0,
-                                X.__)("Error Importing Posts.", "templify-importer-templates")),
+                                X.__)("Error Importing Posts.", "kadence-starter-templates")),
                                 S((0,
-                                X.__)("Please manually try again.", "templify-importer-templates"))
+                                X.__)("Please manually try again.", "kadence-starter-templates"))
                         }();
                         break;
                     case "products":
@@ -24458,9 +24458,9 @@
                                 console.log("> movint to pages"),
                                 j("pages", 40)) : (v(!0),
                                 E((0,
-                                X.__)("Error Importing Products.", "templify-importer-templates")),
+                                X.__)("Error Importing Products.", "kadence-starter-templates")),
                                 S((0,
-                                X.__)("Please manually try again.", "templify-importer-templates")))
+                                X.__)("Please manually try again.", "kadence-starter-templates")))
                             }
                         }();
                         break;
@@ -24490,19 +24490,19 @@
                                 e ? (O(65),
                                 (await d(e)).success ? j("theme", 70) : (v(!0),
                                 E((0,
-                                X.__)("Error Importing Pages.", "templify-importer-templates")),
+                                X.__)("Error Importing Pages.", "kadence-starter-templates")),
                                 S((0,
-                                X.__)("Please manually try again.", "templify-importer-templates")))) : (v(!0),
+                                X.__)("Please manually try again.", "kadence-starter-templates")))) : (v(!0),
                                 E((0,
-                                X.__)("Error Importing Pages.", "templify-importer-templates")),
+                                X.__)("Error Importing Pages.", "kadence-starter-templates")),
                                 S((0,
-                                X.__)("Please manually try again.", "templify-importer-templates")))
+                                X.__)("Please manually try again.", "kadence-starter-templates")))
                             } else
                                 v(!0),
                                 E((0,
-                                X.__)("Error Importing Pages.", "templify-importer-templates")),
+                                X.__)("Error Importing Pages.", "kadence-starter-templates")),
                                 S((0,
-                                X.__)("Please manually try again.", "templify-importer-templates"))
+                                X.__)("Please manually try again.", "kadence-starter-templates"))
                         }();
                         break;
                     case "theme":
@@ -24512,9 +24512,9 @@
                             e?.success ? (console.log("> moving to navigation"),
                             j("navigation", 85)) : (v(!0),
                             E((0,
-                            X.__)("Error Importing Theme Settings.", "templify-importer-templates")),
+                            X.__)("Error Importing Theme Settings.", "kadence-starter-templates")),
                             S((0,
-                            X.__)("Please manually try again.", "templify-importer-templates")))
+                            X.__)("Please manually try again.", "kadence-starter-templates")))
                         }();
                         break;
                     case "navigation":
@@ -24524,9 +24524,9 @@
                             e?.success ? (console.log("> moving to widgets"),
                             j("widgets", 95)) : (v(!0),
                             E((0,
-                            X.__)("Error Importing Navigation.", "templify-importer-templates")),
+                            X.__)("Error Importing Navigation.", "kadence-starter-templates")),
                             S((0,
-                            X.__)("Please manually try again.", "templify-importer-templates")))
+                            X.__)("Please manually try again.", "kadence-starter-templates")))
                         }();
                         break;
                     case "widgets":
@@ -24536,9 +24536,9 @@
                             e?.success ? (console.log("> moving to done"),
                             j("done", 99)) : (v(!0),
                             E((0,
-                            X.__)("Error Importing Widgets.", "templify-importer-templates")),
+                            X.__)("Error Importing Widgets.", "kadence-starter-templates")),
                             S((0,
-                            X.__)("Please manually try again.", "templify-importer-templates")))
+                            X.__)("Please manually try again.", "kadence-starter-templates")))
                         }();
                         break;
                     case "done":
@@ -24576,7 +24576,7 @@
                         window.location.reload()
                     }
                 }, (0,
-                X.__)("Return", "templify-importer-templates"))) : (0,
+                X.__)("Return", "kadence-starter-templates"))) : (0,
                 e.createElement)("div", {
                     className: "tcw-page tcw-processing-screen"
                 }, (0,
@@ -24689,17 +24689,17 @@
                     (0,
                     e.createElement)(e.Fragment, null, (0,
                     e.createElement)("h3", null, t.activeTemplate?.name ? t.activeTemplate.name : (0,
-                    X.__)("Content", "templify-importer-templates")), (0,
+                    X.__)("Content", "kadence-starter-templates")), (0,
                     e.createElement)("div", {
                         className: "tcw-content_wrapper"
                     }, $e && (0,
                     e.createElement)(hi, {
                         message: (0,
-                        X.__)("Your site has starter template content. Check this box to confirm you wish to remove your existing site's content & images.", "templify-importer-templates"),
+                        X.__)("Your site has starter template content. Check this box to confirm you wish to remove your existing site's content & images.", "kadence-starter-templates"),
                         action: (0,
                         e.createElement)(ci, {
                             label: (0,
-                            X.__)("Delete previously imported content?", "templify-importer-templates"),
+                            X.__)("Delete previously imported content?", "kadence-starter-templates"),
                             onChange: function(e) {
                                 n({
                                     type: "SET_OVERWRITE_CONTENT",
@@ -24711,13 +24711,13 @@
                     }), (0,
                     e.createElement)(be.PanelBody, {
                         title: (0,
-                        X.__)("Advanced Settings", "templify-importer-templates"),
+                        X.__)("Advanced Settings", "kadence-starter-templates"),
                         initialOpen: r,
                         onToggle: ()=>a(!r)
                     }, (0,
                     e.createElement)(be.ToggleControl, {
                         label: (0,
-                        X.__)("Import Customizer Settings", "templify-importer-templates"),
+                        X.__)("Import Customizer Settings", "kadence-starter-templates"),
                         checked: t.importCustomizer,
                         onChange: ()=>{
                             n({
@@ -24732,7 +24732,7 @@
                     e.createElement)("h3", {
                         className: "required-plugins-list-header"
                     }, (0,
-                    X.__)("Required Plugins", "templify-importer-templates")), (0,
+                    X.__)("Required Plugins", "kadence-starter-templates")), (0,
                     e.createElement)("ul", {
                         className: "kadence-required-wrap"
                     }, Nn()(o, (t=>{
@@ -24744,7 +24744,7 @@
                         e.createElement)("span", {
                             class: "plugin-status"
                         }, "notactive" === n ? (0,
-                        X.__)("Not Installed", "templify-importer-templates") : n), " ", "active" !== n && "thirdparty" === r ? (0,
+                        X.__)("Not Installed", "kadence-starter-templates") : n), " ", "active" !== n && "thirdparty" === r ? (0,
                         e.createElement)("span", {
                             class: "plugin-install-required"
                         }, (0,
@@ -24771,61 +24771,61 @@
                 e.useState)([])
                   , [C,O] = (0,
                 e.useState)((0,
-                X.__)("Preparing to import...", "templify-importer-templates"))
+                X.__)("Preparing to import...", "kadence-starter-templates"))
                   , [P,T] = (0,
                 e.useState)((0,
-                X.__)("Just a moment while we update with your information...", "templify-importer-templates"))
+                X.__)("Just a moment while we update with your information...", "kadence-starter-templates"))
                   , [I,A] = (0,
                 e.useState)(0)
                   , [j,R] = (0,
                 e.useState)(0)
                   , N = {
                     remove: (0,
-                    X.__)("Removing Previous Starter Content...", "templify-importer-templates"),
+                    X.__)("Removing Previous Starter Content...", "kadence-starter-templates"),
                     plugins: (0,
-                    X.__)("Installing/Activating Plugins...", "templify-importer-templates"),
+                    X.__)("Installing/Activating Plugins...", "kadence-starter-templates"),
                     initial: (0,
-                    X.__)("Preparing Import", "templify-importer-templates"),
+                    X.__)("Preparing Import", "kadence-starter-templates"),
                     content: (0,
-                    X.__)("Importing Content", "templify-importer-templates"),
+                    X.__)("Importing Content", "kadence-starter-templates"),
                     pages: (0,
-                    X.__)("Building Pages", "templify-importer-templates"),
+                    X.__)("Building Pages", "kadence-starter-templates"),
                     posts: (0,
-                    X.__)("Importing Example Posts", "templify-importer-templates"),
+                    X.__)("Importing Example Posts", "kadence-starter-templates"),
                     products: (0,
-                    X.__)("Importing Example Products", "templify-importer-templates"),
+                    X.__)("Importing Example Products", "kadence-starter-templates"),
                     theme: (0,
-                    X.__)("Saving Site Styles", "templify-importer-templates"),
+                    X.__)("Saving Site Styles", "kadence-starter-templates"),
                     navigation: (0,
-                    X.__)("Building Site Navigation", "templify-importer-templates"),
+                    X.__)("Building Site Navigation", "kadence-starter-templates"),
                     widgets: (0,
-                    X.__)("Building Widgets", "templify-importer-templates"),
+                    X.__)("Building Widgets", "kadence-starter-templates"),
                     done: (0,
-                    X.__)("Finishing", "templify-importer-templates")
+                    X.__)("Finishing", "kadence-starter-templates")
                 }
                   , M = {
                     remove: (0,
-                    X.__)("Just a moment while we remove previously imported content...", "templify-importer-templates"),
+                    X.__)("Just a moment while we remove previously imported content...", "kadence-starter-templates"),
                     plugins: (0,
-                    X.__)("Just a moment while we install and activate plugins...", "templify-importer-templates"),
+                    X.__)("Just a moment while we install and activate plugins...", "kadence-starter-templates"),
                     initial: (0,
-                    X.__)("Just a moment while we prepare to install...", "templify-importer-templates"),
+                    X.__)("Just a moment while we prepare to install...", "kadence-starter-templates"),
                     content: (0,
-                    X.__)("Just a moment while we install content, this can take a few minutes.", "templify-importer-templates"),
+                    X.__)("Just a moment while we install content, this can take a few minutes.", "kadence-starter-templates"),
                     pages: (0,
-                    X.__)("Just a moment while we install pages", "templify-importer-templates"),
+                    X.__)("Just a moment while we install pages", "kadence-starter-templates"),
                     posts: (0,
-                    X.__)("Just a moment while we install posts", "templify-importer-templates"),
+                    X.__)("Just a moment while we install posts", "kadence-starter-templates"),
                     products: (0,
-                    X.__)("Just a moment while we install products", "templify-importer-templates"),
+                    X.__)("Just a moment while we install products", "kadence-starter-templates"),
                     theme: (0,
-                    X.__)("Just a moment while we install theme settings", "templify-importer-templates"),
+                    X.__)("Just a moment while we install theme settings", "kadence-starter-templates"),
                     navigation: (0,
-                    X.__)("Just a moment while we install the navigation", "templify-importer-templates"),
+                    X.__)("Just a moment while we install the navigation", "kadence-starter-templates"),
                     widgets: (0,
-                    X.__)("Just a moment while we install widgets", "templify-importer-templates"),
+                    X.__)("Just a moment while we install widgets", "kadence-starter-templates"),
                     done: (0,
-                    X.__)("Finishing", "templify-importer-templates")
+                    X.__)("Finishing", "kadence-starter-templates")
                 };
                 function L(e, n) {
                     "theme" !== e || t.importCustomizer || (e = "widgets"),
@@ -24847,22 +24847,22 @@
                         void 0 !== t.status && "newAJAX" === t.status ? F(e) : void 0 !== t.status && "customizerAJAX" === t.status ? L("theme", 70) : void 0 !== t.status && "afterAllImportAJAX" === t.status ? L("widgets", 85) : void 0 !== t.status && "initialSuccess" === t.status || void 0 !== t.status && "pluginSuccess" === t.status ? L("content", 25) : void 0 !== t.message ? L("done", 99) : void 0 === t.success || t.success ? (console.log(t),
                         k(!0),
                         O((0,
-                        X.__)("Error Importing", "templify-importer-templates")),
+                        X.__)("Error Importing", "kadence-starter-templates")),
                         T((0,
-                        X.__)("Please try again.", "templify-importer-templates"))) : (console.log(t),
+                        X.__)("Please try again.", "kadence-starter-templates"))) : (console.log(t),
                         k(!0),
                         O((0,
-                        X.__)("Error Importing", "templify-importer-templates")),
+                        X.__)("Error Importing", "kadence-starter-templates")),
                         T((0,
-                        X.__)("Failed Import. Something went wrong internally. Please try again.", "templify-importer-templates")))
+                        X.__)("Failed Import. Something went wrong internally. Please try again.", "kadence-starter-templates")))
                     }
                     )).fail((function(e) {
                         console.log(e),
                         k(!0),
                         O((0,
-                        X.__)("Error Importing", "templify-importer-templates")),
+                        X.__)("Error Importing", "kadence-starter-templates")),
                         T((0,
-                        X.__)("Please try again.", "templify-importer-templates"))
+                        X.__)("Please try again.", "kadence-starter-templates"))
                     }
                     ))
                 }
@@ -24878,9 +24878,9 @@
                                 console.log("> removeContent response:", e),
                                 e?.success ? L("plugins", 5) : (k(!0),
                                 O((0,
-                                X.__)("Error removing previous content.", "templify-importer-templates")),
+                                X.__)("Error removing previous content.", "kadence-starter-templates")),
                                 T((0,
-                                X.__)("Please manually install and activate required plugins, then try again", "templify-importer-templates")))
+                                X.__)("Please manually install and activate required plugins, then try again", "kadence-starter-templates")))
                             }()) : L("plugins", 1);
                             break;
                         case "plugins":
@@ -24971,7 +24971,7 @@
                         window.location.reload()
                     }
                 }, (0,
-                X.__)("Return", "templify-importer-templates"))) : (0,
+                X.__)("Return", "kadence-starter-templates"))) : (0,
                 e.createElement)("div", {
                     className: "tcw-page tcw-processing-screen"
                 }, (0,
@@ -25190,14 +25190,14 @@
             e.createElement)(be.SearchControl, {
                 value: k,
                 placeholder: (0,
-                X.__)("Search", "templify-importer-templates"),
+                X.__)("Search", "kadence-starter-templates"),
                 onChange: e=>_(e)
             }), !k && (0,
             e.createElement)(e.Fragment, null, (0,
             e.createElement)("span", {
                 className: "filter-title"
             }, (0,
-            X.__)("Filter:", "templify-importer-templates")), (0,
+            X.__)("Filter:", "kadence-starter-templates")), (0,
             e.createElement)(be.Dropdown, {
                 className: "kadence-site-grid-header-popover",
                 contentClassName: "kst-category-popover",
@@ -25238,9 +25238,9 @@
                         "aria-expanded": n,
                         icon: wl
                     }, "free" === S && (0,
-                    X.__)("Free Only", "templify-importer-templates"), "pro" === S && (0,
-                    X.__)("Pro Only", "templify-importer-templates"), "all" === S && (0,
-                    X.__)("Free & Pro", "templify-importer-templates"), (0,
+                    X.__)("Free Only", "kadence-starter-templates"), "pro" === S && (0,
+                    X.__)("Pro Only", "kadence-starter-templates"), "all" === S && (0,
+                    X.__)("Free & Pro", "kadence-starter-templates"), (0,
                     e.createElement)(be.Icon, {
                         className: "kst-chev",
                         icon: we
@@ -25256,19 +25256,19 @@
                         isSelected: "all" === S,
                         onClick: ()=>C("all")
                     }, (0,
-                    X.__)("Free & Pro", "templify-importer-templates")), (0,
+                    X.__)("Free & Pro", "kadence-starter-templates")), (0,
                     e.createElement)(be.MenuItem, {
                         className: "pro" === S ? "active-item" : "",
                         isSelected: "pro" === S,
                         onClick: ()=>C("pro")
                     }, (0,
-                    X.__)("Pro Only", "templify-importer-templates")), (0,
+                    X.__)("Pro Only", "kadence-starter-templates")), (0,
                     e.createElement)(be.MenuItem, {
                         className: "free" === S ? "active-item" : "",
                         isSelected: "free" === S,
                         onClick: ()=>C("free")
                     }, (0,
-                    X.__)("Free Only", "templify-importer-templates")))
+                    X.__)("Free Only", "kadence-starter-templates")))
                 }
             })))), (0,
             e.createElement)("div", {
@@ -25277,7 +25277,7 @@
             e.createElement)("span", {
                 className: "page-source-notice"
             }, (0,
-            X.__)("This page is loaded from", "templify-importer-templates") + " ", (0,
+            X.__)("This page is loaded from", "kadence-starter-templates") + " ", (0,
             e.createElement)(be.ExternalLink, {
                 href: "https://www.kadencewp.com/?utm_source=in-app&utm_medium=kadence-starter-templates&utm_campaign=dashboard"
             }, "kadencewp.com")))), (0,
@@ -25329,7 +25329,7 @@
                     textAlign: "center"
                 }
             }, (0,
-            X.__)("Error, Unable to access template database, please try re-downloading", "templify-importer-templates")), (0,
+            X.__)("Error, Unable to access template database, please try re-downloading", "kadence-starter-templates")), (0,
             e.createElement)("div", {
                 style: {
                     textAlign: "center"
@@ -25340,7 +25340,7 @@
                 icon: xe,
                 onClick: ()=>async function() {}()
             }, (0,
-            X.__)(" Sync with Cloud", "templify-importer-templates")))))) : (0,
+            X.__)(" Sync with Cloud", "kadence-starter-templates")))))) : (0,
             e.createElement)("div", {
                 className: "main-panel"
             }, "focus" === c && (0,
@@ -25407,9 +25407,9 @@
                 const e = $o(s.mainColor);
                 let t = "";
                 s.isLight && !$o(s.mainColor).isReadable() && (t = (0,
-                X.__)("This color may be hard for people to read on light backgrounds. Consider making it darker.", "templify-importer-templates")),
+                X.__)("This color may be hard for people to read on light backgrounds. Consider making it darker.", "kadence-starter-templates")),
                 s.isLight || $o(s.mainColor).isReadable("#000000") || (t = (0,
-                X.__)("This color may be hard for people to read on dark backgrounds. Consider making it brighter.", "templify-importer-templates"));
+                X.__)("This color may be hard for people to read on dark backgrounds. Consider making it brighter.", "kadence-starter-templates"));
                 let n = s.mainColor
                   , a = e.darken(.2).mix("#222222", .8).toHex()
                   , o = e.darken(.2).mix("#353535", .8).toHex()
@@ -25562,47 +25562,47 @@
           , Hl = [{
             value: "NEUTRAL",
             label: (0,
-            X.__)("Neutral", "templify-importer-templates")
+            X.__)("Neutral", "kadence-starter-templates")
         }, {
             value: "PROFESSIONAL",
             label: (0,
-            X.__)("Professional", "templify-importer-templates")
+            X.__)("Professional", "kadence-starter-templates")
         }, {
             value: "FRIENDLY",
             label: (0,
-            X.__)("Friendly", "templify-importer-templates")
+            X.__)("Friendly", "kadence-starter-templates")
         }, {
             value: "INFORMATIVE",
             label: (0,
-            X.__)("Informative", "templify-importer-templates")
+            X.__)("Informative", "kadence-starter-templates")
         }, {
             value: "ENGAGING",
             label: (0,
-            X.__)("Engaging", "templify-importer-templates")
+            X.__)("Engaging", "kadence-starter-templates")
         }, {
             value: "TRUSTWORTHY",
             label: (0,
-            X.__)("Trustworthy", "templify-importer-templates")
+            X.__)("Trustworthy", "kadence-starter-templates")
         }, {
             value: "CONVERSATIONAL",
             label: (0,
-            X.__)("Conversational", "templify-importer-templates")
+            X.__)("Conversational", "kadence-starter-templates")
         }, {
             value: "PERSUASIVE",
             label: (0,
-            X.__)("Persuasive", "templify-importer-templates")
+            X.__)("Persuasive", "kadence-starter-templates")
         }, {
             value: "UPBEAT",
             label: (0,
-            X.__)("Upbeat", "templify-importer-templates")
+            X.__)("Upbeat", "kadence-starter-templates")
         }, {
             value: "FUNNY",
             label: (0,
-            X.__)("Funny", "templify-importer-templates")
+            X.__)("Funny", "kadence-starter-templates")
         }, {
             value: "INSPIRATIONAL",
             label: (0,
-            X.__)("Inspirational", "templify-importer-templates")
+            X.__)("Inspirational", "kadence-starter-templates")
         }]
           , Vl = "kadence_ai_verticals"
           , Ul = "kadence_ai_collections"
@@ -25611,34 +25611,34 @@
           , ql = [{
             value: "COMPANY",
             label: (0,
-            X.__)("A Company", "templify-importer-templates")
+            X.__)("A Company", "kadence-starter-templates")
         }, {
             value: $l,
             label: (0,
-            X.__)("An Individual", "templify-importer-templates")
+            X.__)("An Individual", "kadence-starter-templates")
         }, {
             value: "ORGANIZATION",
             label: (0,
-            X.__)("An Organization", "templify-importer-templates")
+            X.__)("An Organization", "kadence-starter-templates")
         }]
           , Gl = {
             COMPANY: {
                 label: (0,
-                X.__)("Company Name", "templify-importer-templates"),
+                X.__)("Company Name", "kadence-starter-templates"),
                 placeholder: (0,
-                X.__)("Your Company", "templify-importer-templates")
+                X.__)("Your Company", "kadence-starter-templates")
             },
             INDIVIDUAL: {
                 label: (0,
-                X.__)("Name", "templify-importer-templates"),
+                X.__)("Name", "kadence-starter-templates"),
                 placeholder: (0,
-                X.__)("Your Name", "templify-importer-templates")
+                X.__)("Your Name", "kadence-starter-templates")
             },
             ORGANIZATION: {
                 label: (0,
-                X.__)("Organization Name", "templify-importer-templates"),
+                X.__)("Organization Name", "kadence-starter-templates"),
                 placeholder: (0,
-                X.__)("Your Organization", "templify-importer-templates")
+                X.__)("Your Organization", "kadence-starter-templates")
             }
         }
           , Yl = "Business Address"
@@ -25647,25 +25647,25 @@
           , Jl = [{
             icon: Pl,
             text: (0,
-            X.__)("Business Address", "templify-importer-templates"),
+            X.__)("Business Address", "kadence-starter-templates"),
             value: Yl,
             help: (0,
-            X.__)("E.g.: 1234 Street #1, Chicago, IL 60076, USA", "templify-importer-templates"),
+            X.__)("E.g.: 1234 Street #1, Chicago, IL 60076, USA", "kadence-starter-templates"),
             placeholder: (0,
-            X.__)("Street Adress, City, State, Zipcode, Country", "templify-importer-templates")
+            X.__)("Street Adress, City, State, Zipcode, Country", "kadence-starter-templates")
         }, {
             icon: Tl,
             text: (0,
-            X.__)("Service Area", "templify-importer-templates"),
+            X.__)("Service Area", "kadence-starter-templates"),
             value: Xl,
             help: (0,
-            X.__)("E.g.: Chicago, USA", "templify-importer-templates"),
+            X.__)("E.g.: Chicago, USA", "kadence-starter-templates"),
             placeholder: (0,
-            X.__)("District, City, State, Zipcode, Country", "templify-importer-templates")
+            X.__)("District, City, State, Zipcode, Country", "kadence-starter-templates")
         }, {
             icon: Il,
             text: (0,
-            X.__)("Online Only", "templify-importer-templates"),
+            X.__)("Online Only", "kadence-starter-templates"),
             value: Kl,
             help: "",
             placeholder: ""
@@ -25674,37 +25674,37 @@
             initial: {
                 color: "#757575",
                 message: (0,
-                X.__)("The more detail you add, the better.", "templify-importer-templates")
+                X.__)("The more detail you add, the better.", "kadence-starter-templates")
             },
             weak: {
                 color: "#DF3416",
                 message: (0,
-                X.__)("For better, more accurate copy enter a bit more content.", "templify-importer-templates")
+                X.__)("For better, more accurate copy enter a bit more content.", "kadence-starter-templates")
             },
             medium: {
                 color: "#B35F00",
                 message: (0,
-                X.__)("This is a great start. Try adding a bit more information to your description.", "templify-importer-templates")
+                X.__)("This is a great start. Try adding a bit more information to your description.", "kadence-starter-templates")
             },
             strong: {
                 color: "#1B8F6D",
                 message: (0,
-                X.__)("Excellent work! Want to add more? Keep going! More info means better content.", "templify-importer-templates")
+                X.__)("Excellent work! Want to add more? Keep going! More info means better content.", "kadence-starter-templates")
             },
             enough: {
                 color: "#1B8F6D",
                 message: (0,
-                X.__)("Excellent work! You have added enough information.", "templify-importer-templates")
+                X.__)("Excellent work! You have added enough information.", "kadence-starter-templates")
             },
             less: {
                 color: "#B35F00",
                 message: (0,
-                X.__)("ok, you've added a lot of information. Try removing some to get better results.", "templify-importer-templates")
+                X.__)("ok, you've added a lot of information. Try removing some to get better results.", "kadence-starter-templates")
             },
             muchLess: {
                 color: "#DF3416",
                 message: (0,
-                X.__)("You've added too much information. Remove some to move forward.", "templify-importer-templates")
+                X.__)("You've added too much information. Remove some to move forward.", "kadence-starter-templates")
             }
         }
           , Ql = [Rl, Al, Nl, jl]
@@ -36811,7 +36811,7 @@
                         getMissionStatement: async function(e) {
                             if (!t || !r) {
                                 const e = (0,
-                                X.__)("error missing site key", "templify-importer-templates");
+                                X.__)("error missing site key", "kadence-starter-templates");
                                 return Promise.reject(e)
                             }
                             try {
@@ -37553,10 +37553,10 @@
             e.useState)(!1)
               , [r,a] = (0,
             e.useState)((0,
-            X.__)("Generating AI Content...", "templify-importer-templates"))
+            X.__)("Generating AI Content...", "kadence-starter-templates"))
               , [o,i] = (0,
             e.useState)((0,
-            X.__)("Just a moment while we generate content for your site...", "templify-importer-templates"))
+            X.__)("Just a moment while we generate content for your site...", "kadence-starter-templates"))
               , [l,s] = (0,
             e.useState)(0)
               , [c,u] = (0,
@@ -37565,13 +37565,13 @@
             e.useEffect)((()=>{
                 c < 2 ? s(1) : c < 5 ? s(5) : c < 10 ? s(14) : c < 15 ? s(21) : c < 20 ? s(28) : c < 25 ? s(35) : c < 30 ? s(42) : c < 35 ? s(49) : c < 40 ? s(56) : c < 45 ? s(63) : c < 50 ? s(70) : c < 55 ? s(77) : c < 60 ? s(84) : c < 65 ? s(90) : c < 70 ? (s(92),
                 a((0,
-                X.__)("Generating AI Content... Still Working", "templify-importer-templates")),
+                X.__)("Generating AI Content... Still Working", "kadence-starter-templates")),
                 i((0,
-                X.__)("Things are taking a little longer then usual, please be patience, process should be done soon...", "templify-importer-templates"))) : c < 56 ? s(94) : c < 66 ? s(95) : c < 86 ? s(96) : c < 130 ? s(97) : c > 200 && (s(95),
+                X.__)("Things are taking a little longer then usual, please be patience, process should be done soon...", "kadence-starter-templates"))) : c < 56 ? s(94) : c < 66 ? s(95) : c < 86 ? s(96) : c < 130 ? s(97) : c > 200 && (s(95),
                 a((0,
-                X.__)("The process appears to have failed.", "templify-importer-templates")),
+                X.__)("The process appears to have failed.", "kadence-starter-templates")),
                 i((0,
-                X.__)("Please reload the page and try again.", "templify-importer-templates")),
+                X.__)("Please reload the page and try again.", "kadence-starter-templates")),
                 n(!0))
             }
             ), [c]),
@@ -37605,7 +37605,7 @@
                     window.location.reload()
                 }
             }, (0,
-            X.__)("Return", "templify-importer-templates"))) : (0,
+            X.__)("Return", "kadence-starter-templates"))) : (0,
             e.createElement)("div", {
                 className: "tcw-page tcw-processing-screen"
             }, (0,
@@ -37705,7 +37705,7 @@
                     n("blocks")
                 }
             }, (0,
-            X.__)("or use Classic Starter Templates", "templify-importer-templates")))))
+            X.__)("or use Classic Starter Templates", "kadence-starter-templates")))))
         }
         function Rg() {
             const {settingsState: n, settingDispatch: a} = re()
@@ -37773,10 +37773,10 @@
                 ie(!1),
                 _e(),
                 e && "saved" === e ? pe((0,
-                X.__)("Saved", "templify-importer-templates"), {
+                X.__)("Saved", "kadence-starter-templates"), {
                     type: "snackbar"
                 }) : o.aIUserData || (ue((0,
-                X.__)("Error, Exiting Wizard", "templify-importer-templates"), {
+                X.__)("Error, Exiting Wizard", "kadence-starter-templates"), {
                     type: "snackbar"
                 }),
                 async function() {
@@ -38038,7 +38038,7 @@
                     textAlign: "center"
                 }
             }, (0,
-            X.__)("Error, Unable to access template database, please try re-loading the page.", "templify-importer-templates")), (0,
+            X.__)("Error, Unable to access template database, please try re-loading the page.", "kadence-starter-templates")), (0,
             e.createElement)("div", {
                 style: {
                     textAlign: "center"
@@ -38052,14 +38052,14 @@
                     fe(!0)
                 }()
             }, (0,
-            X.__)(" Sync with Cloud", "templify-importer-templates")))))) : (0,
+            X.__)(" Sync with Cloud", "kadence-starter-templates")))))) : (0,
             e.createElement)("div", {
                 className: "main-panel"
             }, ne && (0,
             e.createElement)("div", {
                 className: "kst-notice-about-ai components-notice is-warning"
             }, (0,
-            X.__)("Missing AI Content, Generate AI in wizard to include AI in your starter template", "templify-importer-templates"), (0,
+            X.__)("Missing AI Content, Generate AI in wizard to include AI in your starter template", "kadence-starter-templates"), (0,
             e.createElement)(be.Button, {
                 className: "kadence-ai-wizard-button",
                 text: (0,
@@ -38071,7 +38071,7 @@
             e.createElement)("div", {
                 className: "kst-notice-about-ai components-notice is-warning"
             }, (0,
-            X.__)("Missing AI Content, Generate AI in wizard to include AI in your starter template", "templify-importer-templates"), (0,
+            X.__)("Missing AI Content, Generate AI in wizard to include AI in your starter template", "kadence-starter-templates"), (0,
             e.createElement)(be.Button, {
                 className: "kadence-ai-wizard-button",
                 text: (0,
@@ -38111,7 +38111,7 @@
             e.createElement)("span", {
                 className: "page-source-notice"
             }, (0,
-            X.__)("This page is loaded from", "templify-importer-templates") + " ", (0,
+            X.__)("This page is loaded from", "kadence-starter-templates") + " ", (0,
             e.createElement)(be.ExternalLink, {
                 href: "https://www.kadencewp.com/?utm_source=in-app&utm_medium=kadence-starter-templates&utm_campaign=dashboard"
             }, "kadencewp.com")))), "focus" === p && (0,
@@ -38270,7 +38270,7 @@
                     a("blocks")
                 }
             }, (0,
-            X.__)("or use Classic Starter Templates", "templify-importer-templates"))), l && !s && (0,
+            X.__)("or use Classic Starter Templates", "kadence-starter-templates"))), l && !s && (0,
             e.createElement)("div", {
                 className: "btn-action-area"
             }, (0,
@@ -38291,7 +38291,7 @@
                     a("blocks")
                 }
             }, (0,
-            X.__)("or use Classic Starter Templates", "templify-importer-templates"))))), kadenceStarterParams.ctemplates && (0,
+            X.__)("or use Classic Starter Templates", "kadence-starter-templates"))))), kadenceStarterParams.ctemplates && (0,
             e.createElement)("div", {
                 className: "kst-choose-builder-with-ai kst-choose-builder-wrap" + (kadenceStarterParams.ctemplates ? " adjust-to-three-column" : "")
             }, (0,
@@ -38301,7 +38301,7 @@
             e.createElement)("h2", {
                 className: "kst-choose-builder-title"
             }, (0,
-            X.__)("Choose Experience", "templify-importer-templates")), (0,
+            X.__)("Choose Experience", "kadence-starter-templates")), (0,
             e.createElement)("div", {
                 className: "kst-choose-builder-inner"
             }, kadenceStarterParams.ctemplates && (0,
@@ -38316,7 +38316,7 @@
                     a("custom")
                 }
             }, kadenceStarterParams.custom_name ? kadenceStarterParams.custom_name : (0,
-            X.__)("Pro Designs", "templify-importer-templates")), (0,
+            X.__)("Pro Designs", "kadence-starter-templates")), (0,
             e.createElement)(be.Button, {
                 icon: q,
                 className: "kt-import-select-type",
@@ -38324,7 +38324,7 @@
                     a("ai")
                 }
             }, (0,
-            X.__)("Kadence AI", "templify-importer-templates")), (0,
+            X.__)("Kadence AI", "kadence-starter-templates")), (0,
             e.createElement)(be.Button, {
                 icon: G,
                 className: "kt-import-select-type",
@@ -38332,7 +38332,7 @@
                     a("blocks")
                 }
             }, (0,
-            X.__)("Classic", "templify-importer-templates"))), n && (0,
+            X.__)("Classic", "kadence-starter-templates"))), n && (0,
             e.createElement)("div", {
                 className: "kst-overlay-saving"
             }, (0,

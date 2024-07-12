@@ -1,17 +1,17 @@
 <?php
 /**
- * WXR importer class used in the One Click Demo Import plugin.
+ * WXR importer class used in the Templify Importer Templates plugin.
  * Needed to extend the WXR_Importer class to get/set the importer protected variables,
  * for use in the multiple AJAX calls.
  *
- * @package Templify Import Templates
+ * @package Templify Importer Templates
  */
 
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
+ namespace TemplifyWP\TemplifyImporterTemplates;
+ if ( ! defined( 'ABSPATH' ) ) {
+	 exit;
+ }
 
 class WXRImporter extends \AwesomeMotive\WPContentImporter2\WXRImporter {
     /**
@@ -97,6 +97,8 @@ class WXRImporter extends \AwesomeMotive\WPContentImporter2\WXRImporter {
 					$wpdb->insert( $wpdb->prefix . 'woocommerce_attribute_taxonomies', $attribute );
 					delete_transient( 'wc_attribute_taxonomies' );
 				}
+
+				
 
 				
 

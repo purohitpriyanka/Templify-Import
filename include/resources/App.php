@@ -1,7 +1,13 @@
 <?php declare( strict_types=1 );
 
+namespace TemplifyWP\TemplifyImporterTemplates;
 
 use InvalidArgumentException;
+use TemplifyWP\TemplifyImporterTemplates\Cache\Cache_Provider;
+use TemplifyWP\TemplifyImporterTemplates\Image_Downloader\Image_Downloader_Provider;
+use TemplifyWP\TemplifyImporterTemplates\Shutdown\Shutdown_Provider;
+use TemplifyWP\TemplifyImporterTemplates\StellarWP\ProphecyMonorepo\Container\Contracts\Container;
+use TemplifyWP\TemplifyImporterTemplates\StellarWP\ProphecyMonorepo\Container\Contracts\Providable;
 use RuntimeException;
 
 /**

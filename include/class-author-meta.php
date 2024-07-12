@@ -5,8 +5,10 @@
  * Used in the Templify Import
  *
  * @since 1.0.4
-* @package Templify Import Templates
+* @package Templify Importer Templates
  */
+
+ namespace TemplifyWP\TemplifyImporterTemplates;
 
 
 /**

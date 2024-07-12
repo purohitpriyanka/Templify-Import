@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'KadenceWP\\KadenceStarterTemplates\\' => array($baseDir . '/include/resources'),
+    'TemplifyWP\\TemplifyImporterTemplates\\' => array($baseDir . '/include/resources'),
+    'AwesomeMotive\\WPContentImporter2\\' => array($baseDir . '/wxr-importer'),
 );

@@ -1,18 +1,19 @@
 <?php
 /**
- * Class for the widget importer used in the One Click Demo Import plugin.
+ * Class for the widget importer used in the Templify Importer Templates plugin.
  *
  * Code is mostly from the Widget Importer & Exporter plugin.
  *
  * @see https://wordpress.org/plugins/widget-importer-exporter/
- * @package Templify Import Templates
+ * @package Templify Importer Templates
  */
 
 
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+ namespace TemplifyWP\TemplifyImporterTemplates;
+ if ( ! defined( 'ABSPATH' ) ) {
+	 exit;
+ }
 
 class WidgetImporter {
 
@@ -107,7 +108,6 @@ class WidgetImporter {
 		return json_decode( $data );
 	}
 
-
     /**
 	 * Import widget JSON data
 	 *
@@ -127,7 +127,7 @@ class WidgetImporter {
 		}
 
 		// Hook before import.
-		do_action( 'kadence-starter-templates/widget_importer_before_widgets_import' );
+		do_action( 'templify-importer-templates/widget_importer_before_widgets_import' );
 		$data =  $data;
 
 		// Get all available widgets site supports.
@@ -274,7 +274,7 @@ class WidgetImporter {
 						'widget_id_num'     => $new_instance_id_number,
 						'widget_id_num_old' => $instance_id_number,
 					);
-					do_action( 'kadence-starter-templates/widget_importer_after_single_widget_import', $after_widget_import );
+					do_action( 'templify-importer-templates/widget_importer_after_single_widget_import', $after_widget_import );
 
 					// Success message.
 					if ( $sidebar_available ) {
@@ -297,7 +297,7 @@ class WidgetImporter {
 		}
 
 		// Hook after import.
-		do_action( 'kadence-starter-templates/widget_importer_after_widgets_import' );
+		do_action( 'templify-importer-templates/widget_importer_after_widgets_import' );
 
 		// Return results.
 		return  $results;

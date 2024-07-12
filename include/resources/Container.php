@@ -1,5 +1,6 @@
 <?php
 
+namespace TemplifyWP\TemplifyImporterTemplates;
 
 class Container implements ContainerInterface {
 

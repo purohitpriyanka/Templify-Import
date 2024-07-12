@@ -18,13 +18,14 @@
  * for the full interface specification.
  *
  * @see https://github.com/humanmade/WordPress-Importer/blob/master/class-logger.php
- * @package Templify Import Templates
+ * @package Templify Importer Templates
  */
 
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+ namespace TemplifyWP\TemplifyImporterTemplates;
+ if ( ! defined( 'ABSPATH' ) ) {
+	 exit;
+ }
 
 class Logger {
 	public $min_level = '';

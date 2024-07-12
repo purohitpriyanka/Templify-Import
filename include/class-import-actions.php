@@ -1,15 +1,18 @@
 <?php
 /**
- * Class for the import actions used in the One Click Demo Import plugin.
+ * Class for the import actions used in the One Templify Importer Templates plugin.
  * Register default WP actions for OCDI plugin.
  *
- * @package Templify Import Templates
+ * @package Templify Importer Templates
  */
 
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+ namespace TemplifyWP\TemplifyImporterTemplates;
+ 
+ if ( ! defined( 'ABSPATH' ) ) {
+	 exit;
+ }
+
 class ImportActions {
 	/**
 	 * Register all action hooks for this class.
@@ -18,15 +21,14 @@ class ImportActions {
 		add_action( 'templify-importer-templates/before_content_import_execution', array( $this, 'before_content_import_action' ), 10, 5 );
     
 		// After content import.
-		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'before_widget_import_action' ), 10, 5 );
+		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'before_widget_import_action' ), 10, 5);
 		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'widgets_import' ), 20, 5 );
 
-		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'forms_import' ), 20, 5 );
-		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'donations_import' ), 20, 5 );
-		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'give_forms_import' ), 20, 5 );
-		add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'depicter_import' ), 20, 5 );
+		//add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'forms_import' ), 20, 5 );
+	//	add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'donations_import' ), 20, 5 );
+		//add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'give_forms_import' ), 20, 5 );
+	//	add_action( 'templify-importer-templates/after_content_import_execution', array( $this, 'depicter_import' ), 20, 5 );
 
-	
 
 		// Customizer import.
 		add_action( 'templify-importer-templates/customizer_import_execution', array( $this, 'customizer_import' ), 10, 1 );
@@ -34,12 +36,10 @@ class ImportActions {
 		// Customizer Color Only import.
 		add_action( 'templify-importer-templates/customizer_import_color_only_execution', array( $this, 'customizer_import_color_only' ), 10, 1 );
 			// Customizer font Only import.
-add_action( 'templify-importer-templates/customizer_import_font_only_execution', array( $this, 'customizer_import_font_only' ), 10, 1 );
+		add_action( 'templify-importer-templates/customizer_import_font_only_execution', array( $this, 'customizer_import_font_only' ), 10, 1 );
 
-// After full import action.
-add_action( 'templify-importer-templates/after_all_import_execution', array( $this, 'after_import_action' ), 10, 5 );
-
-
+		// After full import action.
+		add_action( 'templify-importer-templates/after_all_import_execution', array( $this, 'after_import_action' ), 10, 5 );
 
 		// Special widget import cases.
 		add_action( 'templify-importer-templates/widget_settings_array', array( $this, 'fix_custom_menu_widget_ids' ) );
@@ -47,7 +47,6 @@ add_action( 'templify-importer-templates/after_all_import_execution', array( $th
 	
 	
 	}
-
 
 	/**
 	 * Execute the action: 'templify-importer-templates/before_content_import'.
@@ -73,7 +72,6 @@ add_action( 'templify-importer-templates/after_all_import_execution', array( $th
 		$this->do_import_action( 'templify-importer-templates/before_widgets_import', $import_files[ $selected_index ], $selected_palette, $selected_font );
 	}
 
-	
 
 	
 	/**
@@ -170,30 +168,30 @@ add_action( 'templify-importer-templates/after_all_import_execution', array( $th
 	}
 
 
-		/**
-	 * Execute the Give donations import.
-	 *
-	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
-	 * @param int   $selected_index        Selected index of import.
-	 */
-	public function donations_import( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
-		if ( ! empty( $selected_import_files['give-donations'] ) ) {
-			Templify_Import_Templates_Give_Import::import( $selected_import_files['give-donations'] );
-		}
-	}
-	/**
-	 * Execute the Give forms import.
-	 *
-	 * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
-	 * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
-	 * @param int   $selected_index        Selected index of import.
-	 */
-	public function give_forms_import( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
-		if ( ! empty( $selected_import_files['give-forms'] )) {
-			Templify_Import_Templates_Give_Import::import_forms( $selected_import_files['give-forms'] );
-		}
-	}
+	// 	/**
+	//  * Execute the Give donations import.
+	//  *
+	//  * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
+	//  * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
+	//  * @param int   $selected_index        Selected index of import.
+	//  */
+	// public function donations_import( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
+	// 	if ( ! empty( $selected_import_files['give-donations'] ) ) {
+	// 		Templify_Import_Templates_Give_Import::import( $selected_import_files['give-donations'] );
+	// 	}
+	// }
+	// /**
+	//  * Execute the Give forms import.
+	//  *
+	//  * @param array $selected_import_files Actual selected import files (content, widgets, customizer, redux).
+	//  * @param array $import_files          The filtered import files defined in `templify-importer-templates/import_files` filter.
+	//  * @param int   $selected_index        Selected index of import.
+	//  */
+	// public function give_forms_import( $selected_import_files, $import_files, $selected_index, $selected_palette, $selected_font ) {
+	// 	if ( ! empty( $selected_import_files['give-forms'] )) {
+	// 		Templify_Import_Templates_Give_Import::import_forms( $selected_import_files['give-forms'] );
+	// 	}
+	// }
 
 
 

@@ -4,6 +4,7 @@ namespace AwesomeMotive\WPContentImporter2;
 use WP_Error;
 use XMLReader;
 
+
 class WXRImporter extends \WP_Importer {
 	/**
 	 * Maximum supported WXR version
@@ -365,13 +366,13 @@ class WXRImporter extends \WP_Importer {
 					// Upgrade to the correct version
 					$this->version = $reader->readString();
 
-					if ( version_compare( $this->version, self::MAX_WXR_VERSION, '>' ) ) {
-						$this->logger->warning( sprintf(
-							__( 'This WXR file (version %s) is newer than the importer (version %s) and may not be supported. Please consider updating.', 'wordpress-importer' ),
-							$this->version,
-							self::MAX_WXR_VERSION
-						) );
-					}
+					// if ( version_compare( $this->version, self::MAX_WXR_VERSION, '>' ) ) {
+					// 	$this->logger->warning( sprintf(
+					// 		__( 'This WXR file (version %s) is newer than the importer (version %s) and may not be supported. Please consider updating.', 'wordpress-importer' ),
+					// 		$this->version,
+					// 		self::MAX_WXR_VERSION
+					// 	) );
+					// }
 
 					// Handled everything in this node, move on to the next
 					$reader->next();
@@ -677,14 +678,16 @@ class WXRImporter extends \WP_Importer {
 				case 'wp:status':
 					$data['post_status'] = $child->textContent;
 
-					if ( $data['post_status'] === 'auto-draft' ) {
-						// Bail now
-						return new WP_Error(
-							'wxr_importer.post.cannot_import_draft',
-							__( 'Cannot import auto-draft posts' ),
-							$data
-						);
-					}
+					// if ( $data['post_status'] === 'auto-draft' ) {
+					// 	// Bail now
+					// 	return new WP_Error(
+					// 		'wxr_importer.post.cannot_import_draft',
+					// 		__( 'Cannot import auto-draft posts' ),
+					// 		$data
+					// 	);
+
+						
+					// }
 					break;
 
 				case 'wp:post_parent':
