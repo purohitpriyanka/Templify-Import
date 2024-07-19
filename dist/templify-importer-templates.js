@@ -1,6 +1,6 @@
-jQuery(function ($) {
 
-	// Initialize configData
+jQuery(function ($) {
+// Initialize configData
 var configData = null;
 
 // Perform AJAX request
@@ -22,12 +22,13 @@ $.ajax({
             }
         });
 
+
         if (configData) {
             // Access properties of configData
             var image = configData.image;
             var name = configData.name;
 
-			initialAjaxCall(configData);
+			initialAjaxCall(configData.slug);
 
 			console.log(configData.plugins);
 
@@ -62,40 +63,39 @@ $.ajax({
 });
 
 
+	function initialAjaxCall(configData) {
+		var data = new FormData();
+		
+		data.append('action', 'templify_import_initial');
+		data.append('security', templify_importer_templates.ajax_nonce);
+		data.append('override_colors', 'true');
+		data.append('override_fonts', 'true');
+		data.append('builder', 'custom');
+		data.append('selected', configData);
+		data.append('configData',configData);
 
-function initialAjaxCall(configData) {
-	var data = new FormData();
-	
-	data.append('action', 'templify_import_initial');
-	data.append('security', templify_importer_templates.ajax_nonce);
-	data.append('override_colors', 'true');
-	data.append('override_fonts', 'true');
-	data.append('builder', 'custom');
-	data.append('selected', configData);
-	data.append('configData',configData);
+		ajaxCall(data);
+	}
 
-	ajaxCall(data);
-}
+	function ajaxCall(data) {
+		$.ajax({
+			method: 'POST',
+			url: templify_importer_templates.ajax_url,
+			data: data,
+			contentType: false,
+			processData: false,
+		})
+		.done(function (response) {
+			console.log(response);
 
-function ajaxCall(data) {
-	$.ajax({
-		method: 'POST',
-		url: templify_importer_templates.ajax_url,
-		data: data,
-		contentType: false,
-		processData: false,
-	})
-	.done(function (response) {
-		console.log(response);
-
-		if (response.status === 'initialSuccess') {
-			var newData = new FormData();
-			newData.append('action', 'templify_import_demo_data');
-			newData.append('security', templify_importer_templates.ajax_nonce);
-			newData.append('override_colors', 'true');
-			newData.append('override_fonts', 'true');
-			newData.append('builder', 'custom');
-			newData.append('selected', data.configData);
+			if (response.status === 'initialSuccess') {
+				var newData = new FormData();
+				newData.append('action', 'templify_import_demo_data');
+				newData.append('security', templify_importer_templates.ajax_nonce);
+				newData.append('override_colors', 'true');
+				newData.append('override_fonts', 'true');
+				newData.append('builder', 'custom');
+				newData.append('selected', data.configData);
 				ajaxCall(newData);
 			} else if (response.status === 'newAJAX') {
                 console.log('newajax call');
@@ -116,7 +116,11 @@ function ajaxCall(data) {
 			}
 		});
 	}
+	
 
+
+ // Assuming imageSrc is defined globally or earlier in the script
+ //var imageSrc = templify_importer_templates.custom_icon; // Replace with the actual variable or value
 
 
 
@@ -136,6 +140,6 @@ function ajaxCall(data) {
 
 
 
-	initialAjaxCall();
+	
 });
 
